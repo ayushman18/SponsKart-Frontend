@@ -1,0 +1,28 @@
+import { Link } from "react-router-dom";
+import img1 from "./../../assets/home/joinNow1.png";
+import img2 from "./../../assets/home/joinNow2.png";
+const JoinNow = () => {
+   return (
+      <div className="grid grid-cols-3 gap-4 container mx-auto">
+         <img src={img1} alt="" />
+         <div className="my-auto">
+            <p className="text-center text-4xl mb-6 ">Join Now & Start</p>
+            <p className="text-gray-500">
+               {" "}
+               Consectetur adipisicing elit sed do eiusmod tempor incididunt utnale labore etdolore magna
+               adminim eniam quis nostrud exercitation ullamco laborisn nisi ut aliquip.
+            </p>
+            <button className="w-full py-6 rounded-lg text-xl bg-[#53C929] hover:bg-green-600 text-white my-12">
+               Click Here & Join Now
+            </button>
+            <p className="text-sm">
+               <Link className="link link-primary no-underline">Terms and Conditions</Link> applies. read our{" "}
+               <Link className="link link-primary no-underline">Privacy Policy </Link>to get started.
+            </p>
+         </div>
+         <img src={img2} alt="" />
+      </div>
+   );
+};
+
+export default JoinNow;

@@ -1,21 +1,38 @@
+import {
+   FaGamepad,
+   FaHandHoldingHeart,
+   FaHospital,
+   FaLaptop,
+   FaMusic,
+   FaRocket,
+   FaYoutube,
+} from "react-icons/fa";
+import { PiBankBold } from "react-icons/pi";
+
 const PickedCategory = () => {
-   const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+   const categories = [
+      { name: "Educations Partners", icon: <FaRocket className="w-20 h-20 text-white" /> },
+      { name: "Media Partners", icon: <FaYoutube className="w-20 h-20 text-white" /> },
+      { name: "Lifestyle Partners", icon: <FaHandHoldingHeart className="w-20 h-20 text-white" /> },
+      { name: "Gaming Partners", icon: <FaGamepad className="w-20 h-20 text-white" /> },
+      { name: "Hospitality Partners", icon: <FaHospital className="w-20 h-20 text-white" /> },
+      { name: "Banking Partners", icon: <PiBankBold className="w-20 h-20 text-white" /> },
+      { name: "Tech Partners", icon: <FaLaptop className="w-20 h-20 text-white" /> },
+      { name: "Music Partners", icon: <FaMusic className="w-20 h-20 text-white" /> },
+   ];
+
    return (
       <div className="w-[1040px] mx-auto my-24">
-         <h2 className="text-2xl">Top Picked Categories</h2>
-         <div className="grid grid-cols-4 gap-6">
-            {arr.map((num, index) => (
+         <p className="text-5xl mb-16">Top Picked Categories</p>
+         <div className="grid grid-cols-4 gap-10">
+            {categories.map((category, index) => (
                <div
                   key={index}
-                  className="border hover:bg-gradient-to-t from-gray-900 to-gray-900 hover:text-white duration-1000 p-10 rounded-md group h-64 flex flex-col justify-end"
+                  className="border p-8 bg-[#CFEF50] shadow-lg text-center shadow-[rgba(0, 0, 0, 0.25)] rounded-md group h-64 flex flex-col items-center gap-4"
                >
-                  <p>icon</p>
-                  <h4>Writing & Translation</h4>
-                  <p className="text-xs">3 listing</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  <button className="btn btn-warning btn-sm hidden group-hover:translate-y-0 group-hover:block duration-1000">
-                     Explore{" "}
-                  </button>
+                  <h4 className="text-[28px]">{category.name}</h4>
+                  {/* <img src={categoryImg1} alt="" className="h-20 w-20 " /> */}
+                  {category.icon}
                </div>
             ))}
          </div>

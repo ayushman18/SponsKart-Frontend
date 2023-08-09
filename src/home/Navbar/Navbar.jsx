@@ -42,7 +42,7 @@ const Navbar = () => {
                      </Link>
                   </li>
                   <li>
-                     <Link className="text-lg text-gray-500">Browse Jobs</Link>
+                     <Link className="text-lg text-gray-500">View Creators</Link>
                      <ul className="p-2">
                         <li>
                            <Link to="job-listing">Job Listing</Link>
@@ -55,16 +55,16 @@ const Navbar = () => {
                         </li>
                      </ul>
                   </li>
-                  <li>
-                     <Link to="youtubers">View youtubers</Link>
-                  </li>
+
                   <div className="divider">or</div>
-                  <div className="">
+                  <div>
                      <Link className="btn">Button</Link>
                   </div>
                </ul>
             </div>
-            <Link className="btn btn-ghost normal-case text-lg text-gray-500">daisyUI</Link>
+            <Link to="/" className="normal-case text-lg text-gray-500">
+               <img src="logo.png" alt="" className="h-20" />
+            </Link>
          </div>
          <div className="hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
@@ -84,7 +84,7 @@ const Navbar = () => {
                         className="text-lg hover:border-b border-orange-400 rounded-none hover:text-orange-400 text-gray-500"
                         style={{ background: "none" }}
                      >
-                        Browse Jobs
+                        View Creators
                      </summary>
                      <ul className="p-2 w-60 border-t border-orange-400 rounded-none">
                         <li>
@@ -99,22 +99,16 @@ const Navbar = () => {
                      </ul>
                   </details>
                </li>
-               <li>
-                  <Link
-                     to="youtubers"
-                     className="text-lg hover:border-b border-orange-400 rounded-none hover:text-orange-400 text-gray-500"
-                     style={{ background: "none" }}
-                  >
-                     View youtubers
-                  </Link>
-               </li>
             </ul>
             <div className="w-[2px]  h-8 bg-gray-500"></div>
             <div className="ml-4">
                <Link className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case">
                   <LuLogIn /> Sign In
                </Link>
-               <Link className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg">
+               <Link
+                  to="/register"
+                  className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
+               >
                   Join Now
                </Link>
             </div>
