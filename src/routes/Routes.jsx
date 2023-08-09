@@ -6,6 +6,8 @@ import RegisterLayout from "../layouts/RegisterLayout";
 import ContentCreatorRegister from "../register/ContentCreatorRegister/ContentCreatorRegister";
 import OrganiserRegister from "../register/OrganiserRegister/OrganiserRegister";
 import OTPVerification from "../register/OTPVerification/OTPVerification";
+import Login from "../login/Login/Login";
+import ForgetPass from "../login/ForgetPass/ForgetPass";
 
 export const router = createBrowserRouter([
    {
@@ -37,6 +39,20 @@ export const router = createBrowserRouter([
          {
             path: "verification",
             element: <OTPVerification></OTPVerification>,
+         },
+      ],
+   },
+   {
+      path: "/sign-in",
+      element: <RegisterLayout></RegisterLayout>,
+      children: [
+         {
+            path: "/sign-in",
+            element: <Login></Login>,
+         },
+         {
+            path: "forget-password",
+            element: <ForgetPass></ForgetPass>,
          },
       ],
    },

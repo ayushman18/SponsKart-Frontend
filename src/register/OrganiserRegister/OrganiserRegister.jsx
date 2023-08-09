@@ -17,7 +17,7 @@ const OrganiserRegister = () => {
       if (data.confirm_password === data.password) {
          data.role = "organiser";
          console.log(data);
-         // navigate("/register/verification");
+         navigate("/register/verification");
       } else {
          toast.error("Password does not matched");
       }

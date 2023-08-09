@@ -66,7 +66,7 @@ const ContentCreatorRegister = () => {
             console.log(err);
          });
 
-      // navigate("/register/verification");
+      navigate("/register/verification");
    };
 
    const checked = () => {

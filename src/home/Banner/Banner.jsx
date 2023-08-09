@@ -37,7 +37,9 @@ const Banner = () => {
                <FaSearch className="w-6 absolute opacity-50 right-6 top-1/3 h-6"></FaSearch>
             </div>
             <div className="flex justify-center items-center pt-7">
-               <button className="py-2 px-8 bg-[#53C929] text-white rounded-full w-fit">Sign Up</button>
+               <Link to="/register" className="py-2 px-8 bg-[#53C929] text-white rounded-full w-fit">
+                  Sign Up
+               </Link>
             </div>
             <div className="w-2/3 mx-auto ">
                <img src={arrow} alt="" className="w-20 ml-32 h-20 mx-auto" />

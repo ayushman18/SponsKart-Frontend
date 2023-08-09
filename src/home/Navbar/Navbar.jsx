@@ -102,7 +102,10 @@ const Navbar = () => {
             </ul>
             <div className="w-[2px]  h-8 bg-gray-500"></div>
             <div className="ml-4">
-               <Link className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case">
+               <Link
+                  to="sign-in"
+                  className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
+               >
                   <LuLogIn /> Sign In
                </Link>
                <Link
