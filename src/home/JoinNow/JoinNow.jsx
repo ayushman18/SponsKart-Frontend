@@ -3,9 +3,9 @@ import img1 from "./../../assets/home/joinNow1.png";
 import img2 from "./../../assets/home/joinNow2.png";
 const JoinNow = () => {
    return (
-      <div className="grid grid-cols-3 gap-4 container mx-auto">
+      <div className="lg:grid grid-cols-3 gap-4 container lg:mx-auto">
          <img src={img1} alt="" />
-         <div className="my-auto">
+         <div className="my-auto px-6 lg:px-0">
             <p className="text-center text-4xl mb-6 ">Join Now & Start</p>
             <p className="text-gray-500">
                {" "}

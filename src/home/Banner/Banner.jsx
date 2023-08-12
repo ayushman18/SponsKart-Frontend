@@ -5,10 +5,10 @@ import arrow from "./../../assets/home/arrow.png";
 
 const Banner = () => {
    return (
-      <div className="container flex items-center mx-auto gap-10 pl-52 pt-11">
-         <div className="space-y-4 w-[60%]">
-            <h2 className="text-7xl">
-               Bazaar of <span>Sponsors.</span>
+      <div className="container lg:flex items-center mx-auto gap-10 px-5 lg:pl-52 pt-11">
+         <div className="space-y-4 lg:w-[60%]">
+            <h2 className="text-5xl lg:text-7xl">
+               Bazaar of <span className="text-green-500">Sponsors.</span>
             </h2>
             <div className="mb-10">
                <span>Popular: </span>
@@ -41,12 +41,12 @@ const Banner = () => {
                   Sign Up
                </Link>
             </div>
-            <div className="w-2/3 mx-auto ">
+            <div className="lg:w-2/3 mx-auto ">
                <img src={arrow} alt="" className="w-20 ml-32 h-20 mx-auto" />
                <h2 className="text-xl ml-16 opacity-50">Book Your Meet Now!</h2>
             </div>
          </div>
-         <div>
+         <div className="hidden lg:block">
             <img src={bannerImg} alt="" className="h-[80vh] w-[800px] z-50" />
          </div>
       </div>

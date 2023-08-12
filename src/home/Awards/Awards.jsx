@@ -2,9 +2,9 @@ import { FaRegPlayCircle } from "react-icons/fa";
 import conversation from "../../assets/conversation.png";
 const Awards = () => {
    return (
-      <section className="flex bg-gray-100 items-center">
+      <section className="lg:flex bg-gray-100 items-center">
          <div
-            className="w-1/2 bg-no-repeat bg-cover flex justify-center items-center h-[650px] cursor-pointer"
+            className="lg:w-1/2 bg-no-repeat bg-cover flex justify-center items-center lg:h-[650px] h-[300px] cursor-pointer bg-center"
             style={{
                backgroundImage:
                   "url('https://amentotech.com/projects/workreap/wp-content/uploads/2021/03/video.jpg')",
@@ -14,7 +14,7 @@ const Awards = () => {
                <FaRegPlayCircle />
             </div>
          </div>
-         <div className="p-12 w-1/2">
+         <div className="lg:p-12 p-6 lg:w-1/2">
             <div className="w-2/3 space-y-3">
                <img src={conversation} alt="" className="w-20" />
                <h2 className="text-3xl font-semibold">We’re Surprisingly Amazing</h2>

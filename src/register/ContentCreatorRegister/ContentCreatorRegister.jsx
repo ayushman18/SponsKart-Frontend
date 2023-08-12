@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ContentCreatorRegister = () => {
    const [agree, setAgree] = useState(false);
-   const navigate = useNavigate();
+
    const indianStates = [
       "Andhra Pradesh",
       "Arunachal Pradesh",
@@ -65,8 +64,6 @@ const ContentCreatorRegister = () => {
             window.alert(err);
             console.log(err);
          });
-
-      navigate("/register/verification");
    };
 
    const checked = () => {
@@ -78,11 +75,11 @@ const ContentCreatorRegister = () => {
       <div>
          <p className="text-3xl text-green-500 font-semibold">Content Creator</p>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex items-center justify-around pr-24 my-8">
+            <div className="lg:flex items-center justify-around lg:pr-24 my-8">
                <input
                   type="text"
                   placeholder="First Name"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full mb-6 lg:mb-0 max-w-xs"
                   required
                   {...register("firstname")}
                />
@@ -94,11 +91,11 @@ const ContentCreatorRegister = () => {
                   {...register("lastname")}
                />
             </div>
-            <div className="flex items-center justify-around pr-24">
+            <div className="lg:flex items-center justify-around lg:pr-24">
                <input
                   type="text"
                   placeholder="Type Username"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered mb-6 lg:mb-0 w-full max-w-xs"
                   required
                   {...register("username")}
                />
@@ -110,11 +107,11 @@ const ContentCreatorRegister = () => {
                   {...register("phonenumber")}
                />
             </div>
-            <div className="flex items-center justify-around pr-24 mt-8">
+            <div className="lg:flex items-center justify-around lg:pr-24 mt-8">
                <input
                   type="email"
                   placeholder="Email Id"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered mb-6 lg:mb-0 w-full max-w-xs"
                   required
                   {...register("email")}
                />
@@ -126,8 +123,11 @@ const ContentCreatorRegister = () => {
                   {...register("password")}
                />
             </div>
-            <div className="flex items-center justify-around pr-24 my-8">
-               <select className="select select-bordered w-full max-w-xs" {...register("location")}>
+            <div className="lg:flex items-center justify-around lg:pr-24 my-8">
+               <select
+                  className="select select-bordered mb-6 lg:mb-0 w-full max-w-xs"
+                  {...register("location")}
+               >
                   <option disabled selected>
                      Select Location
                   </option>

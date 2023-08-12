@@ -1,11 +1,10 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const OrganiserRegister = () => {
    const [agree, setAgree] = useState(false);
-   const navigate = useNavigate();
 
    const { register, handleSubmit } = useForm();
 
@@ -15,9 +14,18 @@ const OrganiserRegister = () => {
          return;
       }
       if (data.confirm_password === data.password) {
-         data.role = "organiser";
-         console.log(data);
-         navigate("/register/verification");
+         axios
+            .post("https://sponskart-hkgd.onrender.com/register", data)
+            .then((res) => {
+               console.log("here", res.data);
+               if (res.data.message) {
+                  toast.error(res.data.message);
+               }
+            })
+            .catch((err) => {
+               window.alert(err);
+               console.log(err);
+            });
       } else {
          toast.error("Password does not matched");
       }
@@ -32,11 +40,11 @@ const OrganiserRegister = () => {
       <div>
          <p className="text-3xl text-green-500 font-semibold">Event Organiser</p>
          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex items-center justify-around pr-24 my-8">
+            <div className="lg:flex items-center justify-around lg:pr-24 my-8">
                <input
                   type="text"
                   placeholder="Organization Name"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input mb-6 lg:mb-0 input-bordered w-full max-w-xs"
                   required
                   {...register("organization_name")}
                />
@@ -48,11 +56,11 @@ const OrganiserRegister = () => {
                   {...register("email")}
                />
             </div>
-            <div className="flex items-center justify-around pr-24">
+            <div className="lg:flex items-center justify-around lg:pr-24">
                <input
                   type="password"
                   placeholder="Password"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered mb-6 lg:mb-0 w-full max-w-xs"
                   required
                   {...register("password")}
                />
@@ -64,11 +72,11 @@ const OrganiserRegister = () => {
                   {...register("contact_no")}
                />
             </div>
-            <div className="flex items-center justify-around pr-24 my-8">
+            <div className="lg:flex items-center justify-around lg:pr-24 my-8">
                <input
                   type="password"
                   placeholder="Confirm Password"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input mb-6 lg:mb-0 input-bordered w-full max-w-xs"
                   required
                   {...register("confirm_password")}
                />

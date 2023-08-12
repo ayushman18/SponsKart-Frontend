@@ -1,5 +1,4 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "./PopularServices.css";
 import { Navigation } from "swiper/modules";
 import { useRef } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -8,16 +7,31 @@ const PopularService = () => {
    const swiperRef = useRef();
 
    return (
-      <div className="relative w-[1040px] mx-auto my-24">
+      <div className="relative max-w-[1040px] mx-16 lg:mx-auto my-24">
          <h1 className="text-3xl font-semibold mb-2">Explore Popular service</h1>
          <div>
             <Swiper
-               slidesPerView={4}
+               slidesPerView={1}
                spaceBetween={30}
+               centeredSlides={true}
                loop={true}
                modules={[Navigation]}
                onBeforeInit={(swiper) => {
                   swiperRef.current = swiper;
+               }}
+               breakpoints={{
+                  640: {
+                     slidesPerView: 1,
+                     spaceBetween: 20,
+                  },
+                  768: {
+                     slidesPerView: 3,
+                     spaceBetween: 40,
+                  },
+                  1024: {
+                     slidesPerView: 4,
+                     spaceBetween: 50,
+                  },
                }}
                className="mySwiper"
             >
@@ -143,7 +157,7 @@ const PopularService = () => {
                </SwiperSlide>
             </Swiper>
          </div>
-         <div className="absolute top-1/2 z-[1000] flex justify-between w-[1040px]">
+         <div className="absolute top-1/2 z-[1000] flex justify-between w-full lg:w-[1040px]">
             <button className="btn shadow-lg -ml-6 btn-circle" onClick={() => swiperRef.current?.slidePrev()}>
                <FaAngleLeft />
             </button>
