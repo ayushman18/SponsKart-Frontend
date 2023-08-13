@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Login = () => {
    const { register, handleSubmit } = useForm();
@@ -9,15 +8,11 @@ const Login = () => {
    const onSubmit = (data) => {
       console.log(data);
       axios
-         .post("http://sponskart-hkgd.onrender.com/signin", data)
+         .post("https://sponskart-hkgd.onrender.com/signin", data)
          .then((res) => {
             console.log("here", res.data);
-            if (res.data.message) {
-               toast.error(res.data.message);
-            }
          })
          .catch((err) => {
-            window.alert(err);
             console.log(err);
          });
    };

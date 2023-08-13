@@ -8,7 +8,7 @@ const PopularService = () => {
 
    return (
       <div className="relative max-w-[1040px] mx-16 lg:mx-auto my-24">
-         <h1 className="text-3xl font-semibold mb-2">Explore Popular service</h1>
+         <h1 className="text-3xl font-semibold mb-2">Explore Popular Events</h1>
          <div>
             <Swiper
                slidesPerView={1}

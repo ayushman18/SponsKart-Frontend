@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
+import { FaChevronDown, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
    const location = useLocation();
@@ -19,8 +20,11 @@ const Navbar = () => {
    // const pathname = location.pathname;
 
    return (
-      <nav id="navbar" className={`navbar justify-between top-0 z-[100000] lg:px-10 py-3 duration-700`}>
-         <div className="navbar-start">
+      <nav
+         id="navbar"
+         className={`navbar justify-between items-center top-0 z-[100000] lg:px-10 py-1 duration-700`}
+      >
+         <div>
             <div className="dropdown">
                <label tabIndex={0} className="btn btn-ghost lg:hidden">
                   <svg
@@ -40,46 +44,41 @@ const Navbar = () => {
                </label>
                <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-60"
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                >
                   <li>
-                     <Link to="how-it-works" className="text-lg text-gray-500">
-                        How it works
-                     </Link>
-                  </li>
-
-                  <li>
-                     <Link className="text-lg text-gray-500">View Creators</Link>
+                     <a>Browse</a>
                      <ul className="p-2">
                         <li>
-                           <Link to="job-listing">Job Listing</Link>
+                           <a>Submenu 1</a>
                         </li>
                         <li>
-                           <Link to="job-single">Job Single</Link>
-                        </li>
-                        <li>
-                           <Link to="job-proposal">Job Proposal</Link>
+                           <a>Submenu 2</a>
                         </li>
                      </ul>
                   </li>
-
-                  <div className="divider">or</div>
-                  <div>
-                     <div className="ml-4 flex">
-                        <Link
-                           to="sign-in"
-                           className="btn h-10 btn-success hover:shadow-lg text-white font-bold btn-sm md:btn-md normal-case"
-                        >
-                           <LuLogIn /> Sign In
-                        </Link>
-                        <Link
-                           to="/register"
-                           className="btn btn-xs md:btn-md h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
-                        >
-                           Join Now
-                        </Link>
-                     </div>
-                  </div>
+                  <li>
+                     <a>Past Events</a>
+                     <ul className="p-2">
+                        <li>
+                           <a>Submenu 1</a>
+                        </li>
+                        <li>
+                           <a>Submenu 2</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a>Contact Us</a>
+                     <ul className="p-2">
+                        <li>
+                           <a>Submenu 1</a>
+                        </li>
+                        <li>
+                           <a>Submenu 2</a>
+                        </li>
+                     </ul>
+                  </li>
                </ul>
             </div>
             <Link to="/" className="normal-case text-lg text-gray-500">
@@ -87,41 +86,77 @@ const Navbar = () => {
             </Link>
          </div>
          <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-               <li>
-                  <Link
-                     to="how-it-works"
-                     className="text-lg hover:border-b border-orange-400 rounded-none hover:text-orange-400 text-gray-500"
-                     style={{ background: "none" }}
+            <div className="flex items-center justify-center">
+               <div className="dropdown dropdown-hover dropdown-bottom">
+                  <label
+                     tabIndex={1}
+                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
                   >
-                     How it works
-                  </Link>
-               </li>
-
-               <li tabIndex={0}>
-                  <details className="text-lg text-gray-500">
-                     <summary
-                        className="text-lg hover:border-b border-orange-400 rounded-none hover:text-orange-400 text-gray-500"
-                        style={{ background: "none" }}
-                     >
-                        View Creators
-                     </summary>
-                     <ul className="p-2 w-60 border-t border-orange-400 rounded-none">
-                        <li>
-                           <Link to="job-listing">Job Listing</Link>
-                        </li>
-                        <li>
-                           <Link to="job-single">Job Single</Link>
-                        </li>
-                        <li>
-                           <Link to="job-proposal">Job Proposal</Link>
-                        </li>
-                     </ul>
-                  </details>
-               </li>
-            </ul>
+                     Browse <FaChevronDown></FaChevronDown>
+                  </label>
+                  <ul
+                     tabIndex={1}
+                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                     <li>
+                        <a>Item 1</a>
+                     </li>
+                     <li>
+                        <a>Item 2</a>
+                     </li>
+                  </ul>
+               </div>
+               <div className="dropdown dropdown-hover dropdown-bottom">
+                  <label
+                     tabIndex={2}
+                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
+                  >
+                     Past Events <FaChevronDown></FaChevronDown>
+                  </label>
+                  <ul
+                     tabIndex={2}
+                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                     <li>
+                        <a>Item 1</a>
+                     </li>
+                     <li>
+                        <a>Item 2</a>
+                     </li>
+                  </ul>
+               </div>
+               <div className="dropdown dropdown-hover dropdown-bottom">
+                  <label
+                     tabIndex={3}
+                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
+                  >
+                     Contact Us <FaChevronDown></FaChevronDown>
+                  </label>
+                  <ul
+                     tabIndex={3}
+                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                     <li>
+                        <a>Item 1</a>
+                     </li>
+                     <li>
+                        <a>Item 2</a>
+                     </li>
+                  </ul>
+               </div>
+               <div>
+                  <div className="relative text-white mr-4">
+                     <input
+                        type="text"
+                        placeholder="Search"
+                        className="input w-full px-6 bg-black rounded-lg focus:outline-none text-xl py-3"
+                     />
+                     <FaSearch className="w-6 absolute opacity-75 right-5 top-1/4 h-6"></FaSearch>
+                  </div>
+               </div>
+            </div>
             <div className="w-[2px]  h-8 bg-gray-500"></div>
-            <div className="ml-4">
+            <div className="ml-4 flex justify-center items-center">
                <Link
                   to="sign-in"
                   className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
