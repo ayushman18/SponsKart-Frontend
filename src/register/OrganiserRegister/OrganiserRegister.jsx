@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const OrganiserRegister = () => {
    const [agree, setAgree] = useState(false);
+   const navigate = useNavigate();
 
    const { register, handleSubmit } = useForm();
 
@@ -18,12 +20,17 @@ const OrganiserRegister = () => {
             .post("https://sponskart-hkgd.onrender.com/register", data)
             .then((res) => {
                console.log("here", res.data);
-               if (res.data.message) {
+               if (res.data.code === "ERR_BAD_REQUEST") {
                   toast.error(res.data.message);
+               } else if (res.data.code === 200) {
+                  navigate("/sign-in");
+                  toast.success("User registered successfully. Please login");
                }
             })
             .catch((err) => {
-               window.alert(err);
+               if (err.code) {
+                  toast.error(err.response.data.message);
+               }
                console.log(err);
             });
       } else {
