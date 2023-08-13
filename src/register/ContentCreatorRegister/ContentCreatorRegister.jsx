@@ -53,7 +53,9 @@ const ContentCreatorRegister = () => {
          return;
       }
       // data.role = "content-creator";
+      data.type = "content-creator";
       console.log(data);
+
       axios
          .post("https://sponskart-hkgd.onrender.com/register", data)
          .then((res) => {

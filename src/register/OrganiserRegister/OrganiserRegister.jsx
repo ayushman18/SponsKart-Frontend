@@ -16,6 +16,7 @@ const OrganiserRegister = () => {
          return;
       }
       if (data.confirm_password === data.password) {
+         data.type = "organiser";
          axios
             .post("https://sponskart-hkgd.onrender.com/register", data)
             .then((res) => {
