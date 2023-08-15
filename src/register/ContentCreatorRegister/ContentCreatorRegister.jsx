@@ -53,7 +53,7 @@ const ContentCreatorRegister = () => {
          return;
       }
       // data.role = "content-creator";
-      data.type = "content-creator";
+      data.type = "user";
       console.log(data);
 
       axios

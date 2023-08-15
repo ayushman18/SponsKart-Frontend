@@ -1,10 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
-import { FaChevronDown, FaSearch } from "react-icons/fa";
+import { FaChevronDown, FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
+import { AiFillSetting } from "react-icons/ai";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider/AuthProvider";
 
 const Navbar = () => {
    const location = useLocation();
+   const { user } = useContext(AuthContext);
+   console.log(user);
    useEffect(() => {
       if (location.pathname === "/") {
          window.addEventListener("scroll", () => {
@@ -79,6 +84,49 @@ const Navbar = () => {
                         </li>
                      </ul>
                   </li>
+                  {user ? (
+                     <>
+                        <div className="dropdown dropdown-end">
+                           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                              <div className="w-10 rounded-full">
+                                 <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                              </div>
+                           </label>
+                           <ul
+                              tabIndex={0}
+                              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                           >
+                              <li>
+                                 <a className="justify-between">
+                                    Profile
+                                    <span className="badge">New</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a>Settings</a>
+                              </li>
+                              <li>
+                                 <a>Logout</a>
+                              </li>
+                           </ul>
+                        </div>
+                     </>
+                  ) : (
+                     <li className="ml-4 flex justify-center items-center">
+                        <Link
+                           to="sign-in"
+                           className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
+                        >
+                           <LuLogIn /> Sign In
+                        </Link>
+                        <Link
+                           to="/register"
+                           className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
+                        >
+                           Join Now
+                        </Link>
+                     </li>
+                  )}
                </ul>
             </div>
             <Link to="/" className="normal-case text-lg text-gray-500">
@@ -156,20 +204,90 @@ const Navbar = () => {
                </div>
             </div>
             <div className="w-[2px]  h-8 bg-gray-500"></div>
-            <div className="ml-4 flex justify-center items-center">
-               <Link
-                  to="sign-in"
-                  className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
-               >
-                  <LuLogIn /> Sign In
-               </Link>
-               <Link
-                  to="/register"
-                  className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
-               >
-                  Join Now
-               </Link>
-            </div>
+            {user ? (
+               <>
+                  <div className="w-14 ml-4 bg-gray-400 h-14 flex justify-center items-center rounded-full border">
+                     <FaRegBell className="text-2xl"></FaRegBell>
+                  </div>
+                  <div className="dropdown dropdown-end ml-4">
+                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full flex justify-center items-center">
+                           {user.img ? (
+                              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                           ) : (
+                              <FaUser className="text-5xl"></FaUser>
+                           )}
+                        </div>
+                     </label>
+                     <ul
+                        tabIndex={0}
+                        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto"
+                     >
+                        <li>
+                           <a className="justify-between">
+                              <div className="flex gap-5 border-b pb-6">
+                                 <div className="avatar online">
+                                    <div className="w-12 border rounded-full">
+                                       {user.img ? (
+                                          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                       ) : (
+                                          <FaUser className="text-5xl mx-auto"></FaUser>
+                                       )}
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <h2>{user.organizer ? user.organizer.organizationName : ""}</h2>
+                                    <p className="flex">{user.email}</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </li>
+                        <li>
+                           <a>
+                              <div className="badge badge-warning badge-xs"></div> Status
+                           </a>
+                        </li>
+                        <li>
+                           <a>
+                              <FaRegUser></FaRegUser> Profile
+                           </a>
+                        </li>
+                        <li>
+                           <a>
+                              <FaRegStar></FaRegStar> Past Events
+                           </a>
+                        </li>
+                        <li>
+                           <a>
+                              <AiFillSetting></AiFillSetting> Settings
+                           </a>
+                        </li>
+                        <li>
+                           <a>
+                              <FaPowerOff></FaPowerOff> Log Out
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </>
+            ) : (
+               <>
+                  <div className="ml-4 flex justify-center items-center">
+                     <Link
+                        to="sign-in"
+                        className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
+                     >
+                        <LuLogIn /> Sign In
+                     </Link>
+                     <Link
+                        to="/register"
+                        className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
+                     >
+                        Join Now
+                     </Link>
+                  </div>
+               </>
+            )}
          </div>
       </nav>
    );

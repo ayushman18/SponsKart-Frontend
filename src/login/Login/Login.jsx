@@ -1,8 +1,14 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../home/provider/AuthProvider/AuthProvider";
 
 const Login = () => {
+   const { setUser, user } = useContext(AuthContext);
+   const navigate = useNavigate();
+   console.log(user);
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
@@ -11,6 +17,19 @@ const Login = () => {
          .post("https://sponskart-hkgd.onrender.com/signin", data)
          .then((res) => {
             console.log("here", res.data);
+            if (res.data.code === 200) {
+               toast.success(
+                  `Welcome ${
+                     res.data.data.organizer
+                        ? res.data.data.organizer.organizationName
+                        : res.data.data.contentCreator
+                        ? res.data.data.contentCreator.firstName
+                        : ""
+                  }`
+               );
+               setUser(res.data.data);
+               navigate("/");
+            }
          })
          .catch((err) => {
             console.log(err);

@@ -11,12 +11,13 @@ const OrganiserRegister = () => {
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
+      data.type = "Organizer";
+      console.log(data);
       if (!agree) {
          toast.error("Please agree with terms and conditions");
          return;
       }
       if (data.confirm_password === data.password) {
-         data.type = "organiser";
          axios
             .post("https://sponskart-hkgd.onrender.com/register", data)
             .then((res) => {
@@ -54,7 +55,7 @@ const OrganiserRegister = () => {
                   placeholder="Organization Name"
                   className="input mb-6 lg:mb-0 input-bordered w-full max-w-xs"
                   required
-                  {...register("organization_name")}
+                  {...register("organizationName")}
                />
                <input
                   type="email"
@@ -77,7 +78,7 @@ const OrganiserRegister = () => {
                   placeholder="Contact No."
                   className="input input-bordered w-full max-w-xs"
                   required
-                  {...register("contact_no")}
+                  {...register("phonenumber")}
                />
             </div>
             <div className="lg:flex items-center justify-around lg:pr-24 my-8">
