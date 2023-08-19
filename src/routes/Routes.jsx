@@ -46,11 +46,6 @@ export const router = createBrowserRouter([
             path: "organiser",
             element: <OrganiserRegister></OrganiserRegister>,
          },
-
-         {
-            path: "reset-password",
-            element: <ResetPass></ResetPass>,
-         },
       ],
    },
    {
@@ -64,6 +59,10 @@ export const router = createBrowserRouter([
          {
             path: "forget-password",
             element: <ForgetPass></ForgetPass>,
+         },
+         {
+            path: "reset-password",
+            element: <ResetPass></ResetPass>,
          },
       ],
    },

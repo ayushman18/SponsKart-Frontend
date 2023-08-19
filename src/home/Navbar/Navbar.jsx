@@ -26,10 +26,7 @@ const Navbar = () => {
    const search = (e) => {
       e.preventDefault();
       const text = e.target.text.value;
-      if (!text) {
-         toast.error("Please enter text to search");
-         return;
-      }
+
       const category = e.target.category.value;
       navigate(`/search?text=${text}&category=${category}`);
    };
@@ -176,8 +173,8 @@ const Navbar = () => {
                            className="select select-bordered bg-gray-100 join-item w-20 focus:outline-none rounded-none"
                            name="category"
                         >
-                           <option value="brands">Brands</option>
-                           <option value="organizations">Event-Organization</option>
+                           <option value="brand">Brands</option>
+                           <option value="Organizer">Event-Organization</option>
                            <option value="user">Content-Creator</option>
                         </select>
                         <div className="indicator">
