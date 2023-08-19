@@ -5,9 +5,11 @@ import Register from "../register/Register/Register";
 import RegisterLayout from "../layouts/RegisterLayout";
 import ContentCreatorRegister from "../register/ContentCreatorRegister/ContentCreatorRegister";
 import OrganiserRegister from "../register/OrganiserRegister/OrganiserRegister";
-import OTPVerification from "../register/OTPVerification/OTPVerification";
 import Login from "../login/Login/Login";
 import ForgetPass from "../login/ForgetPass/ForgetPass";
+import Search from "../search/Search/Search";
+import ResetPass from "../login/ResetPass/ResetPass";
+import Brands from "../brands/Brands/Brands";
 
 export const router = createBrowserRouter([
    {
@@ -17,6 +19,14 @@ export const router = createBrowserRouter([
          {
             path: "/",
             element: <Home></Home>,
+         },
+         {
+            path: "/search",
+            element: <Search></Search>,
+         },
+         {
+            path: "/brands/:id",
+            element: <Brands></Brands>,
          },
       ],
    },
@@ -36,9 +46,10 @@ export const router = createBrowserRouter([
             path: "organiser",
             element: <OrganiserRegister></OrganiserRegister>,
          },
+
          {
-            path: "verification",
-            element: <OTPVerification></OTPVerification>,
+            path: "reset-password",
+            element: <ResetPass></ResetPass>,
          },
       ],
    },

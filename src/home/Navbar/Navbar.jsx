@@ -1,25 +1,39 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
-import { FaChevronDown, FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
+import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+   const { user, logOut } = useContext(AuthContext);
    const location = useLocation();
-   const { user } = useContext(AuthContext);
-   console.log(user);
+   const navigate = useNavigate();
+
    useEffect(() => {
-      if (location.pathname === "/") {
-         window.addEventListener("scroll", () => {
+      window.addEventListener("scroll", () => {
+         if (location.pathname === "/") {
             const navbar = document.getElementById("navbar");
             navbar.classList.toggle("fixed", window.scrollY > 40);
             navbar.classList.toggle("bg-white", window.scrollY > 40);
             navbar.classList.toggle("shadow-lg", window.scrollY > 40);
-         });
-      }
+         }
+      });
    }, [location]);
+
+   const search = (e) => {
+      e.preventDefault();
+      const text = e.target.text.value;
+      if (!text) {
+         toast.error("Please enter text to search");
+         return;
+      }
+      const category = e.target.category.value;
+      navigate(`/search?text=${text}&category=${category}`);
+   };
+
    // todo: active link class name
 
    // const pathname = location.pathname;
@@ -52,7 +66,7 @@ const Navbar = () => {
                   className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                >
                   <li>
-                     <a>Browse</a>
+                     <a>Careers</a>
                      <ul className="p-2">
                         <li>
                            <a>Submenu 1</a>
@@ -63,26 +77,10 @@ const Navbar = () => {
                      </ul>
                   </li>
                   <li>
-                     <a>Past Events</a>
-                     <ul className="p-2">
-                        <li>
-                           <a>Submenu 1</a>
-                        </li>
-                        <li>
-                           <a>Submenu 2</a>
-                        </li>
-                     </ul>
+                     <Link to="live-events">Live Events</Link>
                   </li>
                   <li>
-                     <a>Contact Us</a>
-                     <ul className="p-2">
-                        <li>
-                           <a>Submenu 1</a>
-                        </li>
-                        <li>
-                           <a>Submenu 2</a>
-                        </li>
-                     </ul>
+                     <Link to="contact-us">Contact Us</Link>
                   </li>
                   {user ? (
                      <>
@@ -106,7 +104,7 @@ const Navbar = () => {
                                  <a>Settings</a>
                               </li>
                               <li>
-                                 <a>Logout</a>
+                                 <button onClick={logOut}>Logout</button>
                               </li>
                            </ul>
                         </div>
@@ -135,72 +133,63 @@ const Navbar = () => {
          </div>
          <div className="hidden lg:flex">
             <div className="flex items-center justify-center">
-               <div className="dropdown dropdown-hover dropdown-bottom">
-                  <label
-                     tabIndex={1}
-                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
-                  >
-                     Browse <FaChevronDown></FaChevronDown>
-                  </label>
-                  <ul
-                     tabIndex={1}
-                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                     <li>
-                        <a>Item 1</a>
-                     </li>
-                     <li>
-                        <a>Item 2</a>
-                     </li>
-                  </ul>
-               </div>
-               <div className="dropdown dropdown-hover dropdown-bottom">
-                  <label
-                     tabIndex={2}
-                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
-                  >
-                     Past Events <FaChevronDown></FaChevronDown>
-                  </label>
-                  <ul
-                     tabIndex={2}
-                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                     <li>
-                        <a>Item 1</a>
-                     </li>
-                     <li>
-                        <a>Item 2</a>
-                     </li>
-                  </ul>
-               </div>
-               <div className="dropdown dropdown-hover dropdown-bottom">
-                  <label
-                     tabIndex={3}
-                     className="flex hover:border-b border-orange-400 rounded-none hover:text-orange-400 hover:bg-transparent gap-3 py-3 px-5 justify-center items-center"
-                  >
-                     Contact Us <FaChevronDown></FaChevronDown>
-                  </label>
-                  <ul
-                     tabIndex={3}
-                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                     <li>
-                        <a>Item 1</a>
-                     </li>
-                     <li>
-                        <a>Item 2</a>
-                     </li>
-                  </ul>
-               </div>
+               <ul className="menu menu-horizontal px-1">
+                  <li tabIndex={0} className="bg-none">
+                     <details>
+                        <summary className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300">
+                           Careers
+                        </summary>
+                        <ul className="p-2 w-52">
+                           <li>
+                              <a>Submenu 1</a>
+                           </li>
+                           <li>
+                              <a>Submenu 2</a>
+                           </li>
+                        </ul>
+                     </details>
+                  </li>
+                  <li>
+                     <a className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300">
+                        Live Events
+                     </a>
+                  </li>
+                  <li>
+                     <a className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300">
+                        Contact Us
+                     </a>
+                  </li>
+               </ul>
                <div>
-                  <div className="relative text-white mr-4">
-                     <input
-                        type="text"
-                        placeholder="Search"
-                        className="input w-full px-6 bg-black rounded-lg focus:outline-none text-xl py-3"
-                     />
-                     <FaSearch className="w-6 absolute opacity-75 right-5 top-1/4 h-6"></FaSearch>
-                  </div>
+                  <form className="relative mr-4" onSubmit={search}>
+                     <div className="join">
+                        <div>
+                           <div>
+                              <input
+                                 className="input bg-gray-100 input-bordered join-item focus:outline-none rounded-none"
+                                 name="text"
+                                 placeholder="Search"
+                              />
+                           </div>
+                        </div>
+                        <select
+                           className="select select-bordered bg-gray-100 join-item w-20 focus:outline-none rounded-none"
+                           name="category"
+                        >
+                           <option value="brands">Brands</option>
+                           <option value="organizations">Event-Organization</option>
+                           <option value="user">Content-Creator</option>
+                        </select>
+                        <div className="indicator">
+                           <button
+                              className="btn join-item border-green-500 bg-green-500 text-white hover:bg-green-600 focus:outline-none rounded-none"
+                              type="submit"
+                           >
+                              <FaSearch></FaSearch>
+                           </button>
+                        </div>
+                     </div>
+                  </form>
                </div>
             </div>
             <div className="w-[2px]  h-8 bg-gray-500"></div>
@@ -263,7 +252,7 @@ const Navbar = () => {
                            </a>
                         </li>
                         <li>
-                           <a>
+                           <a onClick={logOut}>
                               <FaPowerOff></FaPowerOff> Log Out
                            </a>
                         </li>

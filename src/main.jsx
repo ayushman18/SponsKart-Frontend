@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Routes.jsx";
 import "swiper/css";
 import "react-toastify/dist/ReactToastify.css";
+import "@smastrom/react-rating/style.css";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./home/provider/AuthProvider/AuthProvider";
 

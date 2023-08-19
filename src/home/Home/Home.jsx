@@ -1,8 +1,8 @@
 import Footer from "../../Shared/Footer/Footer";
 import Awards from "../Awards/Awards";
-import Banner from "../Banner/Banner";
+
 import JoinNow from "../JoinNow/JoinNow";
-import Navbar from "../Navbar/Navbar";
+
 import PickedCategory from "../PickedCategory/PickedCategory";
 import PopularService from "../PopularService/PopularService";
 import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
@@ -12,10 +12,6 @@ import "./Home.css";
 const Home = () => {
    return (
       <>
-         <header className="header">
-            <Navbar></Navbar>
-            <Banner></Banner>
-         </header>
          <main>
             <Sponsors></Sponsors>
             <PopularService></PopularService>

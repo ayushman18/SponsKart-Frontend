@@ -17,7 +17,9 @@ const Login = () => {
          .post("https://sponskart-hkgd.onrender.com/signin", data)
          .then((res) => {
             console.log("here", res.data);
+
             if (res.data.code === 200) {
+               localStorage.setItem("user", JSON.stringify(res.data.data));
                toast.success(
                   `Welcome ${
                      res.data.data.organizer
