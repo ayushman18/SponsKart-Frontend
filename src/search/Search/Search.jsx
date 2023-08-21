@@ -87,7 +87,7 @@ const Search = () => {
                <button className="btn rounded-full normal-case">Sort A-Z</button>
                <div className="my-12 grid grid-cols-2 justify-around items-center">
                   {result.map((data) => (
-                     <Link to={`/brands/${data._id}`} key={data._id}>
+                     <Link to={`/${category}/${data._id}`} key={data._id}>
                         <div
                            className="card max-w-[420px] bg-base-100 rounded-2xl"
                            style={{ boxShadow: "0px 4px 25px 13px #525252" }}

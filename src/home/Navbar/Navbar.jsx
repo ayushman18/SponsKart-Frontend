@@ -3,12 +3,11 @@ import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
 import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
-import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider/AuthProvider";
-import { toast } from "react-toastify";
+
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-   const { user, logOut } = useContext(AuthContext);
+   const { user, logOut } = useAuth();
    const location = useLocation();
    const navigate = useNavigate();
 
@@ -234,9 +233,9 @@ const Navbar = () => {
                            </a>
                         </li>
                         <li>
-                           <a>
-                              <FaRegUser></FaRegUser> Profile
-                           </a>
+                           <Link to="/dashboard">
+                              <FaRegUser></FaRegUser> Dashboard
+                           </Link>
                         </li>
                         <li>
                            <a>

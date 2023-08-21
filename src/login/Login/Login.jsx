@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../home/provider/AuthProvider/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-   const { setUser, user } = useContext(AuthContext);
+   const { setUser } = useAuth();
    const navigate = useNavigate();
-   console.log(user);
+   const location = useLocation();
+   const from = location.state?.pathname || "/";
+   console.log(from);
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
@@ -30,7 +31,7 @@ const Login = () => {
                   }`
                );
                setUser(res.data.data);
-               navigate("/");
+               navigate(from);
             }
          })
          .catch((err) => {
@@ -40,6 +41,7 @@ const Login = () => {
    return (
       <div>
          <h2 className="text-3xl font-semibold text-green-500 mb-6">Login</h2>
+
          <form onSubmit={handleSubmit(onSubmit)}>
             <input
                type="text"
@@ -58,9 +60,17 @@ const Login = () => {
                {...register("password")}
             />
             <br /> <br />
-            <Link to="forget-password" className="text-green-500 font-semibold text-lg">
-               Forget Password?
-            </Link>
+            <div className="flex gap-16 items-center">
+               <Link to="forget-password" className="text-green-500 font-semibold text-lg">
+                  Forget Password?
+               </Link>
+               <p className="text-lg">
+                  New here?{" "}
+                  <Link to="/register" className="text-green-500 underline">
+                     Join Us.
+                  </Link>
+               </p>
+            </div>
             <div className="flex justify-center items-center">
                <button className="px-14 py-3 rounded-3xl bg-[#36BC15] font-semibold text-white">Next</button>
             </div>

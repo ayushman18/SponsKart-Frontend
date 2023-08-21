@@ -10,6 +10,9 @@ import ForgetPass from "../login/ForgetPass/ForgetPass";
 import Search from "../search/Search/Search";
 import ResetPass from "../login/ResetPass/ResetPass";
 import Brands from "../brands/Brands/Brands";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../dashboard/Dashboard/Dashboard";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
    {
@@ -25,7 +28,15 @@ export const router = createBrowserRouter([
             element: <Search></Search>,
          },
          {
-            path: "/brands/:id",
+            path: "/brand/:id",
+            element: <Brands></Brands>,
+         },
+         {
+            path: "/Organizer/:id",
+            element: <Brands></Brands>,
+         },
+         {
+            path: "/user/:id",
             element: <Brands></Brands>,
          },
       ],
@@ -63,6 +74,20 @@ export const router = createBrowserRouter([
          {
             path: "reset-password",
             element: <ResetPass></ResetPass>,
+         },
+      ],
+   },
+   {
+      path: "/dashboard",
+      element: (
+         <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+         </PrivateRoute>
+      ),
+      children: [
+         {
+            path: "/dashboard",
+            element: <Dashboard></Dashboard>,
          },
       ],
    },

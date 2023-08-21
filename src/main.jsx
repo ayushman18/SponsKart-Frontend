@@ -7,7 +7,7 @@ import "swiper/css";
 import "react-toastify/dist/ReactToastify.css";
 import "@smastrom/react-rating/style.css";
 import { ToastContainer } from "react-toastify";
-import AuthProvider from "./home/provider/AuthProvider/AuthProvider";
+import AuthProvider from "./provider/AuthProvider/AuthProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>
