@@ -14,6 +14,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import BrandRegister from "../register/BrandRegister/BrandRegister";
 import ContentCreatorDashboard from "../dashboard/ContentCreatorDashboard/ContentCreatorDashboard";
+import ContactUs from "../ContaxtUs/ContactUs";
 
 export const router = createBrowserRouter([
    {
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
             element: <ResetPass></ResetPass>,
          },
       ],
+   },
+   {
+      path: "/contact-us",
+      element: <ContactUs></ContactUs>,
    },
    {
       path: "/dashboard",

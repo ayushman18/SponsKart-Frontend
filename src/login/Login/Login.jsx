@@ -70,7 +70,7 @@ const Login = () => {
          <form onSubmit={handleSubmit(onSubmit)}>
             <input
                type="text"
-               placeholder="Type Email"
+               placeholder="Type Email or Username"
                className="input input-bordered w-full max-w-xs"
                required
                {...register("email")}
