@@ -1,9 +1,49 @@
 import { FaUpload } from "react-icons/fa";
-import "./Dashboard.css";
+import "./ContentCreatorDashboard.css";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
-const Dashboard = () => {
-   // const { user } = useAuth();
+const ContentCreatorDashboard = () => {
+   const { user } = useAuth();
+   console.log(user.phonenumber);
+   // const { type } = user;
+   const indianStates = [
+      "Andhra Pradesh",
+      "Arunachal Pradesh",
+      "Assam",
+      "Bihar",
+      "Chhattisgarh",
+      "Goa",
+      "Gujarat",
+      "Haryana",
+      "Himachal Pradesh",
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Odisha",
+      "Punjab",
+      "Rajasthan",
+      "Sikkim",
+      "Tamil Nadu",
+      "Telangana",
+      "Tripura",
+      "Uttar Pradesh",
+      "Uttarakhand",
+      "West Bengal",
+      "Andaman and Nicobar Islands",
+      "Chandigarh",
+      "Dadra and Nagar Haveli and Daman and Diu",
+      "Lakshadweep",
+      "Delhi",
+      "Puducherry",
+   ];
 
    useEffect(() => {
       var inputs = document.querySelectorAll(".inputFile");
@@ -53,45 +93,53 @@ const Dashboard = () => {
          }
       });
    }, []);
+   const { register, handleSubmit } = useForm();
+   const onSubmit = (data) => {
+      console.log(data);
+   };
 
    return (
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
          <div className="grid grid-cols-3 gap-8">
             <div>
                <input
                   type="text"
-                  placeholder="Username"
+                  placeholder="Update Username"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  {...register("username")}
+                  defaultValue={user.username}
                />
                <input
                   type="email"
                   placeholder="Email"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  {...register("email")}
+                  defaultValue={user.email}
+                  readOnly
                />
                <input
-                  type="tel"
+                  type="number"
                   placeholder="Phone Number"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  {...register("email")}
+                  defaultValue={user.phonenumber}
                />
-               <input
-                  type="text"
-                  placeholder="City"
-                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-               />
-               <input
-                  type="text"
-                  placeholder="State"
-                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-               />
-               <input
-                  type="text"
-                  placeholder="Country"
-                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-               />
+               <select
+                  className="select select-bordered lg:mb-0 w-full max-w-xs px-4 h-16 mb-6 input-style"
+                  {...register("location")}
+               >
+                  <option disabled selected>
+                     Select Location
+                  </option>
+                  {indianStates.map((state, index) => (
+                     <option key={index}>{state}</option>
+                  ))}
+               </select>
+
                <input
                   type="text"
                   placeholder="Social Media Platform Name"
-                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
                />
                <input
                   type="text"
@@ -156,4 +204,4 @@ const Dashboard = () => {
    );
 };
 
-export default Dashboard;
+export default ContentCreatorDashboard;

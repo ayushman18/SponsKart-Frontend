@@ -18,7 +18,7 @@ const DashboardLayout = () => {
    };
 
    return (
-      <section className="bg-gray-100 min-h-screen">
+      <section className="bg-[#151414] min-h-screen">
          <div className="grid grid-cols-3">
             <div className="m-8 rounded-xl bg-white p-8">
                <img src="./logo.png" alt="" />

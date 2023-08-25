@@ -12,9 +12,11 @@ const JoinNow = () => {
                Consectetur adipisicing elit sed do eiusmod tempor incididunt utnale labore etdolore magna
                adminim eniam quis nostrud exercitation ullamco laborisn nisi ut aliquip.
             </p>
-            <button className="w-full py-6 rounded-lg text-xl bg-[#53C929] hover:bg-green-600 text-white my-12">
-               Click Here & Join Now
-            </button>
+            <Link to="/register">
+               <button className="w-full py-6 rounded-lg text-xl bg-[#53C929] hover:bg-green-600 text-white my-12">
+                  Click Here & Join Now
+               </button>
+            </Link>
             <p className="text-sm">
                <Link className="link link-primary no-underline">Terms and Conditions</Link> applies. read our{" "}
                <Link className="link link-primary no-underline">Privacy Policy </Link>to get started.

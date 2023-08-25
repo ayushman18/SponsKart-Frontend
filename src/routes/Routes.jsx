@@ -11,8 +11,9 @@ import Search from "../search/Search/Search";
 import ResetPass from "../login/ResetPass/ResetPass";
 import Brands from "../brands/Brands/Brands";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Dashboard from "../dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import BrandRegister from "../register/BrandRegister/BrandRegister";
+import ContentCreatorDashboard from "../dashboard/ContentCreatorDashboard/ContentCreatorDashboard";
 
 export const router = createBrowserRouter([
    {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             path: "organiser",
             element: <OrganiserRegister></OrganiserRegister>,
          },
+         {
+            path: "brand",
+            element: <BrandRegister></BrandRegister>,
+         },
       ],
    },
    {
@@ -86,8 +91,8 @@ export const router = createBrowserRouter([
       ),
       children: [
          {
-            path: "/dashboard",
-            element: <Dashboard></Dashboard>,
+            path: "contentCreator",
+            element: <ContentCreatorDashboard></ContentCreatorDashboard>,
          },
       ],
    },
