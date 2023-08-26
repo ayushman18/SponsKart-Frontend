@@ -6,6 +6,7 @@ import ContentCreatorSearchCard from "../ContentCreatorSearchCard/ContentCreator
 import BrandSearchCard from "../BrandSearchCard/BrandSearchCard";
 import CreatorFilter from "../Filters/CreatorFilter";
 import OrganizerSearchCard from "../OrganizerSearchCard/OrganizerSearchCard";
+import OrganizerFilter from "../Filters/OrganizerFilter";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
@@ -50,7 +51,13 @@ const Search = () => {
    return (
       <section>
          <div className="container mx-auto grid grid-cols-4 gap-24 my-10 ">
-            <CreatorFilter category={category}></CreatorFilter>
+            {category === "user" ? (
+               <CreatorFilter></CreatorFilter>
+            ) : category === "Organizer" ? (
+               <OrganizerFilter></OrganizerFilter>
+            ) : (
+               <CreatorFilter></CreatorFilter>
+            )}
             <div className="col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
 
@@ -62,7 +69,7 @@ const Search = () => {
                               category={category}
                               data={data}
                            ></ContentCreatorSearchCard>
-                        ) : category === "Organiser" ? (
+                        ) : category === "Organizer" ? (
                            <OrganizerSearchCard category={category} data={data}></OrganizerSearchCard>
                         ) : (
                            <BrandSearchCard category={category} data={data}></BrandSearchCard>

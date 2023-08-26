@@ -9,12 +9,12 @@ import Login from "../login/Login/Login";
 import ForgetPass from "../login/ForgetPass/ForgetPass";
 import Search from "../search/Search/Search";
 import ResetPass from "../login/ResetPass/ResetPass";
-import Brands from "../brands/Brands/Brands";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import BrandRegister from "../register/BrandRegister/BrandRegister";
 import ContentCreatorDashboard from "../dashboard/ContentCreatorDashboard/ContentCreatorDashboard";
-import ContactUs from "../ContaxtUs/ContactUs";
+import ContactUs from "../ContactUs/ContactUs";
+import Brands from "../Details/Brands/Brands";
 
 export const router = createBrowserRouter([
    {
