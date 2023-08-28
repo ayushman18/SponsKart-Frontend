@@ -96,7 +96,11 @@ export const router = createBrowserRouter([
       ),
       children: [
          {
-            path: "contentCreator",
+            path: "user",
+            element: <ContentCreatorDashboard></ContentCreatorDashboard>,
+         },
+         {
+            path: "Organizer",
             element: <ContentCreatorDashboard></ContentCreatorDashboard>,
          },
       ],

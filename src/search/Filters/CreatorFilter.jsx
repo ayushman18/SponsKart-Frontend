@@ -46,32 +46,36 @@ const CreatorFilter = () => {
             <div className="collapse-content">
                <div className="form-control">
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Fitness</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Skin-Care</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Lifestyle</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Cosmetics</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Education</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Technology</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Finance</span>
+                  </label>
+                  <label className="cursor-pointer justify-start gap-4 label">
+                     <input type="checkbox" />
+                     <span className="label-text text-base">Others</span>
                   </label>
                </div>
             </div>
@@ -82,15 +86,15 @@ const CreatorFilter = () => {
             <div className="collapse-content">
                <div className="form-control">
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Male</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Female</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Other</span>
                   </label>
                </div>
@@ -109,6 +113,7 @@ const CreatorFilter = () => {
                      onChange={(e) => {
                         console.log(e.target.value);
                      }}
+                     defaultValue="10000"
                      className="input input-bordered input-success w-full"
                   />
                   <span className="label-text text-base">100K</span>
@@ -121,23 +126,23 @@ const CreatorFilter = () => {
             <div className="collapse-content">
                <div className="form-control">
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Facebook</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">LinkedIn</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Youtube</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Instagram</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Twitter</span>
                   </label>
                </div>
@@ -149,15 +154,15 @@ const CreatorFilter = () => {
             <div className="collapse-content">
                <div className="form-control">
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Hindi</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">English</span>
                   </label>
                   <label className="cursor-pointer justify-start gap-4 label">
-                     <input type="checkbox" className="checkbox checkbox-sm" />
+                     <input type="checkbox" />
                      <span className="label-text text-base">Bangla</span>
                   </label>
                </div>
