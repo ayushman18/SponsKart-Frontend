@@ -29,6 +29,26 @@ const Search = () => {
          });
    }, [category, text]);
 
+   const handelFilterSearch = (filter) => {
+      console.log(JSON.stringify(filter));
+      axios
+         .get(
+            `https://sponskart-hkgd.onrender.com/search?type=${category}&search=${text}&filter=${JSON.stringify(
+               filter
+            )}`
+         )
+         .then((res) => {
+            console.log(res.data.data);
+            setLoading(false);
+            setResult(res.data.data);
+         })
+         .catch((err) => {
+            console.log(err);
+            setLoading(false);
+            toast.error("Please refresh we are having an issue.");
+         });
+   };
+
    if (loading) {
       return (
          <>
@@ -52,11 +72,11 @@ const Search = () => {
       <section>
          <div className="container mx-auto grid grid-cols-4 gap-24 my-10 ">
             {category === "user" ? (
-               <CreatorFilter></CreatorFilter>
+               <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
             ) : category === "Organizer" ? (
-               <OrganizerFilter></OrganizerFilter>
+               <OrganizerFilter handelFilterSearch={handelFilterSearch}></OrganizerFilter>
             ) : (
-               <CreatorFilter></CreatorFilter>
+               <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
             )}
             <div className="col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
