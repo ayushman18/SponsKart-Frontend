@@ -38,10 +38,13 @@ const DashboardLayout = () => {
                   >
                      Update Profile
                   </Link>
-                  <Link to={`/dashboard/brand/addPost`} className="hover:bg-gray-200 rounded-md p-4">
+                  <Link to={`/dashboard/${user.type}/addPost`} className="hover:bg-gray-200 rounded-md p-4">
                      Add A Post
                   </Link>
-                  <Link to={`/dashboard/brand/managePost`} className="hover:bg-gray-200 rounded-md p-4">
+                  <Link
+                     to={`/dashboard/${user.type}/managePost`}
+                     className="hover:bg-gray-200 rounded-md p-4"
+                  >
                      Manage Post
                   </Link>
                </nav>

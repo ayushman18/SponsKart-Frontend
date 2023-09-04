@@ -1,7 +1,7 @@
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useRef } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const PopularService = () => {
    const swiperRef = useRef();

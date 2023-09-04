@@ -18,6 +18,14 @@ import CreatorProfile from "../dashboard/ContentCreatorDashboard/CreatorProfile/
 import CreatorUpdateProfile from "../dashboard/ContentCreatorDashboard/CreatorUpdateProfile/CreatorUpdateProfile";
 import BrandAddPost from "../dashboard/BrandDashboard/BrandAddPost/BrandAddPost";
 import BrandManagePost from "../dashboard/BrandDashboard/BrandManagePost/BrandManagePost";
+import CreatorAddPost from "../dashboard/ContentCreatorDashboard/CreatorAddPost/CreatorAddPost";
+import CreatorManagePost from "../dashboard/ContentCreatorDashboard/CreatorManagePost/CreatorManagePost";
+import OrganizerProfile from "../dashboard/OrganizerDashboard/OrganizerProfile/OrganizerProfile";
+import OrganizerUpdateProfile from "../dashboard/OrganizerDashboard/OrganizerUpdateProfile/OrganizerUpdateProfile";
+import OrganizerAddPost from "../dashboard/OrganizerDashboard/OrganizerAddPost/OrganizerAddPost";
+import OrganizerManagePost from "../dashboard/OrganizerDashboard/OrganizerManagePost/OrganizerManagePost";
+import BrandProfile from "../dashboard/BrandDashboard/BrandProfile/BrandProfile";
+import BrandUpdateProfile from "../dashboard/BrandDashboard/BrandUpdateProfile/BrandUpdateProfile";
 
 export const router = createBrowserRouter([
    {
@@ -110,16 +118,50 @@ export const router = createBrowserRouter([
                   path: "updateProfile",
                   element: <CreatorUpdateProfile></CreatorUpdateProfile>,
                },
+               {
+                  path: "addPost",
+                  element: <CreatorAddPost></CreatorAddPost>,
+               },
+               {
+                  path: "managePost",
+                  element: <CreatorManagePost></CreatorManagePost>,
+               },
             ],
          },
          {
-            path: "Organizer/profile",
-            element: <CreatorProfile></CreatorProfile>,
+            path: "Organizer",
+            children: [
+               {
+                  path: "profile",
+                  element: <OrganizerProfile></OrganizerProfile>,
+               },
+               {
+                  path: "updateProfile",
+                  element: <OrganizerUpdateProfile></OrganizerUpdateProfile>,
+               },
+               {
+                  path: "addPost",
+                  element: <OrganizerAddPost></OrganizerAddPost>,
+               },
+               {
+                  path: "managePost",
+                  element: <OrganizerManagePost></OrganizerManagePost>,
+               },
+            ],
          },
          {
             path: "brand",
 
             children: [
+               {
+                  path: "profile",
+                  element: <BrandProfile></BrandProfile>,
+               },
+               {
+                  path: "updateProfile",
+                  element: <BrandUpdateProfile></BrandUpdateProfile>,
+               },
+
                {
                   path: "addPost",
                   element: <BrandAddPost></BrandAddPost>,
