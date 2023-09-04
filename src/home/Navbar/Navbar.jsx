@@ -172,10 +172,10 @@ const Navbar = () => {
                            </div>
                         </div>
                         <select
-                           className="select select-bordered bg-gray-100 join-item w-20 focus:outline-none rounded-none"
+                           className="select select-bordered bg-gray-100 join-item w-40 focus:outline-none rounded-none"
                            name="category"
                         >
-                           {/* <option value="brand">Brands</option> */}
+                           <option value="brand">Brands</option>
                            <option value="Organizer">Event-Organization</option>
                            <option value="user">Content-Creator</option>
                         </select>
@@ -236,7 +236,7 @@ const Navbar = () => {
                            </a>
                         </li>
                         <li>
-                           <Link to={`/dashboard/${user.type}`}>
+                           <Link to={`/dashboard/${user.type}/profile`}>
                               <FaRegUser></FaRegUser> Dashboard
                            </Link>
                         </li>

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 const ContentCreatorRegister = () => {
    const [agree, setAgree] = useState(false);
+   const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
 
    const indianStates = [
@@ -48,6 +49,7 @@ const ContentCreatorRegister = () => {
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
+      setLoading(true);
       if (!agree) {
          toast.error("Please agree with terms and conditions");
          return;
@@ -60,6 +62,7 @@ const ContentCreatorRegister = () => {
          .post("https://sponskart-hkgd.onrender.com/register", data)
          .then((res) => {
             console.log("here", res.data);
+            setLoading(false);
             if (res.data.code === "ERR_BAD_REQUEST") {
                toast.error(res.data.message);
             } else if (res.data.code === 200) {
@@ -68,6 +71,7 @@ const ContentCreatorRegister = () => {
             }
          })
          .catch((err) => {
+            setLoading(false);
             if (err.code) {
                toast.error(err.response.data.message);
             }
@@ -79,6 +83,19 @@ const ContentCreatorRegister = () => {
       const checkbox = document.getElementById("agree");
       setAgree(checkbox.checked);
    };
+
+   if (loading) {
+      return (
+         <div>
+            <h2>Thanks for joining us. Please wait!! </h2>
+            <div>
+               <span className="loading loading-ring loading-sm"></span>
+               <span className="loading loading-ring loading-sm"></span>
+               <span className="loading loading-ring loading-sm"></span>
+            </div>
+         </div>
+      );
+   }
 
    return (
       <div>

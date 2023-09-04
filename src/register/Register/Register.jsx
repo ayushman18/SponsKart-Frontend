@@ -49,12 +49,12 @@ const Register = () => {
                <span className="text-xl">Content Creator</span>
             </label>
          </div>
-         {/* <div className="form-control">
+         <div className="form-control">
             <label className="label justify-normal gap-8 cursor-pointer" onClick={() => setUserRole("brand")}>
                <input type="radio" name="role" className="radio checked:bg-green-500" value="brand" />
                <span className="text-xl">Brand</span>
             </label>
-         </div> */}
+         </div>
          <div>
             <Link to={userRole}>
                <button className="py-4 px-16 bg-[#53C929] text-white rounded-full w-fit my-20">Next</button>

@@ -12,9 +12,12 @@ import ResetPass from "../login/ResetPass/ResetPass";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import BrandRegister from "../register/BrandRegister/BrandRegister";
-import ContentCreatorDashboard from "../dashboard/ContentCreatorDashboard/ContentCreatorDashboard";
 import ContactUs from "../ContactUs/ContactUs";
 import Brands from "../Details/Brands/Brands";
+import CreatorProfile from "../dashboard/ContentCreatorDashboard/CreatorProfile/CreatorProfile";
+import CreatorUpdateProfile from "../dashboard/ContentCreatorDashboard/CreatorUpdateProfile/CreatorUpdateProfile";
+import BrandAddPost from "../dashboard/BrandDashboard/BrandAddPost/BrandAddPost";
+import BrandManagePost from "../dashboard/BrandDashboard/BrandManagePost/BrandManagePost";
 
 export const router = createBrowserRouter([
    {
@@ -97,11 +100,35 @@ export const router = createBrowserRouter([
       children: [
          {
             path: "user",
-            element: <ContentCreatorDashboard></ContentCreatorDashboard>,
+
+            children: [
+               {
+                  path: "profile",
+                  element: <CreatorProfile></CreatorProfile>,
+               },
+               {
+                  path: "updateProfile",
+                  element: <CreatorUpdateProfile></CreatorUpdateProfile>,
+               },
+            ],
          },
          {
-            path: "Organizer",
-            element: <ContentCreatorDashboard></ContentCreatorDashboard>,
+            path: "Organizer/profile",
+            element: <CreatorProfile></CreatorProfile>,
+         },
+         {
+            path: "brand",
+
+            children: [
+               {
+                  path: "addPost",
+                  element: <BrandAddPost></BrandAddPost>,
+               },
+               {
+                  path: "managePost",
+                  element: <BrandManagePost></BrandManagePost>,
+               },
+            ],
          },
       ],
    },

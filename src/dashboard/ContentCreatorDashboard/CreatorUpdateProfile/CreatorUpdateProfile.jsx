@@ -1,13 +1,12 @@
 import { FaUpload } from "react-icons/fa";
-import "./ContentCreatorDashboard.css";
+import "./CreatorUpdateProfile.css";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 
-const ContentCreatorDashboard = () => {
+const CreatorUpdateProfile = () => {
    const { user } = useAuth();
    console.log(user.phonenumber);
-   // const { type } = user;
    const indianStates = [
       "Andhra Pradesh",
       "Arunachal Pradesh",
@@ -104,6 +103,20 @@ const ContentCreatorDashboard = () => {
             <div>
                <input
                   type="text"
+                  placeholder="Update First Name"
+                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  {...register("firstname")}
+                  defaultValue={user.firstname}
+               />
+               <input
+                  type="text"
+                  placeholder="Update Last Name"
+                  className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+                  {...register("lastname")}
+                  defaultValue={user.lastname}
+               />
+               <input
+                  type="text"
                   placeholder="Update Username"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
                   {...register("username")}
@@ -118,21 +131,20 @@ const ContentCreatorDashboard = () => {
                   readOnly
                />
                <input
-                  type="number"
+                  type="tel"
                   placeholder="Phone Number"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-                  {...register("email")}
+                  {...register("phonenumber")}
                   defaultValue={user.phonenumber}
                />
                <select
                   className="select select-bordered lg:mb-0 w-full max-w-xs px-4 h-16 mb-6 input-style"
                   {...register("location")}
                >
-                  <option disabled selected>
-                     Select Location
-                  </option>
                   {indianStates.map((state, index) => (
-                     <option key={index}>{state}</option>
+                     <option key={index} selected={state === user.location}>
+                        {state}
+                     </option>
                   ))}
                </select>
 
@@ -204,4 +216,4 @@ const ContentCreatorDashboard = () => {
    );
 };
 
-export default ContentCreatorDashboard;
+export default CreatorUpdateProfile;

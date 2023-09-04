@@ -7,6 +7,7 @@ import BrandSearchCard from "../BrandSearchCard/BrandSearchCard";
 import CreatorFilter from "../Filters/CreatorFilter";
 import OrganizerSearchCard from "../OrganizerSearchCard/OrganizerSearchCard";
 import OrganizerFilter from "../Filters/OrganizerFilter";
+import BrandFilter from "../Filters/BrandFilter";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
@@ -76,7 +77,7 @@ const Search = () => {
             ) : category === "Organizer" ? (
                <OrganizerFilter handelFilterSearch={handelFilterSearch}></OrganizerFilter>
             ) : (
-               <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
+               <BrandFilter handelFilterSearch={handelFilterSearch}></BrandFilter>
             )}
             <div className="col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
