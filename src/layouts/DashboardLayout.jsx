@@ -1,8 +1,9 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import fire from "./../assets/dashboard/fire.png";
-import { FaPowerOff, FaRegBell, FaRegQuestionCircle, FaSearch, FaUser } from "react-icons/fa";
+import { FaCalendarAlt, FaPowerOff, FaRegBell, FaRegQuestionCircle, FaSearch, FaUser } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
+import moment from "moment/moment";
 
 const DashboardLayout = () => {
    const { user, logOut } = useAuth();
@@ -29,6 +30,9 @@ const DashboardLayout = () => {
                   <p>profile picture</p>
                </div>
                <nav className="flex flex-col my-6">
+                  <Link to={`/`} className="hover:bg-gray-200 rounded-md p-4">
+                     Home
+                  </Link>
                   <Link to={`/dashboard/${user.type}/profile`} className="hover:bg-gray-200 rounded-md p-4">
                      Profile
                   </Link>
@@ -67,7 +71,7 @@ const DashboardLayout = () => {
                </div>
             </div>
             <div className="col-span-2 p-8">
-               <div className="bg-white rounded-xl p-6 flex flex-wrap justify-between items-center">
+               <div className="bg-white rounded-xl p-6 flex gap-4 flex-wrap justify-between items-center">
                   <div className="border-r pr-4 flex items-center gap-4 justify-start">
                      <div className="avatar">
                         <div className="w-16 rounded-full bg-slate-200">
@@ -92,7 +96,9 @@ const DashboardLayout = () => {
                      </div>
                   </div>
                   <div className="flex-grow flex justify-between items-center pl-4">
-                     <div>date</div>
+                     <div className="flex items-center gap-2">
+                        <FaCalendarAlt></FaCalendarAlt> {moment().format("MM Do YY")}
+                     </div>
                      <div>
                         <div>
                            <form className="relative mr-4" onSubmit={search}>
@@ -127,12 +133,12 @@ const DashboardLayout = () => {
                         </div>
                      </div>
                      <div className="flex items-center gap-4">
-                        <p className="p-5 bg-gray-100 rounded-full">
+                        <button className="btn btn-circle bg-gray-100 rounded-full">
                            <AiOutlineMessage className=" text-xl"></AiOutlineMessage>
-                        </p>
-                        <p className="p-5 bg-gray-100 rounded-full">
+                        </button>
+                        <button className="btn btn-circle bg-gray-100 rounded-full">
                            <FaRegBell className=" text-xl"></FaRegBell>
-                        </p>
+                        </button>
                      </div>
                   </div>
                </div>
