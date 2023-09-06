@@ -53,6 +53,7 @@ export const router = createBrowserRouter([
          {
             path: "/creator/:id",
             element: <CreatorDetails></CreatorDetails>,
+            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/creator/get/${params.id}`),
          },
       ],
    },
@@ -109,7 +110,7 @@ export const router = createBrowserRouter([
       ),
       children: [
          {
-            path: "user",
+            path: "creator",
 
             children: [
                {
