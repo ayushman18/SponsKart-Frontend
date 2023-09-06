@@ -13,7 +13,6 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import BrandRegister from "../register/BrandRegister/BrandRegister";
 import ContactUs from "../ContactUs/ContactUs";
-import Brands from "../Details/Brands/Brands";
 import CreatorProfile from "../dashboard/ContentCreatorDashboard/CreatorProfile/CreatorProfile";
 import CreatorUpdateProfile from "../dashboard/ContentCreatorDashboard/CreatorUpdateProfile/CreatorUpdateProfile";
 import BrandAddPost from "../dashboard/BrandDashboard/BrandAddPost/BrandAddPost";
@@ -26,6 +25,9 @@ import OrganizerAddPost from "../dashboard/OrganizerDashboard/OrganizerAddPost/O
 import OrganizerManagePost from "../dashboard/OrganizerDashboard/OrganizerManagePost/OrganizerManagePost";
 import BrandProfile from "../dashboard/BrandDashboard/BrandProfile/BrandProfile";
 import BrandUpdateProfile from "../dashboard/BrandDashboard/BrandUpdateProfile/BrandUpdateProfile";
+import BrandDetails from "../Details/brand/BrandDetails/BrandDetails";
+import OrganizerDetails from "../Details/organizer/OrganizerDetails/OrganizerDetails";
+import CreatorDetails from "../Details/creator/CreatorDetails/CreatorDetails";
 
 export const router = createBrowserRouter([
    {
@@ -42,15 +44,15 @@ export const router = createBrowserRouter([
          },
          {
             path: "/brand/:id",
-            element: <Brands></Brands>,
+            element: <BrandDetails></BrandDetails>,
          },
          {
-            path: "/Organizer/:id",
-            element: <Brands></Brands>,
+            path: "/organizer/:id",
+            element: <OrganizerDetails></OrganizerDetails>,
          },
          {
-            path: "/user/:id",
-            element: <Brands></Brands>,
+            path: "/creator/:id",
+            element: <CreatorDetails></CreatorDetails>,
          },
       ],
    },

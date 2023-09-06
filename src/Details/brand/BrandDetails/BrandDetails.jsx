@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
-import img from "./../../assets/search/gmail.png";
-import facebook from "./../../assets/socialIcon/facebook.png";
-import instagram from "./../../assets/socialIcon/instagram.png";
-import linkedin from "./../../assets/socialIcon/linkedin.png";
-import twitter from "./../../assets/socialIcon/twitter.png";
+import img from "./../../../assets/search/gmail.png";
+import facebook from "./../../../assets/socialIcon/facebook.png";
+import instagram from "./../../../assets/socialIcon/instagram.png";
+import linkedin from "./../../../assets/socialIcon/linkedin.png";
+import twitter from "./../../../assets/socialIcon/twitter.png";
 import { Rating } from "@smastrom/react-rating";
 
-const Organizer = () => {
+const BrandDetails = () => {
    const params = useParams();
    const id = params.id;
    console.log(id);
@@ -105,4 +105,4 @@ const Organizer = () => {
    );
 };
 
-export default Organizer;
+export default BrandDetails;

@@ -17,7 +17,7 @@ const Search = () => {
    const [result, setResult] = useState([]);
    useEffect(() => {
       axios
-         .get(`https://sponskart-hkgd.onrender.com/search?type=${category}&search=${text}`)
+         .get(`https://sponskart-hkgd.onrender.com/${category}/getall`)
          .then((res) => {
             console.log(res.data.data);
             setLoading(false);
@@ -72,9 +72,9 @@ const Search = () => {
    return (
       <section>
          <div className="container mx-auto grid grid-cols-4 gap-24 my-10 ">
-            {category === "user" ? (
+            {category === "creator" ? (
                <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
-            ) : category === "Organizer" ? (
+            ) : category === "organizer" ? (
                <OrganizerFilter handelFilterSearch={handelFilterSearch}></OrganizerFilter>
             ) : (
                <BrandFilter handelFilterSearch={handelFilterSearch}></BrandFilter>
@@ -83,20 +83,24 @@ const Search = () => {
                <button className="btn rounded-full normal-case">Sort A-Z</button>
 
                <div className="my-12 grid grid-cols-2 gap-8 justify-around items-center">
-                  {result.map((data) => (
-                     <div key={data._id}>
-                        {category === "user" ? (
-                           <ContentCreatorSearchCard
-                              category={category}
-                              data={data}
-                           ></ContentCreatorSearchCard>
-                        ) : category === "Organizer" ? (
-                           <OrganizerSearchCard category={category} data={data}></OrganizerSearchCard>
-                        ) : (
-                           <BrandSearchCard category={category} data={data}></BrandSearchCard>
-                        )}
-                     </div>
-                  ))}
+                  {result.length ? (
+                     result.map((data) => (
+                        <div key={data._id}>
+                           {category === "creator" ? (
+                              <ContentCreatorSearchCard
+                                 category={category}
+                                 data={data}
+                              ></ContentCreatorSearchCard>
+                           ) : category === "organizer" ? (
+                              <OrganizerSearchCard category={category} data={data}></OrganizerSearchCard>
+                           ) : (
+                              <BrandSearchCard category={category} data={data}></BrandSearchCard>
+                           )}
+                        </div>
+                     ))
+                  ) : (
+                     <h2 className="text-2xl">No data found</h2>
+                  )}
                </div>
             </div>
          </div>

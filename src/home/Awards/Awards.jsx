@@ -1,4 +1,3 @@
-import { FaRegPlayCircle } from "react-icons/fa";
 import conversation from "../../assets/conversation.png";
 import icon2 from "./../../assets/home/content-creator.png";
 import icon1 from "./../../assets/home/brand-image.png";
@@ -8,18 +7,10 @@ import { Link } from "react-router-dom";
 const Awards = () => {
    return (
       <section className="lg:flex bg-gray-100 items-center">
-         <div
-            className="lg:w-1/2 bg-no-repeat bg-cover flex justify-center items-center lg:h-[650px] h-[300px] cursor-pointer bg-center"
-            style={{
-               backgroundImage:
-                  "url('https://amentotech.com/projects/workreap/wp-content/uploads/2021/03/video.jpg')",
-            }}
-         >
-            <div className="text-white text-9xl font-thin z-[1000]">
-               <FaRegPlayCircle />
-            </div>
+         <div className="lg:w-1/3 bg-no-repeat bg-cover flex justify-center items-center lg:h-[650px] h-[300px] cursor-pointer bg-center">
+            <img src="./sponskart.png" alt="" />
          </div>
-         <div className="lg:p-12 p-6 lg:w-1/2">
+         <div className="lg:p-12 p-6 lg:w-2/3">
             <div className="space-y-3">
                <img src={conversation} alt="" className="w-20" />
                <h2 className="text-3xl font-semibold">Your Bridge to Dynamic Collaborations</h2>

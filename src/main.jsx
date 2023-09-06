@@ -8,12 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 import "@smastrom/react-rating/style.css";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./provider/AuthProvider/AuthProvider";
+import StepsProvider from "./provider/StepsProvider/StepsProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>
       <AuthProvider>
-         <RouterProvider router={router} />
-         <ToastContainer />
+         <StepsProvider>
+            <RouterProvider router={router} />
+            <ToastContainer />
+         </StepsProvider>
       </AuthProvider>
    </React.StrictMode>
 );

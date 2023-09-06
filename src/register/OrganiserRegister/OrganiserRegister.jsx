@@ -13,7 +13,7 @@ const OrganiserRegister = () => {
 
    const onSubmit = (data) => {
       setLoading(true);
-      data.type = "Organizer";
+      data.type = "organizer";
       console.log(data);
       if (!agree) {
          toast.error("Please agree with terms and conditions");

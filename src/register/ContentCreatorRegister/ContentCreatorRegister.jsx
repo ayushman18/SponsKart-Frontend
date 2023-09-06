@@ -55,7 +55,7 @@ const ContentCreatorRegister = () => {
          return;
       }
       // data.role = "content-creator";
-      data.type = "user";
+      data.type = "creator";
       console.log(data);
 
       axios
