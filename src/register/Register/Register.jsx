@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
-   const [userRole, setUserRole] = useState("organiser");
+   const [userRole, setUserRole] = useState("organizer");
 
    useEffect(() => {
       console.log(userRole);
@@ -23,16 +23,16 @@ const Register = () => {
          <div className="form-control">
             <label
                className="label justify-normal gap-8 cursor-pointer"
-               onClick={() => setUserRole("organiser")}
+               onClick={() => setUserRole("organizer")}
             >
                <input
                   type="radio"
                   name="role"
                   className="radio checked:bg-green-500"
-                  value="organiser"
+                  value="organizer"
                   defaultChecked
                />
-               <span className="text-xl">Event Organiser</span>
+               <span className="text-xl">Event Organizer</span>
             </label>
          </div>
          <div className="form-control">

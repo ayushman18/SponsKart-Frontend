@@ -4,7 +4,7 @@ import Home from "../home/Home/Home";
 import Register from "../register/Register/Register";
 import RegisterLayout from "../layouts/RegisterLayout";
 import ContentCreatorRegister from "../register/ContentCreatorRegister/ContentCreatorRegister";
-import OrganiserRegister from "../register/OrganiserRegister/OrganiserRegister";
+import OrganizerRegister from "../register/OrganizerRegister/OrganizerRegister";
 import Login from "../login/Login/Login";
 import ForgetPass from "../login/ForgetPass/ForgetPass";
 import Search from "../search/Search/Search";
@@ -70,8 +70,8 @@ export const router = createBrowserRouter([
             element: <ContentCreatorRegister></ContentCreatorRegister>,
          },
          {
-            path: "organiser",
-            element: <OrganiserRegister></OrganiserRegister>,
+            path: "organizer",
+            element: <OrganizerRegister></OrganizerRegister>,
          },
          {
             path: "brand",

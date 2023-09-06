@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import background from "./../assets/register/background.png";
 
 const RegisterLayout = () => {
@@ -10,7 +10,9 @@ const RegisterLayout = () => {
          >
             <div className="min-h-screen bg-opacity-50 flex justify-center items-center bg-black">
                <div className="lg:w-3/4 bg-white py-11 rounded-3xl lg:pl-20 px-14 relative">
-                  <img src="./logo.png" alt="" className="w-72 mx-auto" />
+                  <Link to={"/"}>
+                     <img src="./logo.png" alt="" className="w-72 mx-auto" />
+                  </Link>
                   <Outlet></Outlet>
                </div>
             </div>

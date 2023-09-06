@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const OrganiserRegister = () => {
+const OrganizerRegister = () => {
    const [agree, setAgree] = useState(false);
    const [loading, setLoading] = useState(false);
    const navigate = useNavigate();
@@ -12,13 +12,13 @@ const OrganiserRegister = () => {
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
-      setLoading(true);
-      data.type = "organizer";
-      console.log(data);
       if (!agree) {
          toast.error("Please agree with terms and conditions");
          return;
       }
+      setLoading(true);
+      data.type = "organizer";
+      console.log(data);
 
       axios
          .post("https://sponskart-hkgd.onrender.com/register", data)
@@ -61,7 +61,7 @@ const OrganiserRegister = () => {
 
    return (
       <div>
-         <p className="text-3xl text-green-500 font-semibold">Event Organiser</p>
+         <p className="text-3xl text-green-500 font-semibold">Event Organizer</p>
          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="lg:flex items-center justify-around lg:pr-24 my-8">
                <input
@@ -118,4 +118,4 @@ const OrganiserRegister = () => {
    );
 };
 
-export default OrganiserRegister;
+export default OrganizerRegister;

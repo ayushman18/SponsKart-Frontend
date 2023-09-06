@@ -11,34 +11,33 @@ const BrandRegister = () => {
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
-      setLoading(true);
       if (!agree) {
          toast.error("Please agree with terms and conditions");
          return;
       }
-      // data.role = "content-creator";
+      setLoading(true);
       data.type = "brand";
       console.log(data);
 
-      axios
-         .post("https://sponskart-hkgd.onrender.com/register", data)
-         .then((res) => {
-            console.log("here", res.data);
-            setLoading(false);
-            if (res.data.code === "ERR_BAD_REQUEST") {
-               toast.error(res.data.message);
-            } else if (res.data.code === 200) {
-               navigate("/sign-in");
-               toast.success("User registered successfully. Please login");
-            }
-         })
-         .catch((err) => {
-            setLoading(false);
-            if (err.code) {
-               toast.error(err.response.data.message);
-            }
-            console.log(err);
-         });
+      // axios
+      //    .post("https://sponskart-hkgd.onrender.com/register", data)
+      //    .then((res) => {
+      //       console.log("here", res.data);
+      //       setLoading(false);
+      //       if (res.data.code === "ERR_BAD_REQUEST") {
+      //          toast.error(res.data.message);
+      //       } else if (res.data.code === 200) {
+      //          navigate("/sign-in");
+      //          toast.success("User registered successfully. Please login");
+      //       }
+      //    })
+      //    .catch((err) => {
+      //       setLoading(false);
+      //       if (err.code) {
+      //          toast.error(err.response.data.message);
+      //       }
+      //       console.log(err);
+      //    });
    };
 
    const checked = () => {
@@ -66,17 +65,17 @@ const BrandRegister = () => {
             <div className="lg:flex items-center justify-around lg:pr-24 my-8">
                <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder="Brand Name"
                   className="input input-bordered w-full mb-6 lg:mb-0 max-w-xs"
                   required
-                  {...register("firstname")}
+                  {...register("brandName")}
                />
                <input
                   type="text"
-                  placeholder="Last Name"
+                  placeholder="Brand Holder Name"
                   className="input input-bordered w-full max-w-xs"
                   required
-                  {...register("lastname")}
+                  {...register("brandHolderName")}
                />
             </div>
             <div className="lg:flex items-center justify-around lg:pr-24">

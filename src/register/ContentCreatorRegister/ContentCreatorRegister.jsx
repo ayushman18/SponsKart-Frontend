@@ -49,11 +49,11 @@ const ContentCreatorRegister = () => {
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
-      setLoading(true);
       if (!agree) {
          toast.error("Please agree with terms and conditions");
          return;
       }
+      setLoading(true);
       // data.role = "content-creator";
       data.type = "creator";
       console.log(data);
