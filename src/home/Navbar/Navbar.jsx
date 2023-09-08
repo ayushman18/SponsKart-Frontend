@@ -213,7 +213,7 @@ const Navbar = () => {
                      >
                         <li>
                            <a className="justify-between">
-                              <div className="flex gap-5 border-b pb-6">
+                              <div className="flex items-center gap-5 border-b py-4">
                                  <div className="avatar online">
                                     <div className="w-12 border rounded-full">
                                        {user.img ? (
@@ -225,13 +225,13 @@ const Navbar = () => {
                                  </div>
                                  <div>
                                     <h2>
-                                       {user.type === "organizer"
-                                          ? user.organizer?.organizationName
-                                          : user.type === "creator"
+                                       {user.user.type === "organizer"
+                                          ? user.data?.organizationName
+                                          : user.user.type === "creator"
                                           ? user.firstname + " " + user.lastname
                                           : "need brand information"}
                                     </h2>
-                                    <p className="flex">{user.email}</p>
+                                    <p className="flex">{user.data.email}</p>
                                  </div>
                               </div>
                            </a>
@@ -242,7 +242,7 @@ const Navbar = () => {
                            </a>
                         </li>
                         <li>
-                           <Link to={`/dashboard/${user.type}/profile`}>
+                           <Link to={`/dashboard/${user.user.type}/profile`}>
                               <FaRegUser></FaRegUser> Dashboard
                            </Link>
                         </li>

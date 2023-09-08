@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 // import useAuth from "../../../hooks/useAuth";
 import Steps from "../../../components/Steps/Steps";
 import useStep from "../../../hooks/useStep";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
+import UpdateCreatorStepOne from "./UpdateCreatorStepOne";
+import UpdateCreatorStepTwo from "./UpdateCreatorStepTwo";
+import UpdateCreatorStepThree from "./UpdateCreatorStepThree";
 
 const CreatorUpdateProfile = () => {
    // const { user } = useAuth();
@@ -20,14 +20,14 @@ const CreatorUpdateProfile = () => {
 
    return (
       <form onSubmit={handleSubmit(updateData)}>
-         <Steps></Steps>
+         <Steps steps={["Basic Details", "Social Links", "Descriptions & Images"]}></Steps>
 
          {step === 1 ? (
-            <StepOne register={register}></StepOne>
+            <UpdateCreatorStepOne register={register}></UpdateCreatorStepOne>
          ) : step === 2 ? (
-            <StepTwo register={register}> </StepTwo>
+            <UpdateCreatorStepTwo register={register}> </UpdateCreatorStepTwo>
          ) : step === 3 ? (
-            <StepThree register={register}> </StepThree>
+            <UpdateCreatorStepThree register={register}> </UpdateCreatorStepThree>
          ) : (
             <>
                <p>Please Reload The Page</p>

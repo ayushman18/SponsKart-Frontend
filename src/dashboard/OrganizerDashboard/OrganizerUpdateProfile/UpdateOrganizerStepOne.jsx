@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
 
-const StepOne = ({ register }) => {
+const UpdateOrganizerStepOne = ({ register }) => {
    const { user } = useAuth();
 
    const indianStates = [
@@ -60,6 +60,7 @@ const StepOne = ({ register }) => {
             type="text"
             placeholder="Update Username"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+            readOnly
             {...register("username")}
             defaultValue={user.username}
          />
@@ -68,7 +69,7 @@ const StepOne = ({ register }) => {
             placeholder="Email"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
             {...register("email")}
-            defaultValue={user.email}
+            defaultValue={user.data.email}
             readOnly
          />
          <input
@@ -92,4 +93,4 @@ const StepOne = ({ register }) => {
    );
 };
 
-export default StepOne;
+export default UpdateOrganizerStepOne;

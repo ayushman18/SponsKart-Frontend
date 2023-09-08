@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import fire from "./../assets/dashboard/fire.png";
 import { FaCalendarAlt, FaPowerOff, FaRegBell, FaRegQuestionCircle, FaSearch, FaUser } from "react-icons/fa";
@@ -8,6 +8,7 @@ import moment from "moment/moment";
 const DashboardLayout = () => {
    const { user, logOut } = useAuth();
    const navigate = useNavigate();
+   const location = useLocation();
    const arr = [1, 2, 3, 4, 5, 6, 7, 8];
    const percent = (Object.keys(user).length / 22) * 100;
    const number = Math.round(percent / (100 / 8));
@@ -33,20 +34,26 @@ const DashboardLayout = () => {
                   <Link to={`/`} className="hover:bg-gray-200 rounded-md p-4">
                      Home
                   </Link>
-                  <Link to={`/dashboard/${user.type}/profile`} className="hover:bg-gray-200 rounded-md p-4">
+                  <Link
+                     to={`/dashboard/${user.user.type}/profile`}
+                     className="hover:bg-gray-200 rounded-md p-4"
+                  >
                      Profile
                   </Link>
                   <Link
-                     to={`/dashboard/${user.type}/updateProfile`}
+                     to={`/dashboard/${user.user.type}/updateProfile`}
                      className="hover:bg-gray-200 rounded-md p-4"
                   >
                      Update Profile
                   </Link>
-                  <Link to={`/dashboard/${user.type}/addPost`} className="hover:bg-gray-200 rounded-md p-4">
+                  <Link
+                     to={`/dashboard/${user.user.type}/addPost`}
+                     className="hover:bg-gray-200 rounded-md p-4"
+                  >
                      Add A Post
                   </Link>
                   <Link
-                     to={`/dashboard/${user.type}/managePost`}
+                     to={`/dashboard/${user.user.type}/managePost`}
                      className="hover:bg-gray-200 rounded-md p-4"
                   >
                      Manage Post
@@ -86,18 +93,18 @@ const DashboardLayout = () => {
                      </div>
                      <div>
                         <p className="text-xl font-semibold">
-                           {user.type === "Organizer"
+                           {user.user.type === "Organizer"
                               ? user?.organizer?.organizationName || "No Name"
-                              : user.type === "brand"
+                              : user.user.type === "brand"
                               ? "Brand Name"
                               : user.firstname + " " + user.lastname}
                         </p>
-                        <p>{user.email}</p>
+                        <p>{user.data.email}</p>
                      </div>
                   </div>
                   <div className="flex-grow flex justify-between items-center pl-4">
                      <div className="flex items-center gap-2">
-                        <FaCalendarAlt></FaCalendarAlt> {moment().format("MM Do YY")}
+                        <FaCalendarAlt></FaCalendarAlt> {moment().format("Do MMM YY")}
                      </div>
                      <div>
                         <div>
@@ -133,9 +140,14 @@ const DashboardLayout = () => {
                         </div>
                      </div>
                      <div className="flex items-center gap-4">
-                        <button className="btn btn-circle bg-gray-100 rounded-full">
+                        <Link
+                           to="/dashboard/messages"
+                           className={`btn btn-circle  ${
+                              location.pathname === "/dashboard/messages" ? "bg-[#B9DE6A]" : " bg-gray-100"
+                           } rounded-full`}
+                        >
                            <AiOutlineMessage className=" text-xl"></AiOutlineMessage>
-                        </button>
+                        </Link>
                         <button className="btn btn-circle bg-gray-100 rounded-full">
                            <FaRegBell className=" text-xl"></FaRegBell>
                         </button>

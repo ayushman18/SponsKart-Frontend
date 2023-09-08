@@ -1,4 +1,4 @@
-const StepTwo = ({ register }) => {
+const UpdateOrganizerStepTwo = ({ register }) => {
    return (
       <div className="grid grid-cols-2 justify-center gap-8">
          <input
@@ -56,4 +56,4 @@ const StepTwo = ({ register }) => {
    );
 };
 
-export default StepTwo;
+export default UpdateOrganizerStepTwo;

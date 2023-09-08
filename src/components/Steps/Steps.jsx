@@ -1,15 +1,17 @@
 import { useContext } from "react";
 import { StepsContext } from "../../provider/StepsProvider/StepsProvider";
 
-const Steps = () => {
+const Steps = ({ steps }) => {
    const { step } = useContext(StepsContext);
 
    return (
       <div className="mx-auto w-fit my-4 text-white">
          <ul className="steps">
-            <li className={`step ${step >= 1 && "step-success"} mx-4`}>Basic Details</li>
-            <li className={`step ${step >= 2 && "step-success"}`}>More Details</li>
-            <li className={`step ${step >= 3 && "step-success"}`}>Images</li>
+            {steps.map((stepText, index) => (
+               <li key={stepText} className={`step ${step >= index + 1 && "step-success"} `}>
+                  {stepText}
+               </li>
+            ))}
          </ul>
       </div>
    );

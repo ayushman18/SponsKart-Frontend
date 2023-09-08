@@ -126,7 +126,7 @@ const BrandUpdateProfile = () => {
                   placeholder="Email"
                   className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
                   {...register("email")}
-                  defaultValue={user.email}
+                  defaultValue={user.data.email}
                   readOnly
                />
                <input

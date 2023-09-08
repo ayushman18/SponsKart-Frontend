@@ -28,6 +28,7 @@ import BrandUpdateProfile from "../dashboard/BrandDashboard/BrandUpdateProfile/B
 import BrandDetails from "../Details/brand/BrandDetails/BrandDetails";
 import OrganizerDetails from "../Details/organizer/OrganizerDetails/OrganizerDetails";
 import CreatorDetails from "../Details/creator/CreatorDetails/CreatorDetails";
+import ChatBox from "../dashboard/ChatBox/ChatBox";
 
 export const router = createBrowserRouter([
    {
@@ -174,6 +175,10 @@ export const router = createBrowserRouter([
                   element: <BrandManagePost></BrandManagePost>,
                },
             ],
+         },
+         {
+            path: "messages",
+            element: <ChatBox></ChatBox>,
          },
       ],
    },

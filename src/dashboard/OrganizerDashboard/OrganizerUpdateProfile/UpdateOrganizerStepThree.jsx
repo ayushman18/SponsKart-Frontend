@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FaUpload } from "react-icons/fa";
 
-const StepThree = ({ register }) => {
+const UpdateOrganizerStepThree = ({ register }) => {
    useEffect(() => {
       let inputs = document.querySelectorAll(".inputFile");
       let inputs2 = document.querySelectorAll(".inputFile2");
@@ -70,4 +70,4 @@ const StepThree = ({ register }) => {
    );
 };
 
-export default StepThree;
+export default UpdateOrganizerStepThree;
