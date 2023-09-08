@@ -5,6 +5,7 @@ import instagram from "./../../../assets/socialIcon/instagram.png";
 import linkedin from "./../../../assets/socialIcon/linkedin.png";
 import twitter from "./../../../assets/socialIcon/twitter.png";
 import { Rating } from "@smastrom/react-rating";
+import { FaClock } from "react-icons/fa";
 
 const BrandDetails = () => {
    const params = useParams();
@@ -14,7 +15,7 @@ const BrandDetails = () => {
       <section>
          <img
             src="https://s3-alpha-sig.figma.com/img/5019/134f/fc5d161b743d666bba24e209447e186b?Expires=1693180800&Signature=eOjjukpIZKVUD-IBgPMo6YRvbn~oGO4o-S2zUcpfjv8dH~JF-bg-NYfkwALXMEny3hbsBCpfYRNgh2pXQxfu1Y6nliV8h7wW8F0R~JKu3TLzVEKOQekvBgwWDJJ7M7hCxwqOzN3tlGV2fJvjrST5YWQ7sDVwt5AXeT4enzCTLRrttI4EWDWMvgEqxTaX2HGVgeX220~aHeAwIzpNy7BBNS46TjuSIDDYkK5islCJlwNKyUjx0zVqb1s20PlMAOKHM22Yw65kJzKLobtChcN9DXGnCVCXh~EC5h5qokaXskDfX-IV5Ia5TXrFF5McKuE8phdgSgHuVq35TkexBwRxLA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-            alt="Shoes"
+            alt="Brand"
             className="h-64 object-cover w-full mb-5 shadow-xl"
          />
          <div className="container mx-auto grid grid-cols-3 gap-6">
@@ -98,6 +99,39 @@ const BrandDetails = () => {
                      illo inventore veritatis etna quasi architecto beatae vitae dictation explicabo. nemo
                      enim ipsam fugit.
                   </p>
+               </div>
+
+               {/* todo:make dynamic */}
+               <div>
+                  <div
+                     className="max-w-[750px] flex p-8 border rounded-lg my-10 border-[#525252]"
+                     style={{ boxShadow: "0px 4px 38px 17px #525252" }}
+                  >
+                     <div className="w-3/4">
+                        <h2>Lorem ipsum dolor sit amet.</h2>
+                        <p>60,000</p>
+                        <p>
+                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo aliquid sapiente
+                           dolorum saepe doloremque, aperiam mollitia deserunt sunt quo blanditiis debitis
+                           molestiae adipisci libero atque dicta nihil necessitatibus quidem earum?
+                        </p>
+                        <div className="flex justify-between">
+                           <div className="w-20 h-5 rounded-full bg-gray-300"></div>
+                           <div className="w-20 h-5 rounded-full bg-gray-300"></div>
+                           <div className="w-20 h-5 rounded-full bg-gray-300"></div>
+                           <button className="btn bg-green-500 rounded-full "> Send Proposal</button>
+                        </div>
+                     </div>
+                     <div className="divider divider-horizontal"></div>
+                     <div>
+                        <h2 className="flex gap-4 items-center">
+                           <FaClock></FaClock> 3months
+                        </h2>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>

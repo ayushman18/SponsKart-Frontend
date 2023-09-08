@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import gmailImg from "./../../assets/search/gmail.png";
 import { Rating } from "@smastrom/react-rating";
 
-const BrandSearchCard = ({ data, category }) => {
+const BrandSearchCard = ({ data }) => {
    return (
       <div className="card max-w-[420px] hover:shadow-2xl bg-base-100 rounded-2xl shadow-md">
          <figure>
@@ -21,8 +21,8 @@ const BrandSearchCard = ({ data, category }) => {
                <img src={gmailImg} alt="" className="w-6" />
                <p>{data.email}</p>
             </div>
-            <Link to={`/${category}/${data._id}`}>
-               <p className="text-4xl hover:text-orange-400">{data.organizer?.organizationName}</p>
+            <Link to={`/brand/${data._id}`}>
+               <h2 className="text-4xl hover:text-orange-400">{data.brandName}</h2>
             </Link>
             <div className="text-black flex justify-around items-center mt-10">
                <Link className=" hover:text-white">View</Link>

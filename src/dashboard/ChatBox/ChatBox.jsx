@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaArrowCircleRight, FaPaperclip, FaTrash } from "react-icons/fa";
 
 const ChatBox = () => {

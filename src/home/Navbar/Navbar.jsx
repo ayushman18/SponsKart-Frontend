@@ -175,7 +175,7 @@ const Navbar = () => {
                            className="select select-bordered bg-gray-100 join-item w-40 focus:outline-none rounded-none"
                            name="category"
                         >
-                           <option value="brands">Brands</option>
+                           <option value="brand">Brands</option>
                            <option value="organizer">Event-Organization</option>
                            <option value="creator">Content-Creator</option>
                         </select>
@@ -229,9 +229,9 @@ const Navbar = () => {
                                           ? user.data?.organizationName
                                           : user.user.type === "creator"
                                           ? user.firstname + " " + user.lastname
-                                          : "need brand information"}
+                                          : "need information"}
                                     </h2>
-                                    <p className="flex">{user.data.email}</p>
+                                    <p className="flex">{user.user?.email}</p>
                                  </div>
                               </div>
                            </a>

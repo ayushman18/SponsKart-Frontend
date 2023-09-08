@@ -123,7 +123,7 @@ const DashboardLayout = () => {
                                     className="select select-bordered bg-gray-100 join-item w-40 focus:outline-none rounded-none"
                                     name="category"
                                  >
-                                    <option value="brand">Brands</option>
+                                    <option value="brand">Brand</option>
                                     <option value="Organizer">Event-Organization</option>
                                     <option value="user">Content-Creator</option>
                                  </select>

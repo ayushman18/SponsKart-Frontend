@@ -19,25 +19,25 @@ const BrandRegister = () => {
       data.type = "brand";
       console.log(data);
 
-      // axios
-      //    .post("https://sponskart-hkgd.onrender.com/register", data)
-      //    .then((res) => {
-      //       console.log("here", res.data);
-      //       setLoading(false);
-      //       if (res.data.code === "ERR_BAD_REQUEST") {
-      //          toast.error(res.data.message);
-      //       } else if (res.data.code === 200) {
-      //          navigate("/sign-in");
-      //          toast.success("User registered successfully. Please login");
-      //       }
-      //    })
-      //    .catch((err) => {
-      //       setLoading(false);
-      //       if (err.code) {
-      //          toast.error(err.response.data.message);
-      //       }
-      //       console.log(err);
-      //    });
+      axios
+         .post("https://sponskart-hkgd.onrender.com/register", data)
+         .then((res) => {
+            console.log("here", res.data);
+            setLoading(false);
+            if (res.data.code === "ERR_BAD_REQUEST") {
+               toast.error(res.data.message);
+            } else if (res.data.code === 200) {
+               navigate("/sign-in");
+               toast.success("User registered successfully. Please login");
+            }
+         })
+         .catch((err) => {
+            setLoading(false);
+            if (err.code) {
+               toast.error(err.response.data.message);
+            }
+            console.log(err);
+         });
    };
 
    const checked = () => {
@@ -75,7 +75,7 @@ const BrandRegister = () => {
                   placeholder="Brand Holder Name"
                   className="input input-bordered w-full max-w-xs"
                   required
-                  {...register("brandHolderName")}
+                  {...register("HolderName")}
                />
             </div>
             <div className="lg:flex items-center justify-around lg:pr-24">
