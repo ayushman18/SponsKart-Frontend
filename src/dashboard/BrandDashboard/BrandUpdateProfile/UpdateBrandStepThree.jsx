@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 
-const UpdateOrganizerStepThree = ({ register }) => {
+const UpdateBrandStepThree = ({ register }) => {
    const [logoName, setLogoName] = useState("");
    const [bgName, setBgName] = useState("");
    return (
@@ -9,7 +9,7 @@ const UpdateOrganizerStepThree = ({ register }) => {
          <textarea
             type="text"
             placeholder="Short Description"
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-4"
+            className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
             rows="2"
             {...register("shortDescription")}
          />
@@ -30,7 +30,7 @@ const UpdateOrganizerStepThree = ({ register }) => {
          <textarea
             type="text"
             placeholder="Long description"
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-4"
+            className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
             rows="4"
             {...register("longDescription")}
          />
@@ -52,4 +52,4 @@ const UpdateOrganizerStepThree = ({ register }) => {
    );
 };
 
-export default UpdateOrganizerStepThree;
+export default UpdateBrandStepThree;

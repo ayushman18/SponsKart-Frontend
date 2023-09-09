@@ -1,4 +1,4 @@
-const UpdateCreatorStepTwo = ({ register }) => {
+const UpdateBrandStepTwo = ({ register }) => {
    return (
       <div className="grid md:grid-cols-2 gap-8 justify-center">
          <input
@@ -42,4 +42,4 @@ const UpdateCreatorStepTwo = ({ register }) => {
    );
 };
 
-export default UpdateCreatorStepTwo;
+export default UpdateBrandStepTwo;

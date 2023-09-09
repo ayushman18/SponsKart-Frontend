@@ -7,7 +7,7 @@ import bg from "./../../assets/organizerbg.png";
 
 const OrganizerSearchCard = ({ data, category }) => {
    return (
-      <div className="card max-w-[420px] hover:shadow-2xl bg-base-100 rounded-2xl shadow-md">
+      <div className="card max-w-[420px] z-0 hover:shadow-2xl bg-base-100 rounded-2xl shadow-md">
          <figure>
             <img
                src={data.backgroundImage ? data.backgroundImage : bg}

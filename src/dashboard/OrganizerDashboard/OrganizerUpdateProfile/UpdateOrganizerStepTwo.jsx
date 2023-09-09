@@ -1,6 +1,6 @@
 const UpdateOrganizerStepTwo = ({ register }) => {
    return (
-      <div className="grid grid-cols-2 justify-center gap-8">
+      <div className="grid md:grid-cols-2 gap-8 justify-center">
          <input
             type="text"
             placeholder="Social Media Platform Name"

@@ -71,7 +71,7 @@ const Search = () => {
 
    return (
       <section>
-         <div className="container mx-auto grid grid-cols-4 gap-24 my-10 ">
+         <div className="container mx-auto grid lg:grid-cols-4 md:gap-24 my-10 ">
             {category === "creator" ? (
                <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
             ) : category === "organizer" ? (
@@ -79,10 +79,10 @@ const Search = () => {
             ) : (
                <BrandFilter handelFilterSearch={handelFilterSearch}></BrandFilter>
             )}
-            <div className="col-span-3">
+            <div className="md:col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
 
-               <div className="my-12 grid grid-cols-2 gap-4 justify-around items-center">
+               <div className="my-12 grid md:grid-cols-2 gap-8 lg:gap-4 mx-4 lg:mx-0 md:justify-around items-center">
                   {result.length ? (
                      result.map((data) => (
                         <div key={data._id}>

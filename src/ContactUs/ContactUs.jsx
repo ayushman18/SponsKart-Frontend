@@ -26,11 +26,11 @@ const ContactUs = () => {
             <div className="lg:w-3/4 bg-white py-11 rounded-3xl lg:pl-20 px-14 relative">
                <img src="./logo.png" alt="" className="w-72 mx-auto" />
 
-               <p className="text-2xl font-semibold px-16 text-green-500">Having Issues? Contact Us.</p>
+               <p className="text-2xl font-semibold md:px-16 text-green-500">Having Issues? Contact Us.</p>
 
                <div className="lg:px-16">
                   <form onSubmit={handleSubmit(formData)}>
-                     <div className="lg:flex justify-between items-center my-6 gap-10">
+                     <div className="flex flex-col md:flex-row gap-6 lg:gap-10 justify-between items-center my-6">
                         <input
                            type="text"
                            placeholder="Type Your Name"
@@ -46,7 +46,7 @@ const ContactUs = () => {
                            {...register("email")}
                         />
                      </div>
-                     <div className="lg:flex justify-between items-center my-6 gap-10">
+                     <div className="flex flex-col md:flex-row gap-6 justify-between items-center my-6 lg:gap-10">
                         <input
                            type="text"
                            placeholder="Type Your Number"

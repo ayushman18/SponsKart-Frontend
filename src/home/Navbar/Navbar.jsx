@@ -1,26 +1,24 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
 import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
-import { AiFillSetting } from "react-icons/ai";
+import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
 
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
-   const location = useLocation();
    const navigate = useNavigate();
 
    useEffect(() => {
-      window.addEventListener("scroll", () => {
-         if (location.pathname === "/") {
-            const navbar = document.getElementById("navbar");
-            navbar.classList.toggle("fixed", window.scrollY > 40);
-            navbar.classList.toggle("bg-white", window.scrollY > 40);
-            navbar.classList.toggle("shadow-lg", window.scrollY > 40);
-         }
+      const scroll = window.addEventListener("scroll", () => {
+         const navbar = document.getElementById("navbar");
+         navbar.classList.toggle("fixed", window.scrollY > 40);
+         navbar.classList.toggle("bg-white", window.scrollY > 40);
+         navbar.classList.toggle("shadow-lg", window.scrollY > 40);
       });
-   }, [location]);
+      return scroll;
+   }, []);
 
    const search = (e) => {
       e.preventDefault();
@@ -41,92 +39,193 @@ const Navbar = () => {
       >
          <div>
             <div className="dropdown">
-               <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                  <svg
-                     xmlns="http://www.w3.org/2000/svg"
-                     className="h-5 w-5"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                  >
-                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h8m-8 6h16"
-                     />
-                  </svg>
-               </label>
-               <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-               >
-                  <li>
-                     <a>Careers</a>
-                     <ul className="p-2">
-                        <li>
-                           <a>Submenu 1</a>
-                        </li>
-                        <li>
-                           <a>Submenu 2</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li>
-                     <Link to="live-events">Live Events</Link>
-                  </li>
-                  <li>
-                     <Link to="contact-us">Contact Us</Link>
-                  </li>
-                  {user ? (
-                     <>
-                        <div className="dropdown dropdown-end">
-                           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                              <div className="w-10 rounded-full">
-                                 <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+               <div className="drawer lg:hidden z-50">
+                  <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+
+                  <label htmlFor="my-drawer" className="btn btn-ghost drawer-button">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                     >
+                        <path
+                           strokeLinecap="round"
+                           strokeLinejoin="round"
+                           strokeWidth="2"
+                           d="M4 6h16M4 12h8m-8 6h16"
+                        />
+                     </svg>
+                  </label>
+
+                  <div className="drawer-side w-full">
+                     <label htmlFor="my-drawer" className="drawer-overlay"></label>
+                     <div className="menu p-4 w-full min-h-full bg-base-200 text-base-content">
+                        <label htmlFor="my-drawer" className="btn btn-ghost drawer-button bg-gray-300">
+                           <AiOutlineClose></AiOutlineClose>
+                        </label>
+                        {/* Sidebar content here */}
+                        <div className="flex justify-between items-center">
+                           <h2 className="text-3xl my-4 text-green-400">Sponskart</h2>
+                           {user && (
+                              <div className="w-10 ml-4 bg-gray-400 h-10 flex justify-center items-center rounded-full border">
+                                 <FaRegBell className="text-xl"></FaRegBell>
                               </div>
-                           </label>
-                           <ul
-                              tabIndex={0}
-                              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                           >
+                           )}
+                        </div>
+                        <div>
+                           {user && (
+                              <>
+                                 <div>
+                                    <>
+                                       <a className="justify-between">
+                                          <div className="flex items-center gap-5 border-b py-4">
+                                             <div className="avatar online">
+                                                <div className="w-12 border rounded-full">
+                                                   {user.img ? (
+                                                      <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                   ) : (
+                                                      <FaUser className="text-5xl mx-auto"></FaUser>
+                                                   )}
+                                                </div>
+                                             </div>
+                                             <div>
+                                                <h2>
+                                                   {user.user.type === "organizer"
+                                                      ? user.data?.organizationName
+                                                      : user.user.type === "creator"
+                                                      ? user.firstname + " " + user.lastname
+                                                      : "need information"}
+                                                </h2>
+                                                <p className="flex">{user.user?.email}</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </>
+                                    <li>
+                                       <a>
+                                          <div className="badge badge-warning badge-xs"></div> Status
+                                       </a>
+                                    </li>
+                                    <li>
+                                       <Link to={`/dashboard/${user.user.type}/profile`}>
+                                          <FaRegUser></FaRegUser> Dashboard
+                                       </Link>
+                                    </li>
+                                    <li>
+                                       <a>
+                                          <FaRegStar></FaRegStar> Past Events
+                                       </a>
+                                    </li>
+                                    <li>
+                                       <a>
+                                          <AiFillSetting></AiFillSetting> Settings
+                                       </a>
+                                    </li>
+                                    <li>
+                                       <a onClick={logOut}>
+                                          <FaPowerOff></FaPowerOff> Log Out
+                                       </a>
+                                    </li>
+                                 </div>
+                              </>
+                           )}
+                        </div>
+                        <div className="w-80 min-h-full text-base-content">
+                           <ul className="menu menu-vertical px-1">
+                              <li tabIndex={0} className="bg-none">
+                                 <details>
+                                    <summary className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300">
+                                       Careers
+                                    </summary>
+                                    <ul className="p-2 w-52">
+                                       <li>
+                                          <a>Web Developer</a>
+                                       </li>
+                                       <li>
+                                          <a>Web Designer</a>
+                                       </li>
+                                       <li>
+                                          <a>Marketing Officer</a>
+                                       </li>
+                                    </ul>
+                                 </details>
+                              </li>
                               <li>
-                                 <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
+                                 <a className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300">
+                                    Live Events
                                  </a>
                               </li>
                               <li>
-                                 <a>Settings</a>
-                              </li>
-                              <li>
-                                 <button onClick={logOut}>Logout</button>
+                                 <Link
+                                    to="/contact-us"
+                                    className="hover:bg-transparent hover:text-green-500 font-medium rounded-none hover:border-b border-green-500 duration-300"
+                                 >
+                                    Contact Us
+                                 </Link>
                               </li>
                            </ul>
                         </div>
-                     </>
-                  ) : (
-                     <li className="ml-4 flex justify-center items-center">
-                        <Link
-                           to="sign-in"
-                           className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
-                        >
-                           <LuLogIn /> Sign In
-                        </Link>
-                        <Link
-                           to="/register"
-                           className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
-                        >
-                           Join Now
-                        </Link>
-                     </li>
-                  )}
-               </ul>
+
+                        <form className="text-center" onSubmit={search}>
+                           <div className="join">
+                              <div>
+                                 <div>
+                                    <input
+                                       className="input bg-gray-100 input-bordered join-item focus:outline-none rounded-none"
+                                       name="text"
+                                       placeholder="Search"
+                                    />
+                                 </div>
+                              </div>
+                              <select
+                                 className="select select-bordered bg-gray-100 join-item w-28 focus:outline-none rounded-none"
+                                 name="category"
+                              >
+                                 <option value="brand">Brands</option>
+                                 <option value="organizer">Event-Organization</option>
+                                 <option value="creator">Content-Creator</option>
+                              </select>
+                           </div>
+                           <br />
+                           <button
+                              className="btn border-green-500 bg-green-500 text-white hover:bg-green-600 focus:outline-none rounded-none mt-3 lg:mt-0"
+                              type="submit"
+                           >
+                              <FaSearch></FaSearch>
+                           </button>
+                        </form>
+                        <div>
+                           {!user && (
+                              <>
+                                 <div className="m-4 flex justify-around items-center">
+                                    <Link
+                                       to="sign-in"
+                                       className="btn h-10 btn-success hover:shadow-lg text-white font-bold  normal-case"
+                                    >
+                                       <LuLogIn /> Sign In
+                                    </Link>
+                                    <Link
+                                       to="/register"
+                                       className="btn h-10 btn-warning text-white font-bold  normal-case ml-4 hover:shadow-lg"
+                                    >
+                                       Join Now
+                                    </Link>
+                                 </div>
+                              </>
+                           )}
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
             <Link to="/" className="normal-case text-lg text-gray-500">
                <img src="logo.png" alt="" className="h-auto lg:h-20" />
             </Link>
          </div>
+
+         {/* computer Navbar */}
          <div className="hidden lg:flex">
             <div className="flex items-center justify-center">
                <ul className="menu menu-horizontal px-1">
@@ -137,10 +236,13 @@ const Navbar = () => {
                         </summary>
                         <ul className="p-2 w-52">
                            <li>
-                              <a>Submenu 1</a>
+                              <a>Web Developer</a>
                            </li>
                            <li>
-                              <a>Submenu 2</a>
+                              <a>Web Designer</a>
+                           </li>
+                           <li>
+                              <a>Marketing Officer</a>
                            </li>
                         </ul>
                      </details>

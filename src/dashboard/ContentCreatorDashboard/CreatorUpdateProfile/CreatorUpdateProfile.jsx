@@ -1,5 +1,5 @@
 // import { FaUpload } from "react-icons/fa";
-import "./CreatorUpdateProfile.css";
+
 // import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 // import useAuth from "../../../hooks/useAuth";

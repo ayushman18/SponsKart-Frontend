@@ -1,85 +1,52 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 
 const UpdateCreatorStepThree = ({ register }) => {
-   useEffect(() => {
-      let inputs = document.querySelectorAll(".inputFile");
-      let inputs2 = document.querySelectorAll(".inputFile2");
-      inputs.forEach((input) => {
-         {
-            let label = input.nextElementSibling,
-               labelVal = label.innerHTML;
-
-            input.addEventListener("change", function (e) {
-               let fileName = "";
-               console.log(this.files);
-               if (this.files && this.files.length > 1) {
-                  fileName = (this.getAttribute("data-multiple-caption") || "").replace(
-                     "{count}",
-                     this.files.length
-                  );
-               } else {
-                  fileName = e.target.value.split("\\").pop();
-               }
-
-               if (fileName) label.querySelector("span").innerHTML = fileName.slice(0, 15) + "...";
-               else label.innerHTML = labelVal;
-            });
-         }
-      });
-      inputs2.forEach((input) => {
-         {
-            let label = input.nextElementSibling,
-               labelVal = label.innerHTML;
-
-            input.addEventListener("change", function (e) {
-               let fileName = "";
-
-               if (this.files && this.files.length > 1) {
-                  fileName = (this.getAttribute("data-multiple-caption") || "").replace(
-                     "{count}",
-                     this.files.length
-                  );
-               } else {
-                  fileName = e.target.value.split("\\").pop();
-               }
-
-               if (fileName) label.querySelector("span").innerHTML = fileName;
-               else label.innerHTML = labelVal;
-            });
-         }
-      });
-   }, []);
+   const [logoName, setLogoName] = useState("");
+   const [bgName, setBgName] = useState("");
    return (
-      <div className="grid grid-cols-2 gap-8">
-         <div className="flex justify-between items-start col-span-2">
-            <textarea
-               type="text"
-               placeholder="Short Description"
-               className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-8 my-5"
-               {...register("shortDescription")}
-            />
-            <textarea
-               type="text"
-               placeholder="Long description"
-               className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-8 my-5"
-               rows="4"
-               {...register("longDescription")}
-            />
-         </div>
-         <input type="file" name="file" id="file" className="inputFile" {...register("logo")} />
-         <label htmlFor="file">
+      <div className="grid md:grid-cols-2 gap-8 justify-center">
+         <textarea
+            type="text"
+            placeholder="Short Description"
+            className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
+            rows="2"
+            {...register("shortDescription")}
+         />
+         <input
+            type="file"
+            name="file"
+            id="file"
+            className="hidden"
+            {...register("logo")}
+            onChange={(e) => {
+               setLogoName(e.target.files[0].name);
+            }}
+         />
+         <label htmlFor="file" className="bg-white max-w-xs input-style px-4 py-4">
             Upload Logo <br />
-            <span>
-               <FaUpload></FaUpload>
-            </span>
+            <span className="overflow-clip">{logoName ? logoName : <FaUpload></FaUpload>}</span>
          </label>
-         <input type="file" name="file" id="file2" className="inputFile2" {...register("backgroundImg")} />
-         <label htmlFor="file2">
+         <textarea
+            type="text"
+            placeholder="Long description"
+            className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
+            rows="4"
+            {...register("longDescription")}
+         />
+         <input
+            type="file"
+            name="file"
+            id="file2"
+            className="hidden"
+            {...register("backgroundImg")}
+            onChange={(e) => {
+               setBgName(e.target.files[0].name);
+            }}
+         />
+         <label htmlFor="file2" className="bg-white max-w-xs input-style px-4 py-4">
             Upload Background Picture <br />
-            <span>
-               <FaUpload></FaUpload>
-            </span>
+            <span className="overflow-clip">{bgName ? bgName : <FaUpload></FaUpload>}</span>
          </label>
       </div>
    );

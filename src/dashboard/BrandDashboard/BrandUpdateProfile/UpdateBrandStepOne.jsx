@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
 
-const UpdateOrganizerStepOne = ({ register }) => {
+const UpdateBrandStepOne = ({ register }) => {
    const { user } = useAuth();
 
    const indianStates = [
@@ -44,22 +44,22 @@ const UpdateOrganizerStepOne = ({ register }) => {
       <div className="grid md:grid-cols-2 gap-8 justify-center">
          <input
             type="text"
-            placeholder="Update First Name"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-            {...register("firstname")}
-            defaultValue={user.firstname}
+            placeholder="Update Brand Name"
+            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
+            {...register("brandName")}
+            defaultValue={user.brandName}
          />
          <input
             type="text"
-            placeholder="Update Last Name"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-            {...register("lastname")}
-            defaultValue={user.lastname}
+            placeholder="Update Brand Holder Name"
+            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
+            {...register("HolderName")}
+            defaultValue={user.HolderName}
          />
          <input
             type="text"
             placeholder="Update Username"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             readOnly
             {...register("username")}
             defaultValue={user.username}
@@ -67,7 +67,7 @@ const UpdateOrganizerStepOne = ({ register }) => {
          <input
             type="email"
             placeholder="Email"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("email")}
             defaultValue={user.data.email}
             readOnly
@@ -75,12 +75,12 @@ const UpdateOrganizerStepOne = ({ register }) => {
          <input
             type="tel"
             placeholder="Phone Number"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
+            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("phonenumber")}
             defaultValue={user.phonenumber}
          />
          <select
-            className="select select-bordered lg:mb-0 w-full max-w-xs px-4 h-16 mb-6 input-style"
+            className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "
             {...register("location")}
          >
             {indianStates.map((state, index) => (
@@ -93,4 +93,4 @@ const UpdateOrganizerStepOne = ({ register }) => {
    );
 };
 
-export default UpdateOrganizerStepOne;
+export default UpdateBrandStepOne;
