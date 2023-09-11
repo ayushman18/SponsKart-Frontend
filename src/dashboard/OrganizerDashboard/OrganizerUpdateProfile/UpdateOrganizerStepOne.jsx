@@ -47,14 +47,14 @@ const UpdateOrganizerStepOne = ({ register }) => {
             placeholder="Update First Name"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
             {...register("firstname")}
-            defaultValue={user.firstname}
+            defaultValue={user.data.firstname}
          />
          <input
             type="text"
             placeholder="Update Last Name"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
             {...register("lastname")}
-            defaultValue={user.lastname}
+            defaultValue={user.data.lastname}
          />
          <input
             type="text"

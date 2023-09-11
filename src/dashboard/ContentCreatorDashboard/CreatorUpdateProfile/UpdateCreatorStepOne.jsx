@@ -77,7 +77,7 @@ const UpdateCreatorStepOne = ({ register }) => {
             placeholder="Phone Number"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("phonenumber")}
-            defaultValue={user.phonenumber}
+            defaultValue={user.user.phonenumber}
          />
          <select
             className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "

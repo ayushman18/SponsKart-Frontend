@@ -42,11 +42,11 @@ const DashboardTopBar = () => {
             </div>
             <div>
                <p className="text-xl font-semibold">
-                  {user.user.type === "Organizer"
-                     ? user?.organizer?.organizationName || "No Name"
+                  {user.user.type === "organizer"
+                     ? user?.data?.organizationName || "No Name"
                      : user.user.type === "brand"
                      ? user.data.brandName
-                     : user.firstname + " " + user.lastname}
+                     : user.data.firstname + " " + user.data.lastname}
                </p>
                <p>{user.data.email}</p>
             </div>

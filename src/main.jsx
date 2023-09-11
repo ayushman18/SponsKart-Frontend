@@ -9,6 +9,7 @@ import "@smastrom/react-rating/style.css";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./provider/AuthProvider/AuthProvider";
 import StepsProvider from "./provider/StepsProvider/StepsProvider";
+// import "sweetalert2/src/sweetalert2.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
    <React.StrictMode>

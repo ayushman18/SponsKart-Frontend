@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../home/Home/Home";
 import Register from "../register/Register/Register";
@@ -32,6 +32,9 @@ import ChatBox from "../dashboard/ChatBox/ChatBox";
 import MessageBox from "../dashboard/ChatBox/MessageBox";
 import MessageCard from "../dashboard/ChatBox/MessageCard";
 import MobileChatbox from "../dashboard/ChatBox/MobileChatbox";
+import CreatorRoute from "./PrivateRoute/CreatorRoute";
+import OrganizerRoute from "./PrivateRoute/OrganizerRoute";
+import BrandRoute from "./PrivateRoute/BrandRoute";
 
 export const router = createBrowserRouter([
    {
@@ -115,7 +118,11 @@ export const router = createBrowserRouter([
       children: [
          {
             path: "creator",
-
+            element: (
+               <CreatorRoute>
+                  <Outlet></Outlet>
+               </CreatorRoute>
+            ),
             children: [
                {
                   path: "profile",
@@ -137,6 +144,11 @@ export const router = createBrowserRouter([
          },
          {
             path: "Organizer",
+            element: (
+               <OrganizerRoute>
+                  <Outlet></Outlet>
+               </OrganizerRoute>
+            ),
             children: [
                {
                   path: "profile",
@@ -158,7 +170,11 @@ export const router = createBrowserRouter([
          },
          {
             path: "brand",
-
+            element: (
+               <BrandRoute>
+                  <Outlet></Outlet>
+               </BrandRoute>
+            ),
             children: [
                {
                   path: "profile",

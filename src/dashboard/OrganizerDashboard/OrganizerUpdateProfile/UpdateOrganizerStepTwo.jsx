@@ -38,20 +38,6 @@ const UpdateOrganizerStepTwo = ({ register }) => {
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
             {...register("maxViews")}
          />
-         <textarea
-            type="text"
-            placeholder="Short Description"
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-8 my-5"
-            rows="3"
-            {...register("shortDescription")}
-         />
-         <textarea
-            type="text"
-            placeholder="Long description"
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-8 my-5"
-            rows="6"
-            {...register("longDescription")}
-         />
       </div>
    );
 };

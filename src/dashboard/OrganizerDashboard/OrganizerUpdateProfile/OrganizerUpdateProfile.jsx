@@ -18,7 +18,7 @@ const OrganizerUpdateProfile = () => {
       data.backgroundImg = bgImg;
       console.log(data);
       axios
-         .post(`https://sponskart-hkgd.onrender.com/organizer/update`, data)
+         .put(`https://sponskart-hkgd.onrender.com/organizer/update`, data)
          .then((res) => {
             console.log(res);
          })
@@ -26,7 +26,7 @@ const OrganizerUpdateProfile = () => {
    };
    return (
       <form onSubmit={handleSubmit(updateData)}>
-         <Steps steps={["Basic Details", "Social Links"]}></Steps>
+         <Steps steps={["Basic Details", "Social Links", "Images"]}></Steps>
 
          {step === 1 ? (
             <UpdateOrganizerStepOne register={register}></UpdateOrganizerStepOne>

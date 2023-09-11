@@ -52,8 +52,6 @@ const Login = () => {
             <div className="flex items-end">
                <div>
                   <h2>Thank you for sign in Please wait we are verifying.</h2>
-               </div>
-               <div>
                   <span className="loading loading-ring loading-sm"></span>
                   <span className="loading loading-ring loading-sm"></span>
                   <span className="loading loading-ring loading-sm"></span>
