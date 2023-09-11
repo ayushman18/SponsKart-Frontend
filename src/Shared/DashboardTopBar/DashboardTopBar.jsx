@@ -3,10 +3,17 @@ import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMessage } from "react-icons/ai";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const DashboardTopBar = () => {
    const navigate = useNavigate();
    const location = useLocation();
+   const [smallDevice, setSmallDevice] = useState(false);
+
+   useEffect(() => {
+      if (screen.width < 650) setSmallDevice(true);
+   }, [smallDevice]);
 
    const { user } = useAuth();
 
@@ -38,7 +45,7 @@ const DashboardTopBar = () => {
                   {user.user.type === "Organizer"
                      ? user?.organizer?.organizationName || "No Name"
                      : user.user.type === "brand"
-                     ? "Brand Name"
+                     ? user.data.brandName
                      : user.firstname + " " + user.lastname}
                </p>
                <p>{user.data.email}</p>
@@ -89,7 +96,7 @@ const DashboardTopBar = () => {
             </div>
             <div className="flex items-center gap-4">
                <Link
-                  to="/dashboard/messages"
+                  to={`/dashboard/${smallDevice ? "mobile-messages" : "messages"}`}
                   className={`btn btn-circle  ${
                      location.pathname === "/dashboard/messages" ? "bg-[#B9DE6A]" : " bg-gray-100"
                   } rounded-full`}

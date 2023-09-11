@@ -4,13 +4,25 @@ import Steps from "../../../components/Steps/Steps";
 import UpdateOrganizerStepOne from "./UpdateOrganizerStepOne";
 import UpdateOrganizerStepTwo from "./UpdateOrganizerStepTwo";
 import UpdateOrganizerStepThree from "./UpdateOrganizerStepThree";
+import axios from "axios";
+import { useState } from "react";
 
 const OrganizerUpdateProfile = () => {
    const { step, setStep } = useStep();
-
+   const [logoImg, setLogoImg] = useState({});
+   const [bgImg, setBgImg] = useState({});
    const { register, handleSubmit } = useForm();
+
    const updateData = (data) => {
+      data.logo = logoImg;
+      data.backgroundImg = bgImg;
       console.log(data);
+      axios
+         .post(`https://sponskart-hkgd.onrender.com/organizer/update`, data)
+         .then((res) => {
+            console.log(res);
+         })
+         .catch((error) => console.log(error));
    };
    return (
       <form onSubmit={handleSubmit(updateData)}>
@@ -21,7 +33,9 @@ const OrganizerUpdateProfile = () => {
          ) : step === 2 ? (
             <UpdateOrganizerStepTwo register={register}> </UpdateOrganizerStepTwo>
          ) : step === 3 ? (
-            <UpdateOrganizerStepThree register={register}> </UpdateOrganizerStepThree>
+            <UpdateOrganizerStepThree register={register} setLogoImg={setLogoImg} setBgImg={setBgImg}>
+               {" "}
+            </UpdateOrganizerStepThree>
          ) : (
             <>
                <p>Please Reload The Page</p>

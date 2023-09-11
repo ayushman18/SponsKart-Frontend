@@ -47,14 +47,14 @@ const UpdateCreatorStepOne = ({ register }) => {
             placeholder="Update First Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("firstname")}
-            defaultValue={user.firstname}
+            defaultValue={user.data.firstname}
          />
          <input
             type="text"
             placeholder="Update Last Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("lastname")}
-            defaultValue={user.lastname}
+            defaultValue={user.data.lastname}
          />
          <input
             type="text"
@@ -62,7 +62,7 @@ const UpdateCreatorStepOne = ({ register }) => {
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             readOnly
             {...register("username")}
-            defaultValue={user.username}
+            defaultValue={user.user.username}
          />
          <input
             type="email"

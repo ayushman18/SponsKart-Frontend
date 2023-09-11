@@ -29,6 +29,9 @@ import BrandDetails from "../Details/brand/BrandDetails/BrandDetails";
 import OrganizerDetails from "../Details/organizer/OrganizerDetails/OrganizerDetails";
 import CreatorDetails from "../Details/creator/CreatorDetails/CreatorDetails";
 import ChatBox from "../dashboard/ChatBox/ChatBox";
+import MessageBox from "../dashboard/ChatBox/MessageBox";
+import MessageCard from "../dashboard/ChatBox/MessageCard";
+import MobileChatbox from "../dashboard/ChatBox/MobileChatbox";
 
 export const router = createBrowserRouter([
    {
@@ -179,6 +182,26 @@ export const router = createBrowserRouter([
          {
             path: "messages",
             element: <ChatBox></ChatBox>,
+            children: [
+               {
+                  path: ":id",
+                  element: <MessageBox></MessageBox>,
+               },
+            ],
+         },
+         {
+            path: "mobile-messages",
+            element: <MobileChatbox></MobileChatbox>,
+            children: [
+               {
+                  path: "",
+                  element: <MessageCard></MessageCard>,
+               },
+               {
+                  path: ":id",
+                  element: <MessageBox></MessageBox>,
+               },
+            ],
          },
       ],
    },

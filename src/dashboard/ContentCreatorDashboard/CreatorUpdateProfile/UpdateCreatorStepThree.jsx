@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 
-const UpdateCreatorStepThree = ({ register }) => {
+const UpdateCreatorStepThree = ({ register, setLogoImg, setBgImg }) => {
    const [logoName, setLogoName] = useState("");
    const [bgName, setBgName] = useState("");
    return (
@@ -21,6 +21,7 @@ const UpdateCreatorStepThree = ({ register }) => {
             {...register("logo")}
             onChange={(e) => {
                setLogoName(e.target.files[0].name);
+               setLogoImg(e.target.files);
             }}
          />
          <label htmlFor="file" className="bg-white max-w-xs input-style px-4 py-4">
@@ -42,6 +43,7 @@ const UpdateCreatorStepThree = ({ register }) => {
             {...register("backgroundImg")}
             onChange={(e) => {
                setBgName(e.target.files[0].name);
+               setBgImg(e.target.files);
             }}
          />
          <label htmlFor="file2" className="bg-white max-w-xs input-style px-4 py-4">

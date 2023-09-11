@@ -11,7 +11,7 @@ const DashboardLayout = () => {
    const number = Math.round(percent / (100 / 8));
 
    return (
-      <section className="bg-[#151414] min-h-screen">
+      <section className="bg-[#151414]">
          <div className="grid lg:grid-cols-3">
             <div className="relative">
                <div className="drawer lg:drawer-open z-50">
@@ -24,9 +24,9 @@ const DashboardLayout = () => {
                         {">"}
                      </label>
                   </div>
-                  <div className="drawer-side">
+                  <div className="drawer-side lg:h-auto">
                      <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                     <div className="menu max-w-fit min-h-fit text-base-content">
+                     <div className="menu max-w-fit h-full text-base-content">
                         <DashboardNavbar></DashboardNavbar>
                      </div>
                   </div>

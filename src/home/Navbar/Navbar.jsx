@@ -95,8 +95,8 @@ const Navbar = () => {
                                                    {user.user.type === "organizer"
                                                       ? user.data?.organizationName
                                                       : user.user.type === "creator"
-                                                      ? user.firstname + " " + user.lastname
-                                                      : "need information"}
+                                                      ? user.data.firstname + " " + user.data.lastname
+                                                      : user.data.brandName}
                                                 </h2>
                                                 <p className="flex">{user.user?.email}</p>
                                              </div>
@@ -330,8 +330,8 @@ const Navbar = () => {
                                        {user.user.type === "organizer"
                                           ? user.data?.organizationName
                                           : user.user.type === "creator"
-                                          ? user.firstname + " " + user.lastname
-                                          : "need information"}
+                                          ? user.data.firstname + " " + user.data.lastname
+                                          : user.data.brandName}
                                     </h2>
                                     <p className="flex">{user.user?.email}</p>
                                  </div>
