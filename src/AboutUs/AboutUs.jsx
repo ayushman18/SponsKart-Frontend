@@ -1,9 +1,9 @@
+import PageTitle from "../components/PageTitle/PageTitle";
+
 const AboutUs = () => {
    return (
       <section className="container mx-auto my-10">
-         <div className="flex flex-col justify-center items-center h-32">
-            <h2 className="text-4xl text-success">About Us</h2>
-         </div>
+         <PageTitle title={"About Us"}></PageTitle>
          <div>
             <p className="text-xl font-bold">Our Motive</p>
             <p>
@@ -48,8 +48,8 @@ const AboutUs = () => {
             <p>
                Overall, Sponskart is a game-changer for the events industry and influencer marketing. By
                simplifying the sponsorship process for event organizers and connecting influencers with
-               brands, Sponskart is helping businesses achieve their marketing goals and grow
-               their brand presence.
+               brands, Sponskart is helping businesses achieve their marketing goals and grow their brand
+               presence.
             </p>
          </div>
       </section>

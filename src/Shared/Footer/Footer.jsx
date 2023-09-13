@@ -24,22 +24,22 @@ const Footer = () => {
                   <div className="text-gray-100 ">
                      <h4 className="text-2xl mb-6">Company</h4>
                      <div className="flex flex-col gap-4">
-                        <Link>About Us</Link>
-                        <Link>How It Works</Link>
+                        <Link to={"/about-us"}>About Us</Link>
+                        <Link to={"/how-it-works"}>How It Works</Link>
                         <Link>Careers</Link>
                         <Link>Terms & Conditions</Link>
-                        <Link>Trust & Safety</Link>
+                        <Link to={"/trust-and-safety"}>Trust & Safety</Link>
                         <Link>View All</Link>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         <div className="bg-slate-900">
+         <div className="bg-slate-900 text-center lg:text-left">
             <div className="lg:flex px-8 lg:px-0 justify-center container mx-auto items-center gap-6 text-white py-6 text-xl">
                <p>Sponskart: Your Ultimate Collaboration Hub</p>
                <Link to="/register">
-                  <button className="px-8 py-2 rounded-lg bg-orange-400">Join Now</button>
+                  <button className="px-8 py-2 my-4 md:my-0 rounded-lg bg-orange-400">Join Now</button>
                </Link>
             </div>
          </div>
@@ -50,8 +50,8 @@ const Footer = () => {
                   <img src={img} className="h-20 w-20" alt="" />
                </div>
                <div className="flex gap-4 justify-center items-center">
-                  <Link>About Us</Link>
-                  <Link>How It Works</Link>
+                  <Link to={"/about-us"}>About Us</Link>
+                  <Link to={"/how-it-works"}>How It Works</Link>
                   <Link>Careers</Link>
                   <Link>Terms & Conditions</Link>
                </div>

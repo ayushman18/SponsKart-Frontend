@@ -36,6 +36,8 @@ import CreatorRoute from "./PrivateRoute/CreatorRoute";
 import OrganizerRoute from "./PrivateRoute/OrganizerRoute";
 import BrandRoute from "./PrivateRoute/BrandRoute";
 import AboutUs from "../AboutUs/AboutUs";
+import HowItWorks from "../HowItWorks/HowItWorks";
+import TrustAndSafety from "../TrustAndSafety/TrustAndSafety";
 
 export const router = createBrowserRouter([
    {
@@ -112,6 +114,14 @@ export const router = createBrowserRouter([
    {
       path: "/about-us",
       element: <AboutUs></AboutUs>,
+   },
+   {
+      path: "/how-it-works",
+      element: <HowItWorks></HowItWorks>,
+   },
+   {
+      path: "/trust-and-safety",
+      element: <TrustAndSafety></TrustAndSafety>,
    },
    {
       path: "/dashboard",
