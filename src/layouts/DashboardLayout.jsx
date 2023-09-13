@@ -11,7 +11,7 @@ const DashboardLayout = () => {
    const number = Math.round(percent / (100 / 8));
 
    return (
-      <section className="bg-[#151414]">
+      <section className="bg-gray-100">
          <div className="grid lg:grid-cols-3">
             <div className="relative">
                <div className="drawer lg:drawer-open z-50">

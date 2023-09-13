@@ -35,6 +35,7 @@ import MobileChatbox from "../dashboard/ChatBox/MobileChatbox";
 import CreatorRoute from "./PrivateRoute/CreatorRoute";
 import OrganizerRoute from "./PrivateRoute/OrganizerRoute";
 import BrandRoute from "./PrivateRoute/BrandRoute";
+import AboutUs from "../AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
    {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
    {
       path: "/contact-us",
       element: <ContactUs></ContactUs>,
+   },
+   {
+      path: "/about-us",
+      element: <AboutUs></AboutUs>,
    },
    {
       path: "/dashboard",

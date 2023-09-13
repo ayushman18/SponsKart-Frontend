@@ -21,7 +21,7 @@ const UpdateCreatorStepThree = ({ register, setLogoImg, setBgImg }) => {
             {...register("logo")}
             onChange={(e) => {
                setLogoName(e.target.files[0].name);
-               setLogoImg(e.target.files);
+               setLogoImg(e.target.files[0]);
             }}
          />
          <label htmlFor="file" className="bg-white max-w-xs input-style px-4 py-4">
@@ -40,10 +40,10 @@ const UpdateCreatorStepThree = ({ register, setLogoImg, setBgImg }) => {
             name="file"
             id="file2"
             className="hidden"
-            {...register("backgroundImg")}
+            {...register("backgroundImage")}
             onChange={(e) => {
                setBgName(e.target.files[0].name);
-               setBgImg(e.target.files);
+               setBgImg(e.target.files[0]);
             }}
          />
          <label htmlFor="file2" className="bg-white max-w-xs input-style px-4 py-4">

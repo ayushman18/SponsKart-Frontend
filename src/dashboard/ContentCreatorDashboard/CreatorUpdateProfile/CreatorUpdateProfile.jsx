@@ -11,6 +11,8 @@ import UpdateCreatorStepThree from "./UpdateCreatorStepThree";
 import axios from "axios";
 import { useState } from "react";
 
+// todo: fix file upload bug
+
 const CreatorUpdateProfile = () => {
    // const { user } = useAuth();
    const { step, setStep } = useStep();
@@ -19,11 +21,16 @@ const CreatorUpdateProfile = () => {
 
    const { register, handleSubmit } = useForm();
    const updateData = (data) => {
-      data.logo = logoImg;
-      data.backgroundImg = bgImg;
-      console.log(data);
+      const formData = new FormData();
+      formData.append("logo", logoImg);
+
+      console.log(formData);
       axios
-         .put(`https://sponskart-hkgd.onrender.com/creator/update`, data)
+         .put(`https://sponskart-hkgd.onrender.com/creator/update`, formData, {
+            headers: {
+               "Content-Type": "multipart/form-data",
+            },
+         })
          .then((res) => {
             console.log(res);
          })
