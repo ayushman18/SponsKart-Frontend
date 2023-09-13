@@ -18,8 +18,14 @@ const JoinNow = () => {
                </button>
             </Link>
             <p className="text-sm">
-               <Link className="link link-primary no-underline">Terms and Conditions</Link> applies. read our{" "}
-               <Link className="link link-primary no-underline">Privacy Policy </Link>to get started.
+               <Link to={"/terms-conditions"} className="link link-primary no-underline">
+                  Terms and Conditions
+               </Link>{" "}
+               applies. read our{" "}
+               <Link to={"/privacy-policy"} className="link link-primary no-underline">
+                  Privacy Policy{" "}
+               </Link>
+               to get started.
             </p>
          </div>
          <img src={img2} alt="" />

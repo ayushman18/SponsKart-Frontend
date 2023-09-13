@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ContentCreatorRegister = () => {
@@ -164,7 +164,9 @@ const ContentCreatorRegister = () => {
 
                <label htmlFor="agree">
                   <input type="checkbox" name="agree" id="agree" onChange={checked} />
-                  <span className="text-xl ml-4">I agree to the terms and conditions.</span>
+                  <span className="text-xl ml-4">
+                     I agree to the <Link to={"/terms-conditions"}>terms and conditions</Link>.
+                  </span>
                </label>
             </div>
             <div className="flex justify-center items-center">

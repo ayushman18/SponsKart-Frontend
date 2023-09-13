@@ -6,7 +6,7 @@ const AboutUs = () => {
          <PageTitle title={"About Us"}></PageTitle>
          <div>
             <p className="text-xl font-bold">Our Motive</p>
-            <p>
+            <p className="text-gray-700">
                Sponskart is an innovative company that is revolutionizing the world of event sponsorship and
                influencer marketing. This company helps event organizers and influencers connect with brands
                and secure sponsorships for their events or social media content. In turn, Sponskart also helps
@@ -15,7 +15,7 @@ const AboutUs = () => {
             </p>
             <br />
             <p className="text-xl font-bold">For Event Organizer</p>
-            <p>
+            <p className="text-gray-700">
                Event sponsorship is a powerful way for brands to increase brand recognition, build brand
                loyalty, and generate sales leads. However, it can be a daunting process for event organizers
                to secure sponsorships from brands. This is where Sponskart comes in. The company has a vast
@@ -25,7 +25,7 @@ const AboutUs = () => {
 
             <br />
             <p className="text-xl font-bold"> Brand</p>
-            <p>
+            <p className="text-gray-700">
                Similarly, influencer marketing has been increasingly popular among brands as a way to reach
                out to their target audience through social media. Influencers have a huge following on
                platforms such as Instagram, TikTok, and YouTube, and brands are leveraging this trend by
@@ -35,7 +35,7 @@ const AboutUs = () => {
             </p>
             <br />
             <p className="text-xl font-bold">For Influencer</p>
-            <p>
+            <p className="text-gray-700">
                One of the unique aspects of Sponskart is their data-driven approach to sponsorship and
                influencer marketing. They use advanced analytics and algorithms to match the right brand with
                the right event or influencer, ensuring that the partnership is mutually beneficial and
@@ -45,7 +45,7 @@ const AboutUs = () => {
             </p>
             <br />
             <p className="text-xl font-bold">Summary</p>
-            <p>
+            <p className="text-gray-700">
                Overall, Sponskart is a game-changer for the events industry and influencer marketing. By
                simplifying the sponsorship process for event organizers and connecting influencers with
                brands, Sponskart is helping businesses achieve their marketing goals and grow their brand

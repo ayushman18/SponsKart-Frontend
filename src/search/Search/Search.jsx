@@ -70,7 +70,7 @@ const Search = () => {
    }
 
    return (
-      <section>
+      <section className="bg-white">
          <div className="container mx-auto px-10 grid lg:grid-cols-4 md:gap-24 my-10 ">
             {category === "creator" ? (
                <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>

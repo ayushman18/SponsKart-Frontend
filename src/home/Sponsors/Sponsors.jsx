@@ -18,7 +18,7 @@ import img12 from "./../../assets/sponsors/titan.png";
 
 const Sponsors = () => {
    return (
-      <div className="border-2">
+      <div className="border-2 bg-white">
          <div className=" container mx-auto">
             <Marquee className="flex justify-center items-center gap-5">
                <img src={img1} alt="" className="mr-6 h-28 w-auto my-6" />

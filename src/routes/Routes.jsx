@@ -38,6 +38,8 @@ import BrandRoute from "./PrivateRoute/BrandRoute";
 import AboutUs from "../AboutUs/AboutUs";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import TrustAndSafety from "../TrustAndSafety/TrustAndSafety";
+import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "../TermsAndConditions/TermsAndConditions";
 
 export const router = createBrowserRouter([
    {
@@ -122,6 +124,14 @@ export const router = createBrowserRouter([
    {
       path: "/trust-and-safety",
       element: <TrustAndSafety></TrustAndSafety>,
+   },
+   {
+      path: "/privacy-policy",
+      element: <PrivacyPolicy></PrivacyPolicy>,
+   },
+   {
+      path: "/terms-conditions",
+      element: <TermsAndConditions></TermsAndConditions>,
    },
    {
       path: "/dashboard",
