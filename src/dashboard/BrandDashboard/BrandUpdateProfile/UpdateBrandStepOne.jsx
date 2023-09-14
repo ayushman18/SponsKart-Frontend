@@ -47,14 +47,14 @@ const UpdateBrandStepOne = ({ register }) => {
             placeholder="Update Brand Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("brandName")}
-            defaultValue={user.brandName}
+            defaultValue={user.data.brandName}
          />
          <input
             type="text"
             placeholder="Update Brand Holder Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("HolderName")}
-            defaultValue={user.HolderName}
+            defaultValue={user.data.HolderName}
          />
          <input
             type="text"
@@ -62,7 +62,7 @@ const UpdateBrandStepOne = ({ register }) => {
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             readOnly
             {...register("username")}
-            defaultValue={user.username}
+            defaultValue={user.user.username}
          />
          <input
             type="email"
@@ -77,7 +77,7 @@ const UpdateBrandStepOne = ({ register }) => {
             placeholder="Phone Number"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("phonenumber")}
-            defaultValue={user.phonenumber}
+            defaultValue={user.user.phonenumber}
          />
          <select
             className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "

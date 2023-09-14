@@ -18,8 +18,7 @@ const BrandSearchCard = ({ data }) => {
                <Rating style={{ maxWidth: 120 }} value={3} readOnly />
             </div>
             <div className="flex justify-center items-center gap-4 mx-auto">
-               <img src={gmailImg} alt="" className="w-6" />
-               <p>{data.email}</p>
+               <p>{data.username}</p>
             </div>
             <Link to={`/brand/${data._id}`}>
                <h2 className="text-4xl hover:text-orange-400">{data.brandName}</h2>

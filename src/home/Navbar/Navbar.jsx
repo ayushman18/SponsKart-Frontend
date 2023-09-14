@@ -5,10 +5,16 @@ import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "r
 import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
 
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
    const navigate = useNavigate();
+   const [online, setOnline] = useState(true);
+
+   const handelStatus = () => {
+      setOnline(!online);
+   };
 
    useEffect(() => {
       const scroll = window.addEventListener("scroll", () => {
@@ -103,13 +109,18 @@ const Navbar = () => {
                                           </div>
                                        </a>
                                     </>
-                                    <li>
+                                    <li onClick={handelStatus}>
                                        <a>
-                                          <div className="badge badge-warning badge-xs"></div> Status
+                                          <div
+                                             className={`badge  ${
+                                                online ? "badge-success" : "badge-warning"
+                                             } badge-xs`}
+                                          ></div>{" "}
+                                          {online ? "Online" : "Offline"}
                                        </a>
                                     </li>
                                     <li>
-                                       <Link to={`/dashboard/${user.user.type}/profile`}>
+                                       <Link to={`/dashboard/${user.user.type}/updateProfile`}>
                                           <FaRegUser></FaRegUser> Dashboard
                                        </Link>
                                     </li>
@@ -338,13 +349,16 @@ const Navbar = () => {
                               </div>
                            </a>
                         </li>
-                        <li>
+                        <li onClick={handelStatus}>
                            <a>
-                              <div className="badge badge-warning badge-xs"></div> Status
+                              <div
+                                 className={`badge  ${online ? "badge-success" : "badge-warning"} badge-xs`}
+                              ></div>{" "}
+                              {online ? "Online" : "Offline"}
                            </a>
                         </li>
                         <li>
-                           <Link to={`/dashboard/${user.user.type}/profile`}>
+                           <Link to={`/dashboard/${user.user.type}/updateProfile`}>
                               <FaRegUser></FaRegUser> Dashboard
                            </Link>
                         </li>

@@ -15,16 +15,16 @@ const UpdateBrandStepTwo = ({ register }) => {
          />
          <input
             type="text"
-            placeholder="Facebook link"
+            placeholder="Facebook Profile"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("facebookLink")}
+            {...register("facebookProfile")}
          />
 
          <input
             type="text"
             placeholder="LinkedIn Profile"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("linkedinLink")}
+            {...register("linkedinProfile")}
          />
          <input
             type="text"

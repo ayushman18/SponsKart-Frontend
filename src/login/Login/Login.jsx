@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Login = () => {
    const { setUser } = useAuth();
@@ -26,15 +27,16 @@ const Login = () => {
 
             if (res.data.code === 200) {
                localStorage.setItem("user", JSON.stringify(res.data.data));
-               toast.success(
-                  `Welcome ${
-                     res.data.data.organizer
-                        ? res.data.data.organizer.organizationName
-                        : res.data.data.contentCreator
-                        ? res.data.data.contentCreator.firstName
-                        : ""
-                  }`
-               );
+               Swal.fire({
+                  title: "You are welcome in Sponskart!",
+                  text: "Thanks for joining.",
+                  imageUrl: "https://i.ibb.co/P96V9ns/welcome.png",
+                  imageWidth: 300,
+                  imageHeight: 200,
+                  imageAlt: "Custom image",
+                  showConfirmButton: false,
+                  timer: 2000,
+               });
                setUser(res.data.data);
                navigate(from);
             }

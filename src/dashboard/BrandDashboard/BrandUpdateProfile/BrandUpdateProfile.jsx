@@ -15,6 +15,11 @@ const BrandUpdateProfile = () => {
 
    const { register, handleSubmit } = useForm();
    const updateData = (data) => {
+      for (const key in data) {
+         if (data[key] === "") {
+            delete data[key];
+         }
+      }
       console.log(data);
    };
 

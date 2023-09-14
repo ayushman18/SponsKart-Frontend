@@ -16,9 +16,7 @@ const DashboardNavbar = () => {
             <Link to={`/`} className="hover:bg-gray-200 rounded-md p-4">
                Home
             </Link>
-            <Link to={`/dashboard/${user.user.type}/profile`} className="hover:bg-gray-200 rounded-md p-4">
-               Profile
-            </Link>
+
             <Link
                to={`/dashboard/${user.user.type}/updateProfile`}
                className="hover:bg-gray-200 rounded-md p-4"

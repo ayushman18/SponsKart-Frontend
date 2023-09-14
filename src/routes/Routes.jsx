@@ -23,7 +23,6 @@ import OrganizerProfile from "../dashboard/OrganizerDashboard/OrganizerProfile/O
 import OrganizerUpdateProfile from "../dashboard/OrganizerDashboard/OrganizerUpdateProfile/OrganizerUpdateProfile";
 import OrganizerAddPost from "../dashboard/OrganizerDashboard/OrganizerAddPost/OrganizerAddPost";
 import OrganizerManagePost from "../dashboard/OrganizerDashboard/OrganizerManagePost/OrganizerManagePost";
-import BrandProfile from "../dashboard/BrandDashboard/BrandProfile/BrandProfile";
 import BrandUpdateProfile from "../dashboard/BrandDashboard/BrandUpdateProfile/BrandUpdateProfile";
 import BrandDetails from "../Details/brand/BrandDetails/BrandDetails";
 import OrganizerDetails from "../Details/organizer/OrganizerDetails/OrganizerDetails";
@@ -201,10 +200,6 @@ export const router = createBrowserRouter([
                </BrandRoute>
             ),
             children: [
-               {
-                  path: "profile",
-                  element: <BrandProfile></BrandProfile>,
-               },
                {
                   path: "updateProfile",
                   element: <BrandUpdateProfile></BrandUpdateProfile>,

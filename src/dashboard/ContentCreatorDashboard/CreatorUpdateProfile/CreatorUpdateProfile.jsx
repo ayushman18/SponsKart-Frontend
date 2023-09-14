@@ -21,10 +21,23 @@ const CreatorUpdateProfile = () => {
 
    const { register, handleSubmit } = useForm();
    const updateData = (data) => {
-      const formData = new FormData();
-      formData.append("logo", logoImg);
+      data.logo = logoImg;
+      data.backgroundImage = bgImg;
+      for (const key in data) {
+         if (data[key] === "") {
+            delete data[key];
+         } else if (data[key].length === 0) {
+            delete data[key];
+         }
+      }
 
-      console.log(formData);
+      const formData = new FormData();
+
+      for (const key in data) {
+         formData.append(key, data[key]);
+      }
+
+      console.log(data);
       axios
          .put(`https://sponskart-hkgd.onrender.com/creator/update`, formData, {
             headers: {

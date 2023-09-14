@@ -15,7 +15,6 @@ const UpdateCreatorStepThree = ({ register, setLogoImg, setBgImg }) => {
          />
          <input
             type="file"
-            name="file"
             id="file"
             className="hidden"
             {...register("logo")}
@@ -37,7 +36,6 @@ const UpdateCreatorStepThree = ({ register, setLogoImg, setBgImg }) => {
          />
          <input
             type="file"
-            name="file"
             id="file2"
             className="hidden"
             {...register("backgroundImage")}
