@@ -1,7 +1,17 @@
+import ManagePostCard from "../../../components/ManagePostCard/ManagePostCard";
+
 const BrandManagePost = () => {
    return (
       <div>
-         <h2 className="text-white">Manage Post</h2>
+         <h2 className="text-white text-3xl text-center my-4">Manage Post</h2>
+         <div className="grid md:grid-cols-2 justify-center items-center gap-6">
+            <div>
+               <ManagePostCard></ManagePostCard>
+            </div>
+            <div>
+               <ManagePostCard></ManagePostCard>
+            </div>
+         </div>
       </div>
    );
 };
