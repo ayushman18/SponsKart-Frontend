@@ -7,7 +7,7 @@ const DashboardLayout = () => {
    const { user } = useAuth();
 
    const arr = [1, 2, 3, 4, 5, 6, 7, 8];
-   const percent = (Object.keys(user.user).length / 22) * 100;
+   const percent = (Object.keys(user.data).length / 20) * 100;
    const number = Math.round(percent / (100 / 8));
 
    return (

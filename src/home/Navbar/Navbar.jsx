@@ -83,14 +83,19 @@ const Navbar = () => {
                         <div>
                            {user && (
                               <>
-                                 <div>
+                                 <div className="bg-white">
                                     <>
                                        <a className="justify-between">
                                           <div className="flex items-center gap-5 border-b py-4">
                                              <div className="avatar online">
                                                 <div className="w-12 border rounded-full">
-                                                   {user.img ? (
-                                                      <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                                   {user.data.logo ? (
+                                                      <img
+                                                         src={
+                                                            "https://sponskart-hkgd.onrender.com/" +
+                                                            user.data.logo
+                                                         }
+                                                      />
                                                    ) : (
                                                       <FaUser className="text-5xl mx-auto"></FaUser>
                                                    )}
@@ -313,8 +318,8 @@ const Navbar = () => {
                   <div className="dropdown dropdown-end ml-4">
                      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-16 rounded-full flex justify-center items-center">
-                           {user.img ? (
-                              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                           {user.data.logo ? (
+                              <img src={"https://sponskart-hkgd.onrender.com/" + user.data.logo} />
                            ) : (
                               <FaUser className="text-5xl"></FaUser>
                            )}
@@ -322,15 +327,17 @@ const Navbar = () => {
                      </label>
                      <ul
                         tabIndex={0}
-                        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-auto"
+                        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content rounded-box w-auto bg-white"
                      >
                         <li>
                            <a className="justify-between">
                               <div className="flex items-center gap-5 border-b py-4">
                                  <div className="avatar online">
                                     <div className="w-12 border rounded-full">
-                                       {user.img ? (
-                                          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                       {user.data.logo ? (
+                                          <img
+                                             src={"https://sponskart-hkgd.onrender.com/" + user.data.logo}
+                                          />
                                        ) : (
                                           <FaUser className="text-5xl mx-auto"></FaUser>
                                        )}

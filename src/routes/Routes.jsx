@@ -39,6 +39,7 @@ import HowItWorks from "../HowItWorks/HowItWorks";
 import TrustAndSafety from "../TrustAndSafety/TrustAndSafety";
 import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "../TermsAndConditions/TermsAndConditions";
+import BrandPostDetails from "../Details/brand/BrandPostDetails/BrandPostDetails";
 
 export const router = createBrowserRouter([
    {
@@ -56,6 +57,7 @@ export const router = createBrowserRouter([
          {
             path: "/brand/:id",
             element: <BrandDetails></BrandDetails>,
+            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/brand/get/${params.id}`),
          },
          {
             path: "/organizer/:id",
@@ -65,6 +67,11 @@ export const router = createBrowserRouter([
             path: "/creator/:id",
             element: <CreatorDetails></CreatorDetails>,
             loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/creator/get/${params.id}`),
+         },
+         {
+            path: "/post/brand/:id",
+            element: <BrandPostDetails></BrandPostDetails>,
+            // loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/creator/get/${params.id}`),
          },
       ],
    },

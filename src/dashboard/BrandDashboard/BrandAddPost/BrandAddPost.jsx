@@ -1,8 +1,13 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Select from "react-select";
+import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const BrandAddPost = () => {
-   const { register, handleSubmit } = useForm();
+   const { user } = useAuth();
+   const { register, handleSubmit, reset } = useForm();
    const [method, setMethod] = useState("giveaway");
    const [platforms, setPlatforms] = useState([]);
    const [types, setTypes] = useState([]);
@@ -42,38 +47,37 @@ const BrandAddPost = () => {
       "Delhi",
       "Puducherry",
    ];
+   const productType = [
+      { value: "fitness", label: "Fitness" },
+      { value: "healthCare", label: "Health Care" },
+      { value: "lifestyle", label: "Life Style" },
+      { value: "cosmetics", label: "Cosmetics" },
+      { value: "education", label: "Education" },
+      { value: "technology", label: "Technology" },
+      { value: "finance", label: "Finance" },
+      { value: "clothing", label: "Clothing" },
+      { value: "web3", label: "Web3" },
+      { value: "food", label: "Food" },
+      { value: "hospitality", label: "Hospitality" },
+      { value: "others", label: "Others" },
+   ];
+
+   const platformOptions = [
+      { value: "facebook", label: "Facebook" },
+      { value: "linkedin", label: "Linkedin" },
+      { value: "instagram", label: "Instagram" },
+      { value: "youtube", label: "Youtube" },
+      { value: "twitter", label: "Twitter" },
+      { value: "others", label: "Others" },
+   ];
 
    const handelMethod = (e) => {
       setMethod(e.target.value);
       console.log(e.target.value);
    };
 
-   const platformAdder = (e) => {
-      const platform = e.target.value;
-      if (e.target.checked) {
-         const platformArr = [...platforms];
-         platformArr.push(platform);
-         setPlatforms(platformArr);
-      } else {
-         const platformArr = [...platforms];
-         platformArr.pop(platform);
-         setPlatforms(platformArr);
-      }
-   };
-   const typeAdder = (e) => {
-      const type = e.target.value;
-      if (e.target.checked) {
-         const typesArr = [...types];
-         typesArr.push(type);
-         setTypes(typesArr);
-      } else {
-         const typesArr = [...types];
-         typesArr.pop(type);
-         setTypes(typesArr);
-      }
-   };
-
    const updatePost = (data) => {
+      data.id = user.user._id;
       for (const key in data) {
          if (data[key] === "") {
             delete data[key];
@@ -86,9 +90,34 @@ const BrandAddPost = () => {
          data.price = parseInt(data.price);
          delete data["description"];
       }
-      data.platform = platforms;
-      data.types = types;
-      data.minFollower = parseInt(data.minFollower);
+      data.platform = platforms?.map((type) => type.value);
+      data.categories = types?.map((type) => type.value);
+      data.miniFollower = parseInt(data.miniFollower || 0);
+      if (data.platform.length === 0 && data.categories.length === 0) {
+         Swal.fire("Please add Platforms and Categories", "", "error");
+         return;
+      }
+      Swal.fire({
+         title: "Are you sure?",
+         text: "Do you want to add this post?",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Add Post",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axios
+               .post("https://sponskart-hkgd.onrender.com/brand/add/post", data)
+               .then((res) => {
+                  console.log(res.data.data);
+                  Swal.fire("Posted!", "Your post has been added.", "success");
+
+                  reset();
+               })
+               .catch((error) => console.log(error));
+         }
+      });
 
       console.log(data);
    };
@@ -103,8 +132,9 @@ const BrandAddPost = () => {
                      <span className="label-text text-white text-base">Post For</span>
                   </label>
                   <select
-                     {...register("postFor")}
+                     {...register("postfor")}
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
+                     required
                   >
                      <option value="creator" defaultValue>
                         Content Creator
@@ -117,9 +147,10 @@ const BrandAddPost = () => {
                      <span className="label-text text-white text-base">Do you want to</span>
                   </label>
                   <select
-                     {...register("method")}
+                     {...register("payType")}
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
                      onChange={handelMethod}
+                     required
                   >
                      <option value="giveaway" defaultValue>
                         Giveaway Product
@@ -127,20 +158,21 @@ const BrandAddPost = () => {
                      <option value="pay">Pay Creator or Event</option>
                   </select>
                </div>
-               {method === "giveaway" ? (
-                  <div>
-                     <label className="label">
-                        <span className="label-text text-white text-base">Describe your giveaway</span>
-                     </label>
-                     <textarea
-                        type="text"
-                        placeholder="Describe Here"
-                        className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
-                        rows="2"
-                        {...register("description")}
-                     />
-                  </div>
-               ) : (
+
+               <div>
+                  <label className="label">
+                     <span className="label-text text-white text-base">Describe your giveaway</span>
+                  </label>
+                  <textarea
+                     type="text"
+                     placeholder="Describe Here"
+                     className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
+                     rows="2"
+                     required
+                     {...register("describe")}
+                  />
+               </div>
+               {method === "pay" && (
                   <>
                      <div>
                         <label className="label">
@@ -150,16 +182,18 @@ const BrandAddPost = () => {
                            type="number"
                            placeholder="&#x20B9; Rupee"
                            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
+                           required
                            {...register("price")}
                         />
                      </div>
                      <div>
                         <label className="label">
-                           <span className="label-text text-white text-base">Enter the pricing</span>
+                           <span className="label-text text-white text-base">Select Target Audience</span>
                         </label>
                         <select
-                           {...register("audience")}
+                           {...register("targetAudience")}
                            className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
+                           required
                         >
                            <option value="male">Male</option>
                            <option value="female">Female</option>
@@ -168,7 +202,7 @@ const BrandAddPost = () => {
                      </div>
                   </>
                )}
-               <div className="w-[300px]">
+               {/* <div className="w-[300px]">
                   <label className="label">
                      <span className="label-text text-white text-base">Select The Platform</span>
                   </label>
@@ -204,6 +238,20 @@ const BrandAddPost = () => {
                         </div>
                      </div>
                   </div>
+               </div> */}
+               <div>
+                  <label className="label">
+                     <span className="label-text text-white text-base">Select The Platforms</span>
+                  </label>
+                  <Select
+                     className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
+                     placeholder="Select The Platforms"
+                     unstyled
+                     defaultValue={platforms}
+                     onChange={setPlatforms}
+                     options={platformOptions}
+                     isMulti
+                  />
                </div>
 
                <div>
@@ -214,10 +262,10 @@ const BrandAddPost = () => {
                      type="number"
                      placeholder="Minimum Followers"
                      className="input input-bordered min-w-[300px] input-style px-4 py-8 "
-                     {...register("minFollower")}
+                     {...register("miniFollower")}
                   />
                </div>
-               <div className="w-[300px]">
+               {/* <div className="w-[300px]">
                   <label className="label">
                      <span className="label-text text-white text-base">
                         Choose Catergories for your product
@@ -279,6 +327,22 @@ const BrandAddPost = () => {
                         </div>
                      </div>
                   </div>
+               </div> */}
+               <div>
+                  <label className="label">
+                     <span className="label-text text-white text-base">
+                        Choose Categories for your product
+                     </span>
+                  </label>
+                  <Select
+                     className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
+                     placeholder="Categories"
+                     unstyled
+                     defaultValue={types}
+                     onChange={setTypes}
+                     options={productType}
+                     isMulti
+                  />
                </div>
                <div>
                   <label className="label">
@@ -286,7 +350,8 @@ const BrandAddPost = () => {
                   </label>
                   <select
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "
-                     {...register("location")}
+                     {...register("chooseLocation")}
+                     required
                   >
                      {indianStates.map((state, index) => (
                         <option key={index}>{state}</option>

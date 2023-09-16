@@ -2,25 +2,77 @@
 
 // import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import Steps from "../../../components/Steps/Steps";
 import useStep from "../../../hooks/useStep";
 import UpdateBrandStepOne from "./UpdateBrandStepOne";
 import UpdateBrandStepTwo from "./UpdateBrandStepTwo";
 import UpdateBrandStepThree from "./UpdateBrandStepThree";
+import { useState } from "react";
+import axios from "axios";
 
 const BrandUpdateProfile = () => {
-   // const { user } = useAuth();
+   const { user, setUser } = useAuth();
    const { step, setStep } = useStep();
+   const [selectedOption, setSelectedOption] = useState(null);
+   const [logoImg, setLogoImg] = useState({});
+   const [bgImg, setBgImg] = useState({});
+
+   const userData = JSON.parse(localStorage.getItem("user"));
+
+   const options = [
+      { value: "fitness", label: "Fitness" },
+      { value: "healthCare", label: "Health Care" },
+      { value: "lifestyle", label: "Life Style" },
+      { value: "cosmetics", label: "Cosmetics" },
+      { value: "education", label: "Education" },
+      { value: "technology", label: "Technology" },
+      { value: "finance", label: "Finance" },
+      { value: "clothing", label: "Clothing" },
+      { value: "web3", label: "Web3" },
+      { value: "food", label: "Food" },
+      { value: "hospitality", label: "Hospitality" },
+      { value: "others", label: "Others" },
+   ];
 
    const { register, handleSubmit } = useForm();
    const updateData = (data) => {
+      data.brandType = selectedOption?.map((type) => type.value);
+      data.logo = logoImg;
+      data.backgroundImage = bgImg;
+
       for (const key in data) {
-         if (data[key] === "") {
+         if (data[key] === "" || data[key] === undefined) {
             delete data[key];
+         } else if (typeof data[key] === "object" && !Array.isArray(data[key])) {
+            if (!data[key].name) {
+               delete data[key];
+            }
          }
       }
-      console.log(data);
+      //data._id
+      // https://sponskart-hkgd.onrender.com/
+      const formData = new FormData();
+
+      for (const key in data) {
+         formData.append(key, data[key]);
+      }
+      formData.append("id", user.data._id);
+
+      axios
+         .put(`https://sponskart-hkgd.onrender.com/brand/update`, formData, {
+            headers: {
+               "Content-Type": "multipart/form-data",
+            },
+         })
+         .then((res) => {
+            console.log(res.data.data);
+            userData.data = res.data.data;
+            setUser(userData);
+            localStorage.setItem("user", JSON.stringify(userData));
+         })
+         .catch((error) => console.log(error));
+      console.log(data, user);
    };
 
    return (
@@ -28,11 +80,20 @@ const BrandUpdateProfile = () => {
          <Steps steps={["Basic Details", "Social Links", "Descriptions & Images"]}></Steps>
 
          {step === 1 ? (
-            <UpdateBrandStepOne register={register}></UpdateBrandStepOne>
+            <UpdateBrandStepOne
+               selectedOption={selectedOption}
+               setSelectedOption={setSelectedOption}
+               register={register}
+               options={options}
+            ></UpdateBrandStepOne>
          ) : step === 2 ? (
             <UpdateBrandStepTwo register={register}> </UpdateBrandStepTwo>
          ) : step === 3 ? (
-            <UpdateBrandStepThree register={register}> </UpdateBrandStepThree>
+            <UpdateBrandStepThree
+               register={register}
+               setLogoImg={setLogoImg}
+               setBgImg={setBgImg}
+            ></UpdateBrandStepThree>
          ) : (
             <>
                <p>Please Reload The Page</p>

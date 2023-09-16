@@ -2,7 +2,7 @@
 
 // import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import Steps from "../../../components/Steps/Steps";
 import useStep from "../../../hooks/useStep";
 import UpdateCreatorStepOne from "./UpdateCreatorStepOne";
@@ -14,10 +14,13 @@ import { useState } from "react";
 // todo: fix file upload bug
 
 const CreatorUpdateProfile = () => {
-   // const { user } = useAuth();
+   const { user } = useAuth();
    const { step, setStep } = useStep();
    const [logoImg, setLogoImg] = useState({});
    const [bgImg, setBgImg] = useState({});
+   const userData = JSON.parse(localStorage.getItem("user"));
+
+   console.log(userData);
 
    const { register, handleSubmit } = useForm();
    const updateData = (data) => {
@@ -36,6 +39,7 @@ const CreatorUpdateProfile = () => {
       for (const key in data) {
          formData.append(key, data[key]);
       }
+      formData.append("id", user.data._id);
 
       console.log(data);
       axios
@@ -45,7 +49,9 @@ const CreatorUpdateProfile = () => {
             },
          })
          .then((res) => {
-            console.log(res);
+            console.log(res.data.data);
+            userData.data = res.data.data;
+            localStorage.setItem("user", JSON.stringify(userData));
          })
          .catch((error) => console.log(error));
    };
@@ -74,7 +80,7 @@ const CreatorUpdateProfile = () => {
             </div>
             
          </div> */}
-         <div className="flex gap-4 justify-center items-center my-6">
+         <div className={`flex gap-4 justify-center items-center my-6`}>
             <p
                className={`py-3 px-6 border-0 cursor-pointer rounded-lg text-white mt-4 ${
                   step <= 1 ? "btn-disabled bg-[#93e3317e]" : "bg-[#94E331E3]"

@@ -28,9 +28,9 @@ const UpdateCreatorStepTwo = ({ register }) => {
          />
          <input
             type="text"
-            placeholder="Minimum Views"
+            placeholder="Views"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("minViews")}
+            {...register("views")}
          />
          <input
             type="text"

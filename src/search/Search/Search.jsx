@@ -71,7 +71,7 @@ const Search = () => {
 
    return (
       <section className="bg-white">
-         <div className="container mx-auto px-10 grid lg:grid-cols-4 md:gap-24 my-10 ">
+         <div className="container mx-auto px-10 grid lg:grid-cols-4 md:gap-24 py-10 ">
             {category === "creator" ? (
                <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>
             ) : category === "organizer" ? (
@@ -82,7 +82,7 @@ const Search = () => {
             <div className="md:col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
 
-               <div className="my-12 grid md:grid-cols-2 gap-8 lg:gap-4 mx-4 lg:mx-0 md:justify-around items-center">
+               <div className="my-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4 mx-4 lg:mx-0 md:justify-around items-center">
                   {result.length ? (
                      result.map((data) => (
                         <div key={data._id}>

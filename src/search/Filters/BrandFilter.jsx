@@ -5,7 +5,6 @@ import { FaFilter, FaInfinity } from "react-icons/fa";
 const BrandFilter = ({ handelFilterSearch }) => {
    const [range, setRange] = useState(0);
    const [types, setTypes] = useState([]);
-   const [genders, setGenders] = useState([]);
    const [platforms, setPlatforms] = useState([]);
    const [languages, setLanguages] = useState([]);
    const [location, setLocation] = useState("");
@@ -60,19 +59,6 @@ const BrandFilter = ({ handelFilterSearch }) => {
       }
    };
 
-   const genderAdder = (e) => {
-      const gender = e.target.value;
-      if (e.target.checked) {
-         const genderArr = [...genders];
-         genderArr.push(gender);
-         setGenders(genderArr);
-      } else {
-         const genderArr = [...genders];
-         genderArr.pop(gender);
-         setGenders(genderArr);
-      }
-   };
-
    const platformAdder = (e) => {
       const platform = e.target.value;
       if (e.target.checked) {
@@ -105,16 +91,15 @@ const BrandFilter = ({ handelFilterSearch }) => {
       }
    };
 
-   const filter = { range, types, genders, platforms, languages, location };
+   const filter = { range, types, platforms, languages, location };
 
    useEffect(() => {
       console.log(range);
       console.log(types);
-      console.log(genders);
       console.log(platforms);
       console.log(languages);
       console.log(location);
-   }, [range, types, genders, platforms, languages, location]);
+   }, [range, types, platforms, languages, location]);
 
    return (
       <div>
@@ -130,8 +115,8 @@ const BrandFilter = ({ handelFilterSearch }) => {
                         <span className="label-text text-base">Fitness</span>
                      </label>
                      <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={typeAdder} defaultValue="skinCare" />
-                        <span className="label-text text-base">Skin-Care</span>
+                        <input type="checkbox" onChange={typeAdder} defaultValue="healthCare" />
+                        <span className="label-text text-base">Health Care</span>
                      </label>
                      <label className="cursor-pointer justify-start gap-4 label">
                         <input type="checkbox" onChange={typeAdder} defaultValue="lifeStyle" />
@@ -154,32 +139,29 @@ const BrandFilter = ({ handelFilterSearch }) => {
                         <span className="label-text text-base">Finance</span>
                      </label>
                      <label className="cursor-pointer justify-start gap-4 label">
+                        <input type="checkbox" onChange={typeAdder} defaultValue="clothing" />
+                        <span className="label-text text-base">Clothing</span>
+                     </label>
+                     <label className="cursor-pointer justify-start gap-4 label">
+                        <input type="checkbox" onChange={typeAdder} defaultValue="web3" />
+                        <span className="label-text text-base">Web3</span>
+                     </label>
+                     <label className="cursor-pointer justify-start gap-4 label">
+                        <input type="checkbox" onChange={typeAdder} defaultValue="food" />
+                        <span className="label-text text-base">Food (FMCG)</span>
+                     </label>
+                     <label className="cursor-pointer justify-start gap-4 label">
+                        <input type="checkbox" onChange={typeAdder} defaultValue="hospitality" />
+                        <span className="label-text text-base">Hospitality</span>
+                     </label>
+                     <label className="cursor-pointer justify-start gap-4 label">
                         <input type="checkbox" onChange={typeAdder} defaultValue="others" />
                         <span className="label-text text-base">Others</span>
                      </label>
                   </div>
                </div>
             </div>
-            <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
-               <input type="radio" name="my-accordion-2" />
-               <div className="collapse-title bg-[#5252523D] text-xl font-medium">Preferred Gender</div>
-               <div className="collapse-content">
-                  <div className="form-control">
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={genderAdder} defaultValue="male" />
-                        <span className="label-text text-base">Male</span>
-                     </label>
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={genderAdder} defaultValue="female" />
-                        <span className="label-text text-base">Female</span>
-                     </label>
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={genderAdder} defaultValue="other" />
-                        <span className="label-text text-base">Other</span>
-                     </label>
-                  </div>
-               </div>
-            </div>
+
             <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
                <input type="radio" name="my-accordion-2" />
                <div className="collapse-title bg-[#5252523D] text-xl font-medium">Follower Limit</div>
@@ -280,7 +262,7 @@ const BrandFilter = ({ handelFilterSearch }) => {
          </div>
          <div className="drawer drawer-end">
             <input id="filter-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content mb-6 mx-6">
+            <div className="drawer-content lg:hidden   mb-6 mx-6">
                <label
                   htmlFor="filter-drawer"
                   className="btn btn-ghost bg-gray-100 flex items-center justify-center drawer-button"
@@ -302,8 +284,8 @@ const BrandFilter = ({ handelFilterSearch }) => {
                                  <span className="label-text text-base">Fitness</span>
                               </label>
                               <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={typeAdder} defaultValue="skinCare" />
-                                 <span className="label-text text-base">Skin-Care</span>
+                                 <input type="checkbox" onChange={typeAdder} defaultValue="healthCare" />
+                                 <span className="label-text text-base">Health Care</span>
                               </label>
                               <label className="cursor-pointer justify-start gap-4 label">
                                  <input type="checkbox" onChange={typeAdder} defaultValue="lifeStyle" />
@@ -326,34 +308,29 @@ const BrandFilter = ({ handelFilterSearch }) => {
                                  <span className="label-text text-base">Finance</span>
                               </label>
                               <label className="cursor-pointer justify-start gap-4 label">
+                                 <input type="checkbox" onChange={typeAdder} defaultValue="clothing" />
+                                 <span className="label-text text-base">Clothing</span>
+                              </label>
+                              <label className="cursor-pointer justify-start gap-4 label">
+                                 <input type="checkbox" onChange={typeAdder} defaultValue="web3" />
+                                 <span className="label-text text-base">Web3</span>
+                              </label>
+                              <label className="cursor-pointer justify-start gap-4 label">
+                                 <input type="checkbox" onChange={typeAdder} defaultValue="food" />
+                                 <span className="label-text text-base">Food (FMCG)</span>
+                              </label>
+                              <label className="cursor-pointer justify-start gap-4 label">
+                                 <input type="checkbox" onChange={typeAdder} defaultValue="hospitality" />
+                                 <span className="label-text text-base">Hospitality</span>
+                              </label>
+                              <label className="cursor-pointer justify-start gap-4 label">
                                  <input type="checkbox" onChange={typeAdder} defaultValue="others" />
                                  <span className="label-text text-base">Others</span>
                               </label>
                            </div>
                         </div>
                      </div>
-                     <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
-                        <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title bg-[#5252523D] text-xl font-medium">
-                           Preferred Gender
-                        </div>
-                        <div className="collapse-content">
-                           <div className="form-control">
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={genderAdder} defaultValue="male" />
-                                 <span className="label-text text-base">Male</span>
-                              </label>
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={genderAdder} defaultValue="female" />
-                                 <span className="label-text text-base">Female</span>
-                              </label>
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={genderAdder} defaultValue="other" />
-                                 <span className="label-text text-base">Other</span>
-                              </label>
-                           </div>
-                        </div>
-                     </div>
+
                      <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title bg-[#5252523D] text-xl font-medium">

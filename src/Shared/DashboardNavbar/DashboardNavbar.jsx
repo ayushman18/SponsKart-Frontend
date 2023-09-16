@@ -8,14 +8,12 @@ const DashboardNavbar = () => {
    const location = useLocation();
    const pathname = location.pathname;
 
-   console.log(pathname);
-
    return (
-      <div className="lg:m-8 rounded-xl bg-white lg:p-8 p-4">
+      <div className="lg:m-8 rounded-xl bg-white text-black lg:p-8 p-4">
          <div className="avatar w-full">
             <div className="w-52 rounded-full mx-auto bg-gray-100">
                {user.data.logo ? (
-                  <img src={user.data.logo} alt="image" />
+                  <img src={"https://sponskart-hkgd.onrender.com/" + user.data.logo} alt="image" />
                ) : (
                   <FaUser className="text-[208px] pt-5"></FaUser>
                )}
@@ -29,7 +27,7 @@ const DashboardNavbar = () => {
             <Link
                to={`/dashboard/${user.user.type}/updateProfile`}
                className={` ${
-                  pathname === `/dashboard/${user.user.type}/updateProfile` ? "bg-gray-400" : ""
+                  pathname === `/dashboard/${user.user.type}/updateProfile` ? "bg-gray-200" : ""
                } hover:bg-gray-200 rounded-md p-4`}
             >
                Update Profile
@@ -37,7 +35,7 @@ const DashboardNavbar = () => {
             <Link
                to={`/dashboard/${user.user.type}/addPost`}
                className={` ${
-                  pathname === `/dashboard/${user.user.type}/addPost` ? "bg-gray-400" : ""
+                  pathname === `/dashboard/${user.user.type}/addPost` ? "bg-gray-200" : ""
                } hover:bg-gray-200 rounded-md p-4`}
             >
                Add A Post
@@ -45,7 +43,7 @@ const DashboardNavbar = () => {
             <Link
                to={`/dashboard/${user.user.type}/managePost`}
                className={` ${
-                  pathname === `/dashboard/${user.user.type}/managePost` ? "bg-gray-400" : ""
+                  pathname === `/dashboard/${user.user.type}/managePost` ? "bg-gray-200" : ""
                } hover:bg-gray-200 rounded-md p-4`}
             >
                Manage Post

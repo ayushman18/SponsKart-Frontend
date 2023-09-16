@@ -27,16 +27,22 @@ const Login = () => {
 
             if (res.data.code === 200) {
                localStorage.setItem("user", JSON.stringify(res.data.data));
-               Swal.fire({
-                  title: "You are welcome in Sponskart!",
-                  text: "Thanks for joining.",
-                  imageUrl: "https://i.ibb.co/P96V9ns/welcome.png",
-                  imageWidth: 300,
-                  imageHeight: 200,
-                  imageAlt: "Custom image",
-                  showConfirmButton: false,
-                  timer: 2000,
-               });
+               const percent = (Object.keys(res.data.data.data).length / 20) * 100;
+               if (Math.round(percent) < 100) {
+                  Swal.fire("You are welcome in Sponskart!", "Thanks for joining.", "warning");
+               } else {
+                  Swal.fire({
+                     title: "You are welcome in Sponskart!",
+                     text: "Thanks for joining.",
+                     imageUrl: "https://i.ibb.co/P96V9ns/welcome.png",
+                     imageWidth: 300,
+                     imageHeight: 200,
+                     imageAlt: "Custom image",
+                     showConfirmButton: false,
+                     timer: 2000,
+                  });
+               }
+
                setUser(res.data.data);
                navigate(from);
             }

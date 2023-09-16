@@ -31,9 +31,9 @@ const DashboardTopBar = () => {
          <div className="border-r pr-4 mb-6 pl-3 lg:pl-0 lg:mb-0 flex items-center gap-4 justify-start">
             <div className="avatar">
                <div className="w-16 rounded-full bg-slate-200">
-                  {user?.img ? (
+                  {user.data.logo ? (
                      <>
-                        <img src={user?.img} alt="" />
+                        <img src={"https://sponskart-hkgd.onrender.com/" + user.data.logo} alt="" />
                      </>
                   ) : (
                      <FaUser className="w-16 h-16"></FaUser>
