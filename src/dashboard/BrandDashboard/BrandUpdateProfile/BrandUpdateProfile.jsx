@@ -10,6 +10,7 @@ import UpdateBrandStepTwo from "./UpdateBrandStepTwo";
 import UpdateBrandStepThree from "./UpdateBrandStepThree";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const BrandUpdateProfile = () => {
    const { user, setUser } = useAuth();
@@ -19,7 +20,7 @@ const BrandUpdateProfile = () => {
    const [bgImg, setBgImg] = useState({});
 
    const userData = JSON.parse(localStorage.getItem("user"));
-
+   const { register, handleSubmit, reset } = useForm();
    const options = [
       { value: "fitness", label: "Fitness" },
       { value: "healthCare", label: "Health Care" },
@@ -35,7 +36,6 @@ const BrandUpdateProfile = () => {
       { value: "others", label: "Others" },
    ];
 
-   const { register, handleSubmit } = useForm();
    const updateData = (data) => {
       data.brandType = selectedOption?.map((type) => type.value);
       data.logo = logoImg;
@@ -58,20 +58,33 @@ const BrandUpdateProfile = () => {
          formData.append(key, data[key]);
       }
       formData.append("id", user.data._id);
+      Swal.fire({
+         title: "Are you sure?",
+         text: "Your provided all data are correct?",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Update!",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axios
+               .put(`https://sponskart-hkgd.onrender.com/brand/update`, formData, {
+                  headers: {
+                     "Content-Type": "multipart/form-data",
+                  },
+               })
+               .then((res) => {
+                  console.log(res.data.data);
+                  userData.data = res.data.data;
+                  setUser(userData);
+                  localStorage.setItem("user", JSON.stringify(userData));
+                  reset();
+               })
+               .catch((error) => console.log(error));
+         }
+      });
 
-      axios
-         .put(`https://sponskart-hkgd.onrender.com/brand/update`, formData, {
-            headers: {
-               "Content-Type": "multipart/form-data",
-            },
-         })
-         .then((res) => {
-            console.log(res.data.data);
-            userData.data = res.data.data;
-            setUser(userData);
-            localStorage.setItem("user", JSON.stringify(userData));
-         })
-         .catch((error) => console.log(error));
       console.log(data, user);
    };
 

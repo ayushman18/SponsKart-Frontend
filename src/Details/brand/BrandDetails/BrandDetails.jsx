@@ -19,9 +19,9 @@ const BrandDetails = () => {
             alt="Background Image"
             className="h-64 object-cover w-full mb-5 shadow-xl"
          />
-         <div className="container mx-auto grid grid-cols-3 gap-6">
-            <div>
-               <div className="text-center py-8 border-b border-[#5252526E]">
+         <div className="container mx-auto grid lg:grid-cols-3 gap-6">
+            <div className="order-2 lg:order-1">
+               <div className="text-center hidden lg:block py-8 border-b border-[#5252526E]">
                   <img
                      src={`https://sponskart-hkgd.onrender.com/${data.logo}`}
                      alt={data.brandName}
@@ -93,7 +93,7 @@ const BrandDetails = () => {
                   ></textarea>
                </div>
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 order-1 lg:order-2">
                <div className="text-xl mt-9">
                   <p>About “{data.brandName}”</p>
                   <p>{data.shortDescription || ""}</p>

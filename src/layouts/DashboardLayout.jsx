@@ -11,8 +11,8 @@ const DashboardLayout = () => {
    const number = Math.round(percent / (100 / 8));
 
    return (
-      <section className="bg-gray-900">
-         <div className="grid lg:grid-cols-3">
+      <section className="bg-base-300">
+         <div className="grid lg:grid-cols-3 justify-center container mx-auto">
             <div className="relative">
                <div className="drawer lg:drawer-open z-50">
                   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -36,17 +36,17 @@ const DashboardLayout = () => {
                <DashboardTopBar></DashboardTopBar>
                <div className="my-8">
                   <div className="mb-4">
-                     <h2 className="text-xl text-white">Profile Updated</h2>
+                     <h2 className="text-xl">Profile Updated</h2>
                      <div className="flex flex-wrap gap-2 items-center text-xl">
                         {arr.map((element) => (
                            <div
                               key={element}
                               className={`h-4 w-20 ${
-                                 element <= number ? "bg-[#B9DE6A]" : "bg-white"
+                                 element <= number ? "bg-[#B9DE6A]" : "bg-black"
                               } rounded-full`}
                            ></div>
                         ))}
-                        <h2 className="text-white">{Math.round(percent)}%</h2>
+                        <h2 className="text-black">{Math.round(percent)}%</h2>
                      </div>
                   </div>
                   <Outlet></Outlet>

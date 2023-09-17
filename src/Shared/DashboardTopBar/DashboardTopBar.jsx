@@ -48,7 +48,7 @@ const DashboardTopBar = () => {
                      ? user.data.brandName
                      : user.data.firstname + " " + user.data.lastname}
                </p>
-               <p>{user.data.email}</p>
+               <p>{user.data.location},India</p>
             </div>
          </div>
          <div className="flex-grow flex justify-between flex-col md:flex-row gap-4 items-center pl-4">

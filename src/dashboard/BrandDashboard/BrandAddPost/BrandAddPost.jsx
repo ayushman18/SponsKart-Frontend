@@ -124,12 +124,12 @@ const BrandAddPost = () => {
 
    return (
       <div>
-         <h2 className="text-white text-2xl text-center">Add post</h2>
+         <h2 className="text-black text-2xl text-center">Add post</h2>
          <form onSubmit={handleSubmit(updatePost)}>
             <div className="grid md:grid-cols-2 gap-6 justify-center items-start">
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Post For</span>
+                     <span className="label-text text-black text-base">Post For</span>
                   </label>
                   <select
                      {...register("postfor")}
@@ -144,7 +144,7 @@ const BrandAddPost = () => {
                </div>
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Do you want to</span>
+                     <span className="label-text text-black text-base">Do you want to</span>
                   </label>
                   <select
                      {...register("payType")}
@@ -161,7 +161,7 @@ const BrandAddPost = () => {
 
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Describe your giveaway</span>
+                     <span className="label-text text-black text-base">Describe your giveaway</span>
                   </label>
                   <textarea
                      type="text"
@@ -176,7 +176,7 @@ const BrandAddPost = () => {
                   <>
                      <div>
                         <label className="label">
-                           <span className="label-text text-white text-base">Enter the pricing</span>
+                           <span className="label-text text-black text-base">Enter the pricing</span>
                         </label>
                         <input
                            type="number"
@@ -188,7 +188,7 @@ const BrandAddPost = () => {
                      </div>
                      <div>
                         <label className="label">
-                           <span className="label-text text-white text-base">Select Target Audience</span>
+                           <span className="label-text text-black text-base">Select Target Audience</span>
                         </label>
                         <select
                            {...register("targetAudience")}
@@ -204,7 +204,7 @@ const BrandAddPost = () => {
                )}
                {/* <div className="w-[300px]">
                   <label className="label">
-                     <span className="label-text text-white text-base">Select The Platform</span>
+                     <span className="label-text text-black text-base">Select The Platform</span>
                   </label>
                   <div className="collapse collapse-arrow bg-white">
                      <input type="checkbox" name="my-accordion-2" />
@@ -241,7 +241,7 @@ const BrandAddPost = () => {
                </div> */}
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Select The Platforms</span>
+                     <span className="label-text text-black text-base">Select The Platforms</span>
                   </label>
                   <Select
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
@@ -256,7 +256,7 @@ const BrandAddPost = () => {
 
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Minimum Followers</span>
+                     <span className="label-text text-black text-base">Minimum Followers</span>
                   </label>
                   <input
                      type="number"
@@ -267,7 +267,7 @@ const BrandAddPost = () => {
                </div>
                {/* <div className="w-[300px]">
                   <label className="label">
-                     <span className="label-text text-white text-base">
+                     <span className="label-text text-black text-base">
                         Choose Catergories for your product
                      </span>
                   </label>
@@ -330,7 +330,7 @@ const BrandAddPost = () => {
                </div> */}
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">
+                     <span className="label-text text-black text-base">
                         Choose Categories for your product
                      </span>
                   </label>
@@ -346,7 +346,7 @@ const BrandAddPost = () => {
                </div>
                <div>
                   <label className="label">
-                     <span className="label-text text-white text-base">Choose Location</span>
+                     <span className="label-text text-black text-base">Choose Location</span>
                   </label>
                   <select
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "

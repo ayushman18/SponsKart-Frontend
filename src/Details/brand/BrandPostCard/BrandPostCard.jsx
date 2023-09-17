@@ -1,4 +1,6 @@
-import { FaClock } from "react-icons/fa";
+import moment from "moment/moment";
+import { FaClock, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
+import { BiMaleFemale } from "react-icons/bi";
 import { Link } from "react-router-dom";
 // import { FcClock } from "react-icons/fc";
 
@@ -6,7 +8,7 @@ const BrandPostCard = ({ data }) => {
    return (
       <>
          <div
-            className="max-w-[750px] flex p-8 rounded-lg my-10 custom-shadow"
+            className="max-w-[750px] flex items-center p-8 rounded-lg my-10 custom-shadow"
             // style={{ boxShadow: "" }}
          >
             <div className="w-3/4">
@@ -45,12 +47,23 @@ const BrandPostCard = ({ data }) => {
             </div>
             <div className="divider divider-horizontal before:bg-gray-400 after:bg-gray-400"></div>
             <div>
-               <h2 className="flex gap-4 items-center">
-                  <FaClock></FaClock> 3months
-               </h2>
-               <p>Lorem ipsum dolor sit amet.</p>
-               <p>Lorem ipsum dolor sit amet.</p>
-               <p>Lorem ipsum dolor sit amet.</p>
+               <h3 className="text-lg text-red-500">
+                  {data?.postFor === "creator" ? "Creators" : "Organizer"} Need
+               </h3>
+               <p className="flex gap-2 items-center my-3">
+                  <FaClock className="text-xl text-orange-400"></FaClock>{" "}
+                  {moment("20230620", "YYYYMMDD").fromNow()}
+               </p>
+               <p className="flex gap-2 items-center my-3">
+                  <FaMapMarkerAlt className="text-xl text-blue-500"></FaMapMarkerAlt> <span>Location</span>
+               </p>
+               <p className="flex gap-2 items-center my-3">
+                  <FaUsers className="text-xl text-purple-500"></FaUsers> <span>20K Followers</span>
+               </p>
+               <p className="flex gap-2 items-center my-3">
+                  <BiMaleFemale className="text-xl text-red-500"></BiMaleFemale> <span>Any Audience</span>
+               </p>
+
                <Link to={`/post/brand/${data?._id || "id"}`}>
                   <button className="btn btn-success rounded-full btn-sm text-white hover:text-black">
                      View Post
