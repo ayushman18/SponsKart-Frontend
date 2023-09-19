@@ -1,45 +1,43 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../home/Home/Home";
-import Register from "../register/Register/Register";
-import RegisterLayout from "../layouts/RegisterLayout";
-import ContentCreatorRegister from "../register/ContentCreatorRegister/ContentCreatorRegister";
-import OrganizerRegister from "../register/OrganizerRegister/OrganizerRegister";
-import Login from "../login/Login/Login";
-import ForgetPass from "../login/ForgetPass/ForgetPass";
-import Search from "../search/Search/Search";
-import ResetPass from "../login/ResetPass/ResetPass";
 import DashboardLayout from "../layouts/DashboardLayout";
+import RegisterLayout from "../layouts/RegisterLayout";
+import Home from "../pages/home/Home/Home";
+import Search from "../pages/search/Search/Search";
+import BrandDetails from "../pages/Details/brand/BrandDetails/BrandDetails";
+import OrganizerDetails from "../pages/Details/organizer/OrganizerDetails/OrganizerDetails";
+import CreatorDetails from "../pages/Details/creator/CreatorDetails/CreatorDetails";
+import BrandPostDetails from "../pages/Details/brand/BrandPostDetails/BrandPostDetails";
+import Register from "../pages/register/Register/Register";
+import ContentCreatorRegister from "../pages/register/ContentCreatorRegister/ContentCreatorRegister";
+import BrandRegister from "../pages/register/BrandRegister/BrandRegister";
+import OrganizerRegister from "../pages/register/OrganizerRegister/OrganizerRegister";
+import Login from "../pages/login/Login/Login";
+import ForgetPass from "../pages/login/ForgetPass/ForgetPass";
+import ResetPass from "../pages/login/ResetPass/ResetPass";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import HowItWorks from "../pages/HowItWorks/HowItWorks";
+import TrustAndSafety from "../pages/TrustAndSafety/TrustAndSafety";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
-import BrandRegister from "../register/BrandRegister/BrandRegister";
-import ContactUs from "../ContactUs/ContactUs";
-import CreatorProfile from "../dashboard/ContentCreatorDashboard/CreatorProfile/CreatorProfile";
-import CreatorUpdateProfile from "../dashboard/ContentCreatorDashboard/CreatorUpdateProfile/CreatorUpdateProfile";
-import BrandAddPost from "../dashboard/BrandDashboard/BrandAddPost/BrandAddPost";
-import BrandManagePost from "../dashboard/BrandDashboard/BrandManagePost/BrandManagePost";
-import CreatorAddPost from "../dashboard/ContentCreatorDashboard/CreatorAddPost/CreatorAddPost";
-import CreatorManagePost from "../dashboard/ContentCreatorDashboard/CreatorManagePost/CreatorManagePost";
-import OrganizerProfile from "../dashboard/OrganizerDashboard/OrganizerProfile/OrganizerProfile";
-import OrganizerUpdateProfile from "../dashboard/OrganizerDashboard/OrganizerUpdateProfile/OrganizerUpdateProfile";
-import OrganizerAddPost from "../dashboard/OrganizerDashboard/OrganizerAddPost/OrganizerAddPost";
-import OrganizerManagePost from "../dashboard/OrganizerDashboard/OrganizerManagePost/OrganizerManagePost";
-import BrandUpdateProfile from "../dashboard/BrandDashboard/BrandUpdateProfile/BrandUpdateProfile";
-import BrandDetails from "../Details/brand/BrandDetails/BrandDetails";
-import OrganizerDetails from "../Details/organizer/OrganizerDetails/OrganizerDetails";
-import CreatorDetails from "../Details/creator/CreatorDetails/CreatorDetails";
-import ChatBox from "../dashboard/ChatBox/ChatBox";
-import MessageBox from "../dashboard/ChatBox/MessageBox";
-import MessageCard from "../dashboard/ChatBox/MessageCard";
-import MobileChatbox from "../dashboard/ChatBox/MobileChatbox";
 import CreatorRoute from "./PrivateRoute/CreatorRoute";
 import OrganizerRoute from "./PrivateRoute/OrganizerRoute";
 import BrandRoute from "./PrivateRoute/BrandRoute";
-import AboutUs from "../AboutUs/AboutUs";
-import HowItWorks from "../HowItWorks/HowItWorks";
-import TrustAndSafety from "../TrustAndSafety/TrustAndSafety";
-import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
-import TermsAndConditions from "../TermsAndConditions/TermsAndConditions";
-import BrandPostDetails from "../Details/brand/BrandPostDetails/BrandPostDetails";
+import CreatorUpdateProfile from "../pages/dashboard/ContentCreatorDashboard/CreatorUpdateProfile/CreatorUpdateProfile";
+import CreatorAddPost from "../pages/dashboard/ContentCreatorDashboard/CreatorAddPost/CreatorAddPost";
+import CreatorManagePost from "../pages/dashboard/ContentCreatorDashboard/CreatorManagePost/CreatorManagePost";
+import OrganizerUpdateProfile from "../pages/dashboard/OrganizerDashboard/OrganizerUpdateProfile/OrganizerUpdateProfile";
+import OrganizerAddPost from "../pages/dashboard/OrganizerDashboard/OrganizerAddPost/OrganizerAddPost";
+import OrganizerManagePost from "../pages/dashboard/OrganizerDashboard/OrganizerManagePost/OrganizerManagePost";
+import BrandUpdateProfile from "../pages/dashboard/BrandDashboard/BrandUpdateProfile/BrandUpdateProfile";
+import BrandAddPost from "../pages/dashboard/BrandDashboard/BrandAddPost/BrandAddPost";
+import BrandManagePost from "../pages/dashboard/BrandDashboard/BrandManagePost/BrandManagePost";
+import ChatBox from "../pages/dashboard/ChatBox/ChatBox";
+import MessageBox from "../pages/dashboard/ChatBox/MessageBox";
+import MobileChatbox from "../pages/dashboard/ChatBox/MobileChatbox";
+import MessageCard from "../pages/dashboard/ChatBox/MessageCard";
 
 export const router = createBrowserRouter([
    {
@@ -71,7 +69,6 @@ export const router = createBrowserRouter([
          {
             path: "/post/brand/:id",
             element: <BrandPostDetails></BrandPostDetails>,
-            // loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/creator/get/${params.id}`),
          },
       ],
    },
@@ -156,10 +153,6 @@ export const router = createBrowserRouter([
             ),
             children: [
                {
-                  path: "profile",
-                  element: <CreatorProfile></CreatorProfile>,
-               },
-               {
                   path: "updateProfile",
                   element: <CreatorUpdateProfile></CreatorUpdateProfile>,
                },
@@ -181,10 +174,6 @@ export const router = createBrowserRouter([
                </OrganizerRoute>
             ),
             children: [
-               {
-                  path: "profile",
-                  element: <OrganizerProfile></OrganizerProfile>,
-               },
                {
                   path: "updateProfile",
                   element: <OrganizerUpdateProfile></OrganizerUpdateProfile>,

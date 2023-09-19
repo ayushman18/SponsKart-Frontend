@@ -1,10 +1,11 @@
 import { FaCalendarAlt, FaRegBell, FaSearch, FaUser } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
+
 import moment from "moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useState } from "react";
 import { useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const DashboardTopBar = () => {
    const navigate = useNavigate();

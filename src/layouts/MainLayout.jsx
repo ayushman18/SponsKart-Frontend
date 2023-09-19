@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Banner from "../home/Banner/Banner";
-import Navbar from "../home/Navbar/Navbar";
+import Navbar from "../pages/home/Navbar/Navbar";
+import Banner from "../pages/home/Banner/Banner";
 
 const MainLayout = () => {
    const location = useLocation();

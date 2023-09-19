@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
    const loggedUser = JSON.parse(localStorage.getItem("user"));
    const [user, setUser] = useState(loggedUser || null);
-   console.log(user);
+   // console.log(user);
 
    const logOut = () => {
       localStorage.removeItem("user");

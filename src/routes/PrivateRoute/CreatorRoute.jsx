@@ -1,6 +1,6 @@
-import useAuth from "../../hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const CreatorRoute = ({ children }) => {
    const { user } = useAuth();

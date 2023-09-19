@@ -1,6 +1,6 @@
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
 
-const ManagePostCard = () => {
+const ManagePostCard = ({ deletePost }) => {
    return (
       <div className="card card-side bg-base-100 items-center shadow-xl">
          <div className="card-body">
@@ -13,7 +13,7 @@ const ManagePostCard = () => {
             <button className="btn join-item  btn-warning">
                <FaEdit className="text-xl text-white"></FaEdit>
             </button>
-            <button className="btn join-item btn-error text-white">
+            <button className="btn join-item btn-error text-white" onClick={deletePost}>
                <FaTrashAlt className="text-xl"></FaTrashAlt>
             </button>
             <button className="btn join-item btn-info">
