@@ -185,7 +185,7 @@ const BrandAddPost = () => {
                            placeholder="&#x20B9; Rupee"
                            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
                            required
-                           {...register("price")}
+                           {...register("pricing")}
                         />
                      </div>
                      <div>

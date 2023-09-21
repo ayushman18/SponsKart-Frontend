@@ -11,13 +11,14 @@ const BrandPostCard = ({ data }) => {
             className="max-w-[750px] flex items-center p-8 rounded-lg my-10 custom-shadow"
             // style={{ boxShadow: "" }}
          >
-            <div className="w-3/4">
+            <div className="w-2/3">
                <p className="text-gray-600 text-sm">
                   {data?.payType === "pay" ? "Pay For the product" : "Giveaway a Product"}
                </p>
                <h2 className="text-lg font-semibold">
                   {data?.postfor === "creator" ? "Post For Creators" : "Post For Organizers"}
                </h2>
+               {data.pricing && <p className="text-gray-600 text-sm mb-4">Price: {data.pricing} Rupi</p>}
                <p className="text-gray-700">{data.describe?.slice(0, 300) + "..."}</p>
                <div className="flex gap-4 my-2 items-center flex-wrap">
                   <p className="text-sm text-gray-600">Categories:</p>
