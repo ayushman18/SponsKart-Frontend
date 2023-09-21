@@ -70,7 +70,7 @@ const Search = () => {
             <div className="md:col-span-3">
                <button className="btn rounded-full normal-case">Sort A-Z</button>
 
-               <div className="my-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4 mx-4 lg:mx-0 md:justify-around items-center">
+               <div className="my-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6 mx-4 lg:mx-0 md:justify-between items-center">
                   {result?.length ? (
                      result.map((data) => (
                         <div key={data._id}>

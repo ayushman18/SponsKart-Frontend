@@ -15,8 +15,9 @@ const Navbar = () => {
 
    const handelStatus = () => {
       setOnline(!online);
+
       axios
-         .post("https://sponskart-hkgd.onrender.com/status", { status: "online" })
+         .post("https://sponskart-hkgd.onrender.com/status", { status: !online ? "online" : "offline" })
          .then((res) => {
             console.log(res.data);
          })

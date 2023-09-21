@@ -90,6 +90,8 @@ const BrandAddPost = () => {
          data.price = parseInt(data.price);
          delete data["description"];
       }
+      data.date = new Date();
+      data.brandId = user.user.brand;
       data.platform = platforms?.map((type) => type.value);
       data.categories = types?.map((type) => type.value);
       data.miniFollower = parseInt(data.miniFollower || 0);
@@ -119,7 +121,7 @@ const BrandAddPost = () => {
          }
       });
 
-      // console.log(data);
+      console.log(data);
    };
 
    return (

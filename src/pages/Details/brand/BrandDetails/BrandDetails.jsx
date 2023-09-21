@@ -19,12 +19,12 @@ const BrandDetails = () => {
          const res = await axios.get(
             `https://sponskart-hkgd.onrender.com/brand/post/all?brandId=${data._id}`
          );
-         console.log(res.data.data);
+         // console.log(res.data.data);
          return res.data.data;
       },
    });
    useEffect(() => {
-      console.log(data);
+      // console.log(data);
       console.log(posts);
    }, [data, posts]);
    return (
@@ -127,7 +127,7 @@ const BrandDetails = () => {
                      <BrandPostCard key={post._id} data={post}></BrandPostCard>
                   ))}
                </div>
-               <BrandPostCard></BrandPostCard>
+
                {/* todo:make dynamic */}
             </div>
          </div>

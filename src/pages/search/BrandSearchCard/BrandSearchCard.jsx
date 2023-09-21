@@ -16,7 +16,11 @@ const BrandSearchCard = ({ data }) => {
             <div className="-mt-24">
                {data?.logo ? (
                   <div className="avatar relative">
-                     <div className={`w-4 h-4 rounded-full bg-yellow-500 absolute -right-1 -top-1`}></div>
+                     <div
+                        className={`w-4 h-4 rounded-full ${
+                           data.status === "online" ? "bg-green-500" : "bg-yellow-500"
+                        }  absolute -right-1 -top-1`}
+                     ></div>
                      <div className="w-24 border-0 rounded-xl">
                         <img src={`https://sponskart-hkgd.onrender.com/${data?.logo}`} alt="logo" />
                      </div>
@@ -40,10 +44,10 @@ const BrandSearchCard = ({ data }) => {
             <Link to={`/brand/${data?._id}`}>
                <h2 className="text-4xl hover:text-orange-400">{data?.brandName}</h2>
             </Link>
-            <div className="text-black flex justify-around items-center mt-5">
-               <Link className=" hover:text-white">View</Link>
-               <div className="h-6 w-[2px] bg-gray-500"></div>
-               <Link className=" hover:text-white">Job Profile</Link>
+            <div className="text-black flex gap-4 items-center mt-5 mx-auto">
+               <Link to={`/brand/${data?._id}`} className=" hover:text-white">
+                  View
+               </Link>
                <div className="h-6 w-[2px] bg-gray-500"></div>{" "}
                <Link className=" hover:text-white">Follow</Link>
             </div>
