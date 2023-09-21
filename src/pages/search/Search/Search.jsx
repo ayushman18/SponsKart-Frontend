@@ -8,6 +8,7 @@ import OrganizerSearchCard from "../OrganizerSearchCard/OrganizerSearchCard";
 import OrganizerFilter from "../Filters/OrganizerFilter";
 import BrandFilter from "../Filters/BrandFilter";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
@@ -39,6 +40,10 @@ const Search = () => {
             toast.error("Please refresh we are having an issue.");
          });
    };
+
+   useEffect(() => {
+      console.log(result);
+   }, [result]);
 
    if (isLoading) {
       return (

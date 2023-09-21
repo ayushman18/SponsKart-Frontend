@@ -4,7 +4,7 @@ import ManagePostCard from "../../../../components/ManagePostCard/ManagePostCard
 const BrandManagePost = () => {
    const deletePost = (id) => {
       axios
-         .delete(`https://sponskart-hkgd.onrender.com/brand/deletepost?postId=65095e6c544f94d521cbc8e1`)
+         .delete(`https://sponskart-hkgd.onrender.com/brand/deletepost?postId=${id}`)
          .then((res) => console.log(res.data))
          .catch((err) => console.log(err));
    };

@@ -17,14 +17,15 @@ const BrandDetails = () => {
       queryKey: ["posts"],
       queryFn: async () => {
          const res = await axios.get(
-            `https://sponskart-hkgd.onrender.com/brand/post/all?brandId=64ffe3e9cba1e497db4e05c1`
+            `https://sponskart-hkgd.onrender.com/brand/post/all?brandId=${data._id}`
          );
+         console.log(res.data.data);
          return res.data.data;
       },
    });
    useEffect(() => {
-      console.log(posts);
       console.log(data);
+      console.log(posts);
    }, [data, posts]);
    return (
       <section className="bg-white">
@@ -60,31 +61,39 @@ const BrandDetails = () => {
                <div className="py-8 border-b border-[#5252526E]">
                   <p className="text-xl text-center my-8">Follow Our Company at: </p>
                   <div>
-                     <Link to={data?.facebook || ""}>
-                        <div className="flex gap-4 items-center mb-6">
-                           <img src={facebook} alt="" className="w-14 h-14" />
-                           <p>facebook page name</p>
-                        </div>
-                     </Link>
-                     <Link to={data?.twitter || ""}>
-                        <div className="flex gap-4 items-center mb-6">
-                           <img src={twitter} alt="" className="w-14 h-14" />
-                           <p>twitter page name</p>
-                        </div>
-                     </Link>
-                     <Link to={data?.linkedin || ""}>
-                        <div className="flex gap-4 items-center mb-6">
-                           <img src={linkedin} alt="" className="w-14 h-14" />
-                           <p>linkedin page name</p>
-                        </div>
-                     </Link>
+                     {data.facebook && (
+                        <Link to={data?.facebook}>
+                           <div className="flex gap-4 items-center mb-6">
+                              <img src={facebook} alt="" className="w-14 h-14" />
+                              <p className="text-lg">Facebook Profile</p>
+                           </div>
+                        </Link>
+                     )}
+                     {data.twitter && (
+                        <Link to={data?.twitter || ""}>
+                           <div className="flex gap-4 items-center mb-6">
+                              <img src={twitter} alt="" className="w-14 h-14" />
+                              <p className="text-lg">Twitter Profile</p>
+                           </div>
+                        </Link>
+                     )}
+                     {data.linkedin && (
+                        <Link to={data?.linkedin || ""}>
+                           <div className="flex gap-4 items-center mb-6">
+                              <img src={linkedin} alt="" className="w-14 h-14" />
+                              <p className="text-lg">Linkedin Profile</p>
+                           </div>
+                        </Link>
+                     )}
 
-                     <Link to={data?.instagram || ""}>
-                        <div className="flex gap-4 items-center mb-6">
-                           <img src={instagram} alt="" className="w-14 h-14" />
-                           <p>instagram page name</p>
-                        </div>
-                     </Link>
+                     {data.instagram && (
+                        <Link to={data?.instagram || ""}>
+                           <div className="flex gap-4 items-center mb-6">
+                              <img src={instagram} alt="" className="w-14 h-14" />
+                              <p className="text-lg">Instagram Profile</p>
+                           </div>
+                        </Link>
+                     )}
                   </div>
                   <div className="text-center">
                      <Rating style={{ maxWidth: 120 }} value={3} readOnly className="mx-auto" />
@@ -114,9 +123,11 @@ const BrandDetails = () => {
                   <p>{data.longDescriptions || "User didn't update his profile yet."}</p>
                </div>
                <div>
-                  <BrandPostCard></BrandPostCard>
+                  {posts?.map((post) => (
+                     <BrandPostCard key={post._id} data={post}></BrandPostCard>
+                  ))}
                </div>
-
+               <BrandPostCard></BrandPostCard>
                {/* todo:make dynamic */}
             </div>
          </div>

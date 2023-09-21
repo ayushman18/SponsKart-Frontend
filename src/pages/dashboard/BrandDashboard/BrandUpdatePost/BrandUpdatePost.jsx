@@ -5,7 +5,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 
-const BrandAddPost = () => {
+const BrandUpdatePost = () => {
    const { user } = useAuth();
    const { register, handleSubmit, reset } = useForm();
    const [method, setMethod] = useState("giveaway");
@@ -369,4 +369,4 @@ const BrandAddPost = () => {
    );
 };
 
-export default BrandAddPost;
+export default BrandUpdatePost;

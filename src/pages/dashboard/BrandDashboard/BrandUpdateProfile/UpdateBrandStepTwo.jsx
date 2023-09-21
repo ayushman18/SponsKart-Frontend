@@ -35,24 +35,58 @@ const UpdateBrandStepTwo = ({ register }) => {
                />
             </div>
          </div>
-         <input
-            type="text"
-            placeholder="Twitter Profile"
-            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("twitter")}
-         />
-         <input
-            type="text"
-            placeholder="LinkedIn Profile"
-            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("linkedin")}
-         />
-         <input
-            type="text"
-            placeholder="Subscribers/Followers"
-            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("follower")}
-         />
+         <div>
+            <input
+               type="text"
+               placeholder="Twitter Profile"
+               className="input input-bordered min-w-[300px] w-full input-style px-4 py-8 mb-5"
+               {...register("twitter")}
+            />
+
+            <div className="flex gap-2 items-center justify-between">
+               <p>Twitter Followers:</p>
+               <input
+                  type="text"
+                  placeholder="Followers"
+                  className="input input-bordered max-w-[300px] input-style px-4 py-8"
+                  {...register("twitterFollowers")}
+               />
+            </div>
+         </div>
+         <div>
+            <input
+               type="text"
+               placeholder="LinkedIn Profile"
+               className="input input-bordered min-w-[300px] w-full input-style px-4 py-8 mb-5"
+               {...register("linkedin")}
+            />
+            <div className="flex gap-2 items-center justify-between">
+               <p>LinkedIn Followers:</p>
+               <input
+                  type="text"
+                  placeholder="Followers"
+                  className="input input-bordered max-w-[300px] input-style px-4 py-8"
+                  {...register("linkedinFollowers")}
+               />
+            </div>
+         </div>
+         <div>
+            <input
+               type="text"
+               placeholder="Youtube Profile"
+               className="input input-bordered min-w-[300px] w-full input-style px-4 py-8 mb-5"
+               {...register("follower")}
+            />
+            <div className="flex gap-2 items-center justify-between">
+               <p>Youtube Followers:</p>
+               <input
+                  type="text"
+                  placeholder="Followers"
+                  className="input input-bordered max-w-[300px] input-style px-4 py-8"
+                  {...register("youtubeFollowers")}
+               />
+            </div>
+         </div>
          <input
             type="text"
             placeholder="Website Link"
