@@ -7,7 +7,7 @@ const ForgetPass = () => {
    const onSubmit = (data) => {
       // console.log(data);
       axios
-         .post("https://sponskart-hkgd.onrender.com/forgot")
+         .post("https://sponskart-hkgd.onrender.com/forgot", data)
          .then((res) => console.log(res.data))
          .catch((err) => console.log(err));
    };
