@@ -1,10 +1,18 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router-dom";
 
 const ResetPass = () => {
    const { register, handleSubmit } = useForm();
-
+   const [searchParams] = useSearchParams();
+   const token = searchParams.get("token");
    const onSubmit = (data) => {
-      // console.log(data);
+      const password = data.confirm_password;
+      axios
+         .post(`https://sponskart-hkgd.onrender.com/resetpassword?token=${token}`, password)
+         .then((res) => console.log(res.data))
+         .catch((err) => console.log(err));
+      console.log(data);
    };
    return (
       <div>

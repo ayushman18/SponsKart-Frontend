@@ -1,24 +1,32 @@
+import moment from "moment";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const ManagePostCard = ({ deletePost }) => {
+const ManagePostCard = ({ deletePost, post }) => {
+   const { postfor, payType, date, _id } = post;
+
    return (
       <div className="card card-side bg-base-100 items-center shadow-xl">
          <div className="card-body">
-            <h2 className="card-title">Post For Content Creator</h2>
-            <p>Want to giveaway.</p>
-            <p>Price/Descriptions</p>
-            <p>Date</p>
+            <h2 className="card-title">
+               Post for {postfor === "creator" ? "Content Creator" : "Event Organizer"}
+            </h2>
+            <p>Pay Type: {payType === "pay" ? "Paid Post" : "Giveaway Post"}</p>
+
+            <p>Date: {moment(date).fromNow()}</p>
          </div>
-         <div className="join join-vertical rounded-none h-full">
+         <div className="join join-vertical px-3 rounded-lg h-full">
             <button className="btn join-item  btn-warning">
                <FaEdit className="text-xl text-white"></FaEdit>
             </button>
-            <button className="btn join-item btn-error text-white" onClick={deletePost}>
+            <button className="btn join-item btn-error text-white" onClick={() => deletePost(_id)}>
                <FaTrashAlt className="text-xl"></FaTrashAlt>
             </button>
-            <button className="btn join-item btn-info">
-               <FaEye className="text-xl"></FaEye>
-            </button>
+            <Link to={`/post/brand/${post._id}`}>
+               <button className="btn join-item btn-info">
+                  <FaEye className="text-xl"></FaEye>
+               </button>
+            </Link>
          </div>
       </div>
    );
