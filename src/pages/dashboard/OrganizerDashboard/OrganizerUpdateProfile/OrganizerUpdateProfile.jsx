@@ -6,36 +6,103 @@ import UpdateOrganizerStepTwo from "./UpdateOrganizerStepTwo";
 import UpdateOrganizerStepThree from "./UpdateOrganizerStepThree";
 import axios from "axios";
 import { useState } from "react";
+import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const OrganizerUpdateProfile = () => {
+   const { user, setUser } = useAuth();
    const { step, setStep } = useStep();
+   const [selectedOption, setSelectedOption] = useState([]);
+   const [selectedPlatform, setSelectedPlatform] = useState([]);
+   const [selectedBudget, setSelectedBudget] = useState([]);
+   const [selectedFootfall, setSelectedFootfall] = useState([]);
    const [logoImg, setLogoImg] = useState({});
    const [bgImg, setBgImg] = useState({});
-   const { register, handleSubmit } = useForm();
+
+   const userData = JSON.parse(localStorage.getItem("user"));
+   const { register, handleSubmit, reset } = useForm();
 
    const updateData = (data) => {
+      data.category = selectedOption;
+      data.footfall = selectedFootfall;
+      data.budget = selectedBudget;
+      data.platforms = selectedPlatform;
       data.logo = logoImg;
-      data.backgroundImg = bgImg;
-      // console.log(data);
-      axios
-         .put(`https://sponskart-hkgd.onrender.com/organizer/update`, data)
-         .then((res) => {
-            // console.log(res);
-         })
-         .catch((error) => console.log(error));
+      data.backgroundImage = bgImg;
+      console.log(data);
+      // for (const key in data) {
+      //    if (data[key] === "") {
+      //       delete data[key];
+      //    } else if (typeof data[key] === "object" && !Array.isArray(data[key])) {
+      //       if (!data[key].name || !data[key].value) {
+      //          delete data[key];
+      //       }
+      //    }
+      // }
+      //data._id
+      // https://sponskart-hkgd.onrender.com/
+      console.log(data);
+      const formData = new FormData();
+
+      for (const key in data) {
+         formData.append(key, data[key]);
+      }
+      formData.append("id", user.data._id);
+      Swal.fire({
+         title: "Are you sure?",
+         text: "Your provided all data are correct?",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Update!",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axios
+               .put(`https://sponskart-hkgd.onrender.com/organizer/update`, formData, {
+                  headers: {
+                     "Content-Type": "multipart/form-data",
+                  },
+               })
+               .then((res) => {
+                  // console.log(res.data.data);
+                  userData.data = res.data.data;
+                  setUser(userData);
+                  localStorage.setItem("user", JSON.stringify(userData));
+                  reset();
+               })
+               .catch((error) => console.log(error));
+         }
+      });
    };
    return (
       <form onSubmit={handleSubmit(updateData)}>
-         <Steps steps={["Basic Details", "Social Links", "Images"]}></Steps>
+         <Steps steps={["Basic Details", "Additional", "Images"]}></Steps>
 
          {step === 1 ? (
-            <UpdateOrganizerStepOne register={register}></UpdateOrganizerStepOne>
+            <UpdateOrganizerStepOne
+               register={register}
+               selectedOption={selectedOption}
+               setSelectedOption={setSelectedOption}
+            ></UpdateOrganizerStepOne>
          ) : step === 2 ? (
-            <UpdateOrganizerStepTwo register={register}> </UpdateOrganizerStepTwo>
-         ) : step === 3 ? (
-            <UpdateOrganizerStepThree register={register} setLogoImg={setLogoImg} setBgImg={setBgImg}>
+            <UpdateOrganizerStepTwo
+               register={register}
+               setSelectedPlatform={setSelectedPlatform}
+               selectedPlatform={selectedPlatform}
+               setSelectedBudget={setSelectedBudget}
+               selectedBudget={selectedBudget}
+               setSelectedFootfall={setSelectedFootfall}
+               selectedFootfall={selectedFootfall}
+            >
                {" "}
-            </UpdateOrganizerStepThree>
+            </UpdateOrganizerStepTwo>
+         ) : step === 3 ? (
+            <UpdateOrganizerStepThree
+               register={register}
+               setLogoImg={setLogoImg}
+               setBgImg={setBgImg}
+            ></UpdateOrganizerStepThree>
          ) : (
             <>
                <p>Please Reload The Page</p>

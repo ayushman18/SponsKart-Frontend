@@ -197,16 +197,20 @@ const OrganizerFilter = ({ handelFilterSearch }) => {
                <div className="collapse-content">
                   <div className="form-control">
                      <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={footfallAdder} defaultValue="facebook" />
-                        <span className="label-text text-base">Option 1</span>
+                        <input type="checkbox" onChange={footfallAdder} defaultValue="under25k" />
+                        <span className="label-text text-base">Under 25000</span>
                      </label>
                      <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={footfallAdder} defaultValue="linkedin" />
-                        <span className="label-text text-base">Option 2</span>
+                        <input type="checkbox" onChange={footfallAdder} defaultValue="25to50k" />
+                        <span className="label-text text-base">25000 - 50000</span>
                      </label>
                      <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={footfallAdder} defaultValue="youtube" />
-                        <span className="label-text text-base">Option 3</span>
+                        <input type="checkbox" onChange={footfallAdder} defaultValue="50to75k" />
+                        <span className="label-text text-base">50000 - 75000</span>
+                     </label>
+                     <label className="cursor-pointer justify-start gap-4 label">
+                        <input type="checkbox" onChange={footfallAdder} defaultValue="75to100k" />
+                        <span className="label-text text-base">75000 - iv000</span>
                      </label>
                   </div>
                </div>
@@ -367,16 +371,20 @@ const OrganizerFilter = ({ handelFilterSearch }) => {
                         <div className="collapse-content">
                            <div className="form-control">
                               <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={footfallAdder} defaultValue="facebook" />
-                                 <span className="label-text text-base">Option 1</span>
+                                 <input type="checkbox" onChange={footfallAdder} defaultValue="under25k" />
+                                 <span className="label-text text-base">Under 25000</span>
                               </label>
                               <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={footfallAdder} defaultValue="linkedin" />
-                                 <span className="label-text text-base">Option 2</span>
+                                 <input type="checkbox" onChange={footfallAdder} defaultValue="25to50k" />
+                                 <span className="label-text text-base">25000 - 50000</span>
                               </label>
                               <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={footfallAdder} defaultValue="youtube" />
-                                 <span className="label-text text-base">Option 3</span>
+                                 <input type="checkbox" onChange={footfallAdder} defaultValue="50to75k" />
+                                 <span className="label-text text-base">50000 - 75000</span>
+                              </label>
+                              <label className="cursor-pointer justify-start gap-4 label">
+                                 <input type="checkbox" onChange={footfallAdder} defaultValue="75to100k" />
+                                 <span className="label-text text-base">75000 - iv000</span>
                               </label>
                            </div>
                         </div>

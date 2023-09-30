@@ -61,6 +61,7 @@ export const router = createBrowserRouter([
          {
             path: "/organizer/:id",
             element: <OrganizerDetails></OrganizerDetails>,
+            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/organizer/get/${params.id}`),
          },
          {
             path: "/creator/:id",
