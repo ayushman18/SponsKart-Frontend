@@ -38,6 +38,7 @@ import ChatBox from "../pages/dashboard/ChatBox/ChatBox";
 import MessageBox from "../pages/dashboard/ChatBox/MessageBox";
 import MobileChatbox from "../pages/dashboard/ChatBox/MobileChatbox";
 import MessageCard from "../pages/dashboard/ChatBox/MessageCard";
+import BrandUpdatePost from "../pages/dashboard/BrandDashboard/BrandUpdatePost/BrandUpdatePost";
 
 export const router = createBrowserRouter([
    {
@@ -208,6 +209,12 @@ export const router = createBrowserRouter([
                {
                   path: "managePost",
                   element: <BrandManagePost></BrandManagePost>,
+               },
+               {
+                  path: "updatePost/:id",
+                  element: <BrandUpdatePost></BrandUpdatePost>,
+                  loader: ({ params }) =>
+                     fetch(`https://sponskart-hkgd.onrender.com/brand/post?postId=${params.id}`),
                },
             ],
          },

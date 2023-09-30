@@ -6,7 +6,7 @@ const CreatorFilter = ({ handelFilterSearch }) => {
    const [types, setTypes] = useState([]);
    const [genders, setGenders] = useState([]);
    const [platforms, setPlatforms] = useState([]);
-   const [languages, setLanguages] = useState([]);
+   const [budget, setBudget] = useState("");
    const [location, setLocation] = useState("");
 
    const indianStates = [
@@ -85,26 +85,18 @@ const CreatorFilter = ({ handelFilterSearch }) => {
       }
    };
 
-   const rangeCounter = (e) => {
+   const followerCounter = (e) => {
       const rangeValue = parseInt(e.target.value);
 
       setRange(rangeValue);
    };
 
-   const languageAdder = (e) => {
-      const language = e.target.value;
-      if (e.target.checked) {
-         const languageArr = [...languages];
-         languageArr.push(language);
-         setLanguages(languageArr);
-      } else {
-         const languageArr = [...languages];
-         languageArr.pop(language);
-         setLanguages(languageArr);
-      }
+   const budgetCounter = (e) => {
+      const rangeValue = e.target.value;
+      setBudget(rangeValue);
    };
 
-   const filter = { range, types, genders, platforms, languages, location };
+   const filter = { follower: range, types, genders, platforms, budget, location };
 
    return (
       <div>
@@ -179,7 +171,7 @@ const CreatorFilter = ({ handelFilterSearch }) => {
                      <input
                         type="number"
                         min="1000"
-                        onChange={rangeCounter}
+                        onChange={followerCounter}
                         className="input input-bordered input-success w-full"
                      />
                      <span className="label-text flex items-center text-base">
@@ -222,22 +214,48 @@ const CreatorFilter = ({ handelFilterSearch }) => {
             </div>
             <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
                <input type="radio" name="my-accordion-2" />
-               <div className="collapse-title bg-[#5252523D] text-xl font-medium">Language</div>
+               <div className="collapse-title bg-[#5252523D] text-xl font-medium">Budget</div>
                <div className="collapse-content">
-                  <div className="form-control">
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={languageAdder} defaultValue="hindi" />
-                        <span className="label-text text-base">Hindi</span>
-                     </label>
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={languageAdder} defaultValue="English" />
-                        <span className="label-text text-base">English</span>
-                     </label>
-                     <label className="cursor-pointer justify-start gap-4 label">
-                        <input type="checkbox" onChange={languageAdder} defaultValue="bangla" />
-                        <span className="label-text text-base">Bangla</span>
-                     </label>
-                  </div>
+                  <label className="cursor-pointer justify-start gap-4 label">
+                     <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio radio-success"
+                        value={"under1k"}
+                        onChange={budgetCounter}
+                     />
+                     <span className="label-text flex items-center text-base">Under 1K</span>
+                  </label>
+                  <label className="cursor-pointer justify-start gap-4 label">
+                     <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio radio-success"
+                        value={"1to5k"}
+                        onChange={budgetCounter}
+                     />
+                     <span className="label-text flex items-center text-base">1K-5K</span>
+                  </label>
+                  <label className="cursor-pointer justify-start gap-4 label">
+                     <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio radio-success"
+                        value={"5to10k"}
+                        onChange={budgetCounter}
+                     />
+                     <span className="label-text flex items-center text-base">5K-10K</span>
+                  </label>
+                  <label className="cursor-pointer justify-start gap-4 label">
+                     <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio radio-success"
+                        value={"moreThen10k"}
+                        onChange={budgetCounter}
+                     />
+                     <span className="label-text flex items-center text-base">More then 10K</span>
+                  </label>
                </div>
             </div>
             <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
@@ -270,7 +288,7 @@ const CreatorFilter = ({ handelFilterSearch }) => {
          </div>
          <div className="drawer drawer-end">
             <input id="filter-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content mb-6 mx-6">
+            <div className="drawer-content md:hidden mb-6 mx-6">
                <label
                   htmlFor="filter-drawer"
                   className="btn btn-ghost bg-gray-100 flex items-center justify-center drawer-button"
@@ -357,7 +375,7 @@ const CreatorFilter = ({ handelFilterSearch }) => {
                               <input
                                  type="number"
                                  min="1000"
-                                 onChange={rangeCounter}
+                                 onChange={followerCounter}
                                  className="input input-bordered input-success w-full"
                               />
                               <span className="label-text text-base flex items-center">
@@ -400,22 +418,48 @@ const CreatorFilter = ({ handelFilterSearch }) => {
                      </div>
                      <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">
                         <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title bg-[#5252523D] text-xl font-medium">Language</div>
+                        <div className="collapse-title bg-[#5252523D] text-xl font-medium">Budget</div>
                         <div className="collapse-content">
-                           <div className="form-control">
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={languageAdder} defaultValue="hindi" />
-                                 <span className="label-text text-base">Hindi</span>
-                              </label>
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={languageAdder} defaultValue="English" />
-                                 <span className="label-text text-base">English</span>
-                              </label>
-                              <label className="cursor-pointer justify-start gap-4 label">
-                                 <input type="checkbox" onChange={languageAdder} defaultValue="bangla" />
-                                 <span className="label-text text-base">Bangla</span>
-                              </label>
-                           </div>
+                           <label className="cursor-pointer justify-start gap-4 label">
+                              <input
+                                 type="radio"
+                                 name="radio-1"
+                                 className="radio radio-success"
+                                 value={"under1k"}
+                                 onChange={budgetCounter}
+                              />
+                              <span className="label-text flex items-center text-base">Under 1K</span>
+                           </label>
+                           <label className="cursor-pointer justify-start gap-4 label">
+                              <input
+                                 type="radio"
+                                 name="radio-1"
+                                 className="radio radio-success"
+                                 value={"1to5k"}
+                                 onChange={budgetCounter}
+                              />
+                              <span className="label-text flex items-center text-base">1K-5K</span>
+                           </label>
+                           <label className="cursor-pointer justify-start gap-4 label">
+                              <input
+                                 type="radio"
+                                 name="radio-1"
+                                 className="radio radio-success"
+                                 value={"5to10k"}
+                                 onChange={budgetCounter}
+                              />
+                              <span className="label-text flex items-center text-base">5K-10K</span>
+                           </label>
+                           <label className="cursor-pointer justify-start gap-4 label">
+                              <input
+                                 type="radio"
+                                 name="radio-1"
+                                 className="radio radio-success"
+                                 value={"moreThen10k"}
+                                 onChange={budgetCounter}
+                              />
+                              <span className="label-text flex items-center text-base">More then 10K</span>
+                           </label>
                         </div>
                      </div>
                      <div className="collapse collapse-arrow rounded-none border-b border-[#5252526E]">

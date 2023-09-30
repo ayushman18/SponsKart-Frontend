@@ -1,16 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
+import { useLoaderData } from "react-router-dom";
 
 const BrandUpdatePost = () => {
    const { user } = useAuth();
+   const data = useLoaderData();
+   const post = data.data;
    const { register, handleSubmit, reset } = useForm();
-   const [method, setMethod] = useState("giveaway");
-   const [platforms, setPlatforms] = useState([]);
-   const [types, setTypes] = useState([]);
+   const [method, setMethod] = useState(post.payType);
+
    const indianStates = [
       "Andhra Pradesh",
       "Arunachal Pradesh",
@@ -61,6 +63,8 @@ const BrandUpdatePost = () => {
       { value: "hospitality", label: "Hospitality" },
       { value: "others", label: "Others" },
    ];
+   const defaultTypes = productType.filter((type) => post.categories.includes(type.value));
+   const [types, setTypes] = useState(defaultTypes);
 
    const platformOptions = [
       { value: "facebook", label: "Facebook" },
@@ -70,6 +74,9 @@ const BrandUpdatePost = () => {
       { value: "twitter", label: "Twitter" },
       { value: "others", label: "Others" },
    ];
+   const defaultPlatforms = platformOptions.filter((type) => post.platform.includes(type.value));
+
+   const [platforms, setPlatforms] = useState(defaultPlatforms);
 
    const handelMethod = (e) => {
       setMethod(e.target.value);
@@ -97,34 +104,33 @@ const BrandUpdatePost = () => {
          Swal.fire("Please add Platforms and Categories", "", "error");
          return;
       }
-      Swal.fire({
-         title: "Are you sure?",
-         text: "Do you want to add this post?",
-         icon: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#3085d6",
-         cancelButtonColor: "#d33",
-         confirmButtonText: "Yes, Add Post",
-      }).then((result) => {
-         if (result.isConfirmed) {
-            axios
-               .post("https://sponskart-hkgd.onrender.com/brand/add/post", data)
-               .then((res) => {
-                  console.log(res.data.data);
-                  Swal.fire("Posted!", "Your post has been added.", "success");
+      console.log(data);
+      // Swal.fire({
+      //    title: "Are you sure?",
+      //    text: "Do you want to add this post?",
+      //    icon: "warning",
+      //    showCancelButton: true,
+      //    confirmButtonColor: "#3085d6",
+      //    cancelButtonColor: "#d33",
+      //    confirmButtonText: "Yes, Add Post",
+      // }).then((result) => {
+      //    if (result.isConfirmed) {
+      //       axios
+      //          .post("https://sponskart-hkgd.onrender.com/brand/add/post", data)
+      //          .then((res) => {
+      //             console.log(res.data.data);
+      //             Swal.fire("Posted!", "Your post has been added.", "success");
 
-                  reset();
-               })
-               .catch((error) => console.log(error));
-         }
-      });
-
-      // console.log(data);
+      //             reset();
+      //          })
+      //          .catch((error) => console.log(error));
+      //    }
+      // });
    };
 
    return (
       <div>
-         <h2 className="text-black text-2xl text-center">Add post</h2>
+         <h2 className="text-black text-2xl text-center">Update post</h2>
          <form onSubmit={handleSubmit(updatePost)}>
             <div className="grid md:grid-cols-2 gap-6 justify-center items-start">
                <div>
@@ -136,10 +142,12 @@ const BrandUpdatePost = () => {
                      className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
                      required
                   >
-                     <option value="creator" defaultValue>
+                     <option value="creator" selected={post.postfor === "creator"}>
                         Content Creator
                      </option>
-                     <option value="organizer">Event Organizer</option>
+                     <option value="organizer" selected={post.postfor === "organizer"}>
+                        Event Organizer
+                     </option>
                   </select>
                </div>
                <div>
@@ -152,10 +160,12 @@ const BrandUpdatePost = () => {
                      onChange={handelMethod}
                      required
                   >
-                     <option value="giveaway" defaultValue>
+                     <option value="giveaway" selected={post.payType === "giveaway"}>
                         Giveaway Product
                      </option>
-                     <option value="pay">Pay Creator or Event</option>
+                     <option value="pay" selected={post.payType === "pay"}>
+                        Pay {post.postfor}
+                     </option>
                   </select>
                </div>
 
@@ -169,6 +179,7 @@ const BrandUpdatePost = () => {
                      className="textarea textarea-bordered textarea-lg min-w-[300px] input-style px-4 py-4"
                      rows="2"
                      required
+                     defaultValue={post.describe}
                      {...register("describe")}
                   />
                </div>
@@ -183,6 +194,7 @@ const BrandUpdatePost = () => {
                            placeholder="&#x20B9; Rupee"
                            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
                            required
+                           defaultValue={post.price}
                            {...register("price")}
                         />
                      </div>
@@ -195,50 +207,20 @@ const BrandUpdatePost = () => {
                            className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
                            required
                         >
-                           <option value="male">Male</option>
-                           <option value="female">Female</option>
-                           <option value="any">Any</option>
+                           <option value="male" selected={post.targetAudience === "male"}>
+                              Male
+                           </option>
+                           <option value="female" selected={post.targetAudience === "female"}>
+                              Female
+                           </option>
+                           <option value="any" selected={post.targetAudience === "any"}>
+                              Any
+                           </option>
                         </select>
                      </div>
                   </>
                )}
-               {/* <div className="w-[300px]">
-                  <label className="label">
-                     <span className="label-text text-black text-base">Select The Platform</span>
-                  </label>
-                  <div className="collapse collapse-arrow bg-white">
-                     <input type="checkbox" name="my-accordion-2" />
-                     <div className="collapse-title bg-white text-sm font-semibold">Platform</div>
-                     <div className="collapse-content">
-                        <div className="form-control">
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="facebook" />
-                              <span className="label-text text-base">Facebook</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="linkedin" />
-                              <span className="label-text text-base">LinkedIn</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="youtube" />
-                              <span className="label-text text-base">Youtube</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="instagram" />
-                              <span className="label-text text-base">Instagram</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="twitter" />
-                              <span className="label-text text-base">Twitter</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="other" />
-                              <span className="label-text text-base">Other</span>
-                           </label>
-                        </div>
-                     </div>
-                  </div>
-               </div> */}
+
                <div>
                   <label className="label">
                      <span className="label-text text-black text-base">Select The Platforms</span>
@@ -263,71 +245,10 @@ const BrandUpdatePost = () => {
                      placeholder="Minimum Followers"
                      className="input input-bordered min-w-[300px] input-style px-4 py-8 "
                      {...register("miniFollower")}
+                     defaultValue={post.miniFollower}
                   />
                </div>
-               {/* <div className="w-[300px]">
-                  <label className="label">
-                     <span className="label-text text-black text-base">
-                        Choose Catergories for your product
-                     </span>
-                  </label>
-                  <div className="collapse collapse-arrow bg-white">
-                     <input type="checkbox" name="my-accordion-2" />
-                     <div className="collapse-title bg-white text-sm font-semibold">Select Categories</div>
-                     <div className="collapse-content">
-                        <div className="form-control">
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="fitness" />
-                              <span className="label-text text-base">Fitness</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="healthCare" />
-                              <span className="label-text text-base">Health Care</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="lifeStyle" />
-                              <span className="label-text text-base">Lifestyle</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="cosmetics" />
-                              <span className="label-text text-base">Cosmetics</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="education" />
-                              <span className="label-text text-base">Education</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="technology" />
-                              <span className="label-text text-base">Technology</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="finance" />
-                              <span className="label-text text-base">Finance</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="clothing" />
-                              <span className="label-text text-base">Clothing</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="web3" />
-                              <span className="label-text text-base">Web3</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="food" />
-                              <span className="label-text text-base">Food (FMCG)</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="hospitality" />
-                              <span className="label-text text-base">Hospitality</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="others" />
-                              <span className="label-text text-base">Others</span>
-                           </label>
-                        </div>
-                     </div>
-                  </div>
-               </div> */}
+
                <div>
                   <label className="label">
                      <span className="label-text text-black text-base">
@@ -354,7 +275,9 @@ const BrandUpdatePost = () => {
                      required
                   >
                      {indianStates.map((state, index) => (
-                        <option key={index}>{state}</option>
+                        <option key={index} selected={post.chooseLocation === state}>
+                           {state}
+                        </option>
                      ))}
                   </select>
                </div>

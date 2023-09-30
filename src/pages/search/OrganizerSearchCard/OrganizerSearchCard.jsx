@@ -12,24 +12,24 @@ const OrganizerSearchCard = ({ data, category }) => {
             <img
                src={data.backgroundImage ? data.backgroundImage : bg}
                alt="Background"
-               className="h-48 object-fill w-full object-center"
+               className="h-32 object-fill w-full object-center"
             />
          </figure>
          <div className="card-body relative rounded-b-2xl bg-[#ecffa2] text-center">
             <img
                src={data.logo ? data.logo : gmailImg}
                alt="Logo"
-               className="w-32 bg-white px-2 -mt-20 mx-auto z-50"
+               className="w-24 h-24 bg-white px-2 -mt-20 mx-auto z-50"
             />
 
             <Link to={`/${category}/${data._id}`}>
-               <p className="text-4xl hover:text-orange-400">{data?.organizationName || "Organizer"}</p>
+               <p className="text-[26px] hover:text-orange-400">{data?.organizationName || "Organizer"}</p>
             </Link>
-            <div className="flex dark:text-gray-50 text-gray-600 justify-between items-center text-sm w-3/4 mx-auto ">
+            <div className="flex dark:text-gray-50 text-gray-600 justify-between items-center text-sm mx-auto ">
                <p>{data.followers > 1000 ? data.followers / 1000 + "K" : data.followers || 0} Followers</p>
-               <div className="divider divider-horizontal"></div>
-               <p>{data.location || "Not Updated"}</p>
-               <div className="divider divider-horizontal"></div>
+               <div className="h-10 mx-2 w-0.5 bg-gray-300"></div>
+               <p>{data.state || "Not Updated"}</p>
+               <div className="h-10 mx-2 w-0.5 bg-gray-300"></div>
                <p>Rs 1,00,000 per project</p>
             </div>
 

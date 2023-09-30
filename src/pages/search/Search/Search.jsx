@@ -9,6 +9,8 @@ import OrganizerFilter from "../Filters/OrganizerFilter";
 import BrandFilter from "../Filters/BrandFilter";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
+import SearchPageTitle from "../SearchPageTitle/SearchPageTitle";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
@@ -17,28 +19,29 @@ const Search = () => {
    const { data: result, isLoading } = useQuery({
       queryKey: ["data"],
       queryFn: async () => {
-         const res = await axios.get(`https://sponskart-hkgd.onrender.com/${category}/getall`);
+         const res = await axios.get(`https://sponskart-hkgd.onrender.com/${category}/getall?text=${text}`);
          return res.data.data;
       },
    });
 
    const handelFilterSearch = (filter) => {
+      console.log(filter);
       // console.log(JSON.stringify(filter));
-      axios
-         .get(
-            `https://sponskart-hkgd.onrender.com/search?type=${category}&search=${text}&filter=${JSON.stringify(
-               filter
-            )}`
-         )
-         .then((res) => {
-            console.log(res.data.data);
-            // setResult(res.data.data);
-         })
-         .catch((err) => {
-            console.log(err);
+      // axios
+      //    .get(
+      //       `https://sponskart-hkgd.onrender.com/search?type=${category}&search=${text}&filter=${JSON.stringify(
+      //          filter
+      //       )}`
+      //    )
+      //    .then((res) => {
+      //       console.log(res.data.data);
+      //       // setResult(res.data.data);
+      //    })
+      //    .catch((err) => {
+      //       console.log(err);
 
-            toast.error("Please refresh we are having an issue.");
-         });
+      //       toast.error("Please refresh we are having an issue.");
+      //    });
    };
 
    useEffect(() => {
@@ -48,17 +51,14 @@ const Search = () => {
    if (isLoading) {
       return (
          <>
-            <div className="h-screen flex justify-center items-center">
-               <div>
-                  <span className="loading loading-spinner text-error"></span>
-               </div>
-            </div>
+            <LoadingSpinner></LoadingSpinner>
          </>
       );
    }
 
    return (
       <section className="bg-white">
+         <SearchPageTitle category={category}></SearchPageTitle>
          <div className="container mx-auto px-10 grid lg:grid-cols-4 md:gap-24 py-10 ">
             {category === "creator" ? (
                <CreatorFilter handelFilterSearch={handelFilterSearch}></CreatorFilter>

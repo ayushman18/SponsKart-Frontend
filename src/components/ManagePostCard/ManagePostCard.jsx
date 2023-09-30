@@ -16,9 +16,12 @@ const ManagePostCard = ({ deletePost, post }) => {
             <p>Date: {moment(date).fromNow()}</p>
          </div>
          <div className="join join-vertical px-3 rounded-lg h-full">
-            <button className="btn join-item  btn-warning">
-               <FaEdit className="text-xl text-white"></FaEdit>
-            </button>
+            <Link to={`/dashboard/brand/updatePost/${_id}`}>
+               <button className="btn join-item  btn-warning">
+                  <FaEdit className="text-xl text-white"></FaEdit>
+               </button>
+            </Link>
+
             <button className="btn join-item btn-error text-white" onClick={() => deletePost(_id)}>
                <FaTrashAlt className="text-xl"></FaTrashAlt>
             </button>
