@@ -59,7 +59,7 @@ const CreatorUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-hkgd.onrender.com/organizer/update`, formData, {
+               .put(`https://sponskart-hkgd.onrender.com/creator/update`, formData, {
                   headers: {
                      "Content-Type": "multipart/form-data",
                   },

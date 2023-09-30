@@ -39,9 +39,6 @@ const OrganizerUpdateProfile = () => {
       //       }
       //    }
       // }
-      //data._id
-      // https://sponskart-hkgd.onrender.com/
-      console.log(data);
       const formData = new FormData();
 
       for (const key in data) {
