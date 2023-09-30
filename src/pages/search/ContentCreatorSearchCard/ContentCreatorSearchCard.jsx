@@ -2,13 +2,22 @@ import { Link } from "react-router-dom";
 import linkedin from "./../../../assets/socialIcon/linkedin.png";
 import instagram from "./../../../assets/socialIcon/instagram.png";
 import twitter from "./../../../assets/socialIcon/twitter.png";
+import { FaUser } from "react-icons/fa";
 
 const ContentCreatorSearchCard = ({ category, data }) => {
    return (
       <div className="card hover:shadow-2xl z-0 bg-[#CFEF504F] shadow-xl">
          <div className="card-body items-center">
             <div className="mx-auto">
-               <img src={linkedin} alt="" className="w-24 mx-auto" />
+               {data.logo ? (
+                  <img
+                     src={"https://sponskart-hkgd.onrender.com/" + data?.logo}
+                     alt=""
+                     className="w-24 mx-auto"
+                  />
+               ) : (
+                  <FaUser className="text-6xl mx-auto"></FaUser>
+               )}
                <Link to={`/${category}/${data._id}`}>
                   <h2 className="card-title mx-auto w-fit hover:text-gray-400 my-4">
                      {data.firstname + " " + data.lastname}

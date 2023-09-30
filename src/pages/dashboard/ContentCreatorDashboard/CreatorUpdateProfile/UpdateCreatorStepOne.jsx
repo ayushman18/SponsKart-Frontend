@@ -1,6 +1,7 @@
+import Select from "react-select";
 import useAuth from "../../../../hooks/useAuth";
 
-const UpdateCreatorStepOne = ({ register }) => {
+const UpdateCreatorStepOne = ({ register, selectedOption, setSelectedOption }) => {
    const { user } = useAuth();
 
    const indianStates = [
@@ -38,6 +39,16 @@ const UpdateCreatorStepOne = ({ register }) => {
       "Lakshadweep",
       "Delhi",
       "Puducherry",
+   ];
+   const options = [
+      { value: "fitness", label: "Fitness" },
+      { value: "skincare", label: "Skin Care" },
+      { value: "lifestyle", label: "Life Style" },
+      { value: "cosmetics", label: "Cosmetics" },
+      { value: "education", label: "Education" },
+      { value: "technology", label: "Technology" },
+      { value: "finance", label: "Finance" },
+      { value: "others", label: "Others" },
    ];
 
    return (
@@ -79,6 +90,15 @@ const UpdateCreatorStepOne = ({ register }) => {
             {...register("phonenumber")}
             defaultValue={user.user.phonenumber}
          />
+         <Select
+            className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
+            placeholder="Select Brand Preferred Type"
+            unstyled
+            defaultValue={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
+            isMulti
+         />
          <select
             className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "
             {...register("location")}
@@ -88,6 +108,17 @@ const UpdateCreatorStepOne = ({ register }) => {
                   {state}
                </option>
             ))}
+         </select>
+         <select
+            className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6 "
+            {...register("gender")}
+         >
+            <option value="" disabled selected>
+               Select Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
          </select>
       </div>
    );

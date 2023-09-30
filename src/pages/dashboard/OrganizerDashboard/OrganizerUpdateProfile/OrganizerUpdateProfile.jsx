@@ -94,9 +94,7 @@ const OrganizerUpdateProfile = () => {
                selectedBudget={selectedBudget}
                setSelectedFootfall={setSelectedFootfall}
                selectedFootfall={selectedFootfall}
-            >
-               {" "}
-            </UpdateOrganizerStepTwo>
+            ></UpdateOrganizerStepTwo>
          ) : step === 3 ? (
             <UpdateOrganizerStepThree
                register={register}
@@ -109,12 +107,6 @@ const OrganizerUpdateProfile = () => {
             </>
          )}
 
-         {/* <div className="grid grid-cols-2 gap-8">
-            <div>
-              
-            </div>
-            
-         </div> */}
          <div className="flex gap-4 justify-center items-center my-6">
             <p
                className={`py-3 px-6 border-0 cursor-pointer rounded-lg text-white mt-4 ${

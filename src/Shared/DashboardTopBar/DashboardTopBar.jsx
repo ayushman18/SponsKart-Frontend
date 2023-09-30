@@ -74,8 +74,8 @@ const DashboardTopBar = () => {
                            name="category"
                         >
                            <option value="brand">Brand</option>
-                           <option value="Organizer">Event-Organization</option>
-                           <option value="user">Content-Creator</option>
+                           <option value="organizer">Event-Organization</option>
+                           <option value="creator">Content-Creator</option>
                         </select>
                         <div className="indicator hidden md:block">
                            <button

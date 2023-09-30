@@ -10,12 +10,15 @@ import UpdateCreatorStepTwo from "./UpdateCreatorStepTwo";
 import UpdateCreatorStepThree from "./UpdateCreatorStepThree";
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 // todo: fix file upload bug
 
 const CreatorUpdateProfile = () => {
-   const { user } = useAuth();
+   const { user, setUser } = useAuth();
    const { step, setStep } = useStep();
+   const [selectedOption, setSelectedOption] = useState([]);
+   const [selectedBudget, setSelectedBudget] = useState([]);
    const [logoImg, setLogoImg] = useState({});
    const [bgImg, setBgImg] = useState({});
    const userData = JSON.parse(localStorage.getItem("user"));
@@ -23,7 +26,10 @@ const CreatorUpdateProfile = () => {
    // console.log(userData);
 
    const { register, handleSubmit } = useForm();
+
    const updateData = (data) => {
+      data.category = selectedOption;
+      data.budget = selectedBudget;
       data.logo = logoImg;
       data.backgroundImage = bgImg;
       for (const key in data) {
@@ -41,29 +47,50 @@ const CreatorUpdateProfile = () => {
       }
       formData.append("id", user.data._id);
 
-      // console.log(data);
-      axios
-         .put(`https://sponskart-hkgd.onrender.com/creator/update`, formData, {
-            headers: {
-               "Content-Type": "multipart/form-data",
-            },
-         })
-         .then((res) => {
-            // console.log(res.data.data);
-            userData.data = res.data.data;
-            localStorage.setItem("user", JSON.stringify(userData));
-         })
-         .catch((error) => console.log(error));
+      console.log(data);
+      Swal.fire({
+         title: "Are you sure?",
+         text: "Your provided all data are correct?",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Update!",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axios
+               .put(`https://sponskart-hkgd.onrender.com/organizer/update`, formData, {
+                  headers: {
+                     "Content-Type": "multipart/form-data",
+                  },
+               })
+               .then((res) => {
+                  // console.log(res.data.data);
+                  userData.data = res.data.data;
+                  setUser(userData);
+                  localStorage.setItem("user", JSON.stringify(userData));
+               })
+               .catch((error) => console.log(error));
+         }
+      });
    };
 
    return (
       <form onSubmit={handleSubmit(updateData)}>
-         <Steps steps={["Basic Details", "Social Links", "Descriptions & Images"]}></Steps>
+         <Steps steps={["Basic Details", "Additional", "Descriptions & Images"]}></Steps>
 
          {step === 1 ? (
-            <UpdateCreatorStepOne register={register}></UpdateCreatorStepOne>
+            <UpdateCreatorStepOne
+               register={register}
+               selectedOption={selectedOption}
+               setSelectedOption={setSelectedOption}
+            ></UpdateCreatorStepOne>
          ) : step === 2 ? (
-            <UpdateCreatorStepTwo register={register}> </UpdateCreatorStepTwo>
+            <UpdateCreatorStepTwo
+               register={register}
+               setSelectedBudget={setSelectedBudget}
+               selectedBudget={selectedBudget}
+            ></UpdateCreatorStepTwo>
          ) : step === 3 ? (
             <UpdateCreatorStepThree register={register} setLogoImg={setLogoImg} setBgImg={setBgImg}>
                {" "}
