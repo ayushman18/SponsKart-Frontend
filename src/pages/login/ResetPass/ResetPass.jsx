@@ -20,7 +20,7 @@ const ResetPass = () => {
 
       const password = data.confirm_password;
       axios
-         .post(`https://sponskart-hkgd.onrender.com/resetpassword?token=${token}`, { password })
+         .post(`https://sponskart-server.vercel.app/resetpassword?token=${token}`, { password })
          .then((res) => {
             console.log(res.status);
             if (res.status === 200) {

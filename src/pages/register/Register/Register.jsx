@@ -8,9 +8,8 @@ const Register = () => {
    const [userRole, setUserRole] = useState("organizer");
 
    return (
-      <>
-         {" "}
-         <p className="lg:w-1/2 py-5 text-xl px-10 rounded-full bg-[#cfef5062] mb-6">
+      <div className="md:px-10 lg:min-w-[60vw]">
+         <p className="text-start py-5 text-xl px-10 rounded-full bg-[#cfef5062] mb-6">
             <FaSearch className="w-6 opacity-75 h-6 inline-block"></FaSearch> Looking for Sponsorship?
          </p>
          <p className="text-4xl font-semibold mb-6">
@@ -34,7 +33,7 @@ const Register = () => {
          <div className="form-control">
             <label
                className="label justify-normal gap-8 cursor-pointer"
-               onClick={() => setUserRole("content-creator")}
+               onClick={() => setUserRole("creator")}
             >
                <input
                   type="radio"
@@ -52,12 +51,12 @@ const Register = () => {
             </label>
          </div>
          <div>
-            <Link to={userRole}>
+            <Link to="basic-register" state={userRole}>
                <button className="py-4 px-16 bg-[#53C929] text-white rounded-full w-fit my-20">Next</button>
             </Link>
          </div>
          <img src={strimming} alt="" className="absolute top-0 -z-20 -right-10" />
-      </>
+      </div>
    );
 };
 

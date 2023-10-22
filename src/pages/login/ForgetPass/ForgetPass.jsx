@@ -1,16 +1,17 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const ForgetPass = () => {
+   const { resetPassword } = useAuth();
    const { register, handleSubmit } = useForm();
-   const navigate = useNavigate();
    const [error, setError] = useState("");
+   const navigate = useNavigate();
 
    const onSubmit = (data) => {
-      // console.log(data);
+      console.log(data);
       setError("");
       Swal.fire({
          title: "Do you want to reset Password?",
@@ -22,18 +23,18 @@ const ForgetPass = () => {
          confirmButtonText: "Yes, I do!",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .post("https://sponskart-hkgd.onrender.com/forgot", data)
-               .then((res) => {
-                  console.log(res.data);
+            resetPassword(data.email)
+               .then(() => {
+                  navigate("/sign-in");
                   Swal.fire(
                      "Sent Reset Mail!",
                      `Please check your ${data.email} inbox or spam box for reset mail.`,
                      "success"
                   );
-                  navigate("/");
                })
-               .catch((err) => setError(err.response.data.message));
+               .catch((err) => {
+                  console.log(err);
+               });
          }
       });
    };

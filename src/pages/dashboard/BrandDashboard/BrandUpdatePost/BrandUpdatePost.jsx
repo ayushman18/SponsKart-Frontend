@@ -1,17 +1,21 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const BrandUpdatePost = () => {
    const { user } = useAuth();
    const data = useLoaderData();
+   const { id } = useParams();
    const post = data.data;
-   const { register, handleSubmit, reset } = useForm();
+   const { register, handleSubmit } = useForm();
    const [method, setMethod] = useState(post.payType);
+   const [platforms, setPlatforms] = useState(post?.platform);
+   const [types, setTypes] = useState(post?.categories);
+   const [questions, setQuestions] = useState(post?.questions);
 
    const indianStates = [
       "Andhra Pradesh",
@@ -63,8 +67,6 @@ const BrandUpdatePost = () => {
       { value: "hospitality", label: "Hospitality" },
       { value: "others", label: "Others" },
    ];
-   const defaultTypes = productType.filter((type) => post.categories.includes(type.value));
-   const [types, setTypes] = useState(defaultTypes);
 
    const platformOptions = [
       { value: "facebook", label: "Facebook" },
@@ -74,9 +76,22 @@ const BrandUpdatePost = () => {
       { value: "twitter", label: "Twitter" },
       { value: "others", label: "Others" },
    ];
-   const defaultPlatforms = platformOptions.filter((type) => post.platform.includes(type.value));
 
-   const [platforms, setPlatforms] = useState(defaultPlatforms);
+   const addQuestion = () => {
+      setQuestions([...questions, ""]);
+   };
+
+   const removeQuestion = (index) => {
+      const updatedQuestions = [...questions];
+      updatedQuestions.splice(index, 1);
+      setQuestions(updatedQuestions);
+   };
+
+   const handleQuestionChange = (index, event) => {
+      const updatedQuestions = [...questions];
+      updatedQuestions[index] = event.target.value;
+      setQuestions(updatedQuestions);
+   };
 
    const handelMethod = (e) => {
       setMethod(e.target.value);
@@ -84,7 +99,8 @@ const BrandUpdatePost = () => {
    };
 
    const updatePost = (data) => {
-      data.id = user.user._id;
+      data.id = id;
+      data.questions = questions;
       for (const key in data) {
          if (data[key] === "") {
             delete data[key];
@@ -94,38 +110,38 @@ const BrandUpdatePost = () => {
          delete data["audience"];
          delete data["price"];
       } else {
-         data.price = parseInt(data.price);
+         data.pricing = parseInt(data.pricing);
          delete data["description"];
       }
-      data.platform = platforms?.map((type) => type.value);
-      data.categories = types?.map((type) => type.value);
+      data.date = new Date();
+      data.brandId = user.user.brand;
+      data.platform = platforms;
+      data.categories = types;
       data.miniFollower = parseInt(data.miniFollower || 0);
       if (data.platform.length === 0 && data.categories.length === 0) {
          Swal.fire("Please add Platforms and Categories", "", "error");
          return;
       }
       console.log(data);
-      // Swal.fire({
-      //    title: "Are you sure?",
-      //    text: "Do you want to add this post?",
-      //    icon: "warning",
-      //    showCancelButton: true,
-      //    confirmButtonColor: "#3085d6",
-      //    cancelButtonColor: "#d33",
-      //    confirmButtonText: "Yes, Add Post",
-      // }).then((result) => {
-      //    if (result.isConfirmed) {
-      //       axios
-      //          .post("https://sponskart-hkgd.onrender.com/brand/add/post", data)
-      //          .then((res) => {
-      //             console.log(res.data.data);
-      //             Swal.fire("Posted!", "Your post has been added.", "success");
-
-      //             reset();
-      //          })
-      //          .catch((error) => console.log(error));
-      //    }
-      // });
+      Swal.fire({
+         title: "Are you sure?",
+         text: "Do you want to add this post?",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, Add Post",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axios
+               .put("https://sponskart-server.vercel.app/brand/updatepost", data)
+               .then((res) => {
+                  console.log(res.data.data);
+                  Swal.fire("Posted!", "Your post has been added.", "success");
+               })
+               .catch((error) => console.log(error));
+         }
+      });
    };
 
    return (
@@ -281,10 +297,32 @@ const BrandUpdatePost = () => {
                      ))}
                   </select>
                </div>
+               <div className="col-span-2">
+                  <div className="flex flex-wrap items-center gap-4">
+                     <p>Want to add questions?</p>
+                     <p onClick={addQuestion} className="btn btn-success">
+                        Add Question
+                     </p>
+                  </div>
+               </div>
+               {questions?.map((question, index) => (
+                  <div key={index} className="join">
+                     <input
+                        type="text"
+                        className="input input-bordered min-w-[300px] input-style px-4 py-6 join-item"
+                        value={question}
+                        placeholder={`Type Question ${index + 1}`}
+                        onChange={(e) => handleQuestionChange(index, e)}
+                     />
+                     <p onClick={() => removeQuestion(index)} className="btn btn-error rounded-2xl join-item">
+                        Remove
+                     </p>
+                  </div>
+               ))}
             </div>
             <div className="flex justify-center items-center my-6">
                <button type="submit" className="btn btn-success">
-                  add post
+                  Update post
                </button>
             </div>
          </form>

@@ -9,26 +9,20 @@ const ContentCreatorSearchCard = ({ category, data }) => {
       <div className="card hover:shadow-2xl z-0 bg-[#CFEF504F] shadow-xl">
          <div className="card-body items-center">
             <div className="mx-auto">
-               {data.logo ? (
-                  <img
-                     src={"https://sponskart-hkgd.onrender.com/" + data?.logo}
-                     alt=""
-                     className="w-24 mx-auto"
-                  />
+               {data.logo?.url ? (
+                  <img src={data.logo?.url} alt="" className="w-24 h-24 mx-auto" />
                ) : (
                   <FaUser className="text-6xl mx-auto"></FaUser>
                )}
                <Link to={`/${category}/${data._id}`}>
-                  <h2 className="card-title mx-auto w-fit hover:text-gray-400 my-4">
-                     {data.firstname + " " + data.lastname}
-                  </h2>
+                  <h2 className="card-title mx-auto w-fit hover:text-gray-400 my-4">{data.name}</h2>
                </Link>
                <div className="flex text-gray-600 text-center items-center text-sm ">
-                  <p>{data.followers}K Followers</p>
+                  <p>{data.followers || 0}K Followers</p>
                   <div className="w-[2px] mx-2 h-10 bg-gray-500"></div>
-                  <p>{data.state}</p>
+                  <p>{data.location}</p>
                   <div className="w-[2px] mx-2 h-10 bg-gray-500"></div>
-                  <p>Rs 1,00,000 per project</p>
+                  <p>Rs {data?.budget?.label || 0} per project</p>
                </div>
                <div className="flex justify-center items-center">
                   <button className="btn btn-outline btn-xs rounded-full bg-white my-4">Follow</button>

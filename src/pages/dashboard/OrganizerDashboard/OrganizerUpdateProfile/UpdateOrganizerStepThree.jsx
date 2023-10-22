@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import useAuth from "../../../../hooks/useAuth";
 
 const UpdateOrganizerStepThree = ({ register, setBgImg, setLogoImg }) => {
+   const { user } = useAuth();
    const [logoName, setLogoName] = useState("");
    const [bgName, setBgName] = useState("");
    return (
@@ -12,6 +14,7 @@ const UpdateOrganizerStepThree = ({ register, setBgImg, setLogoImg }) => {
             className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-4"
             rows="2"
             {...register("shortDescription")}
+            defaultValue={user.data?.shortDescription}
          />
          <input
             type="file"
@@ -34,6 +37,7 @@ const UpdateOrganizerStepThree = ({ register, setBgImg, setLogoImg }) => {
             className="textarea textarea-bordered textarea-lg w-full max-w-xs input-style px-4 py-4"
             rows="4"
             {...register("longDescription")}
+            defaultValue={user.data?.longDescription}
          />
          <input
             type="file"

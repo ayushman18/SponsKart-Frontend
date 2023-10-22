@@ -11,27 +11,33 @@ import UpdateCreatorStepThree from "./UpdateCreatorStepThree";
 import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { hostImage } from "../../../../api/api";
 
 // todo: fix file upload bug
 
 const CreatorUpdateProfile = () => {
-   const { user, setUser } = useAuth();
+   const { user } = useAuth();
    const { step, setStep } = useStep();
    const [selectedOption, setSelectedOption] = useState([]);
    const [selectedBudget, setSelectedBudget] = useState([]);
-   const [logoImg, setLogoImg] = useState({});
-   const [bgImg, setBgImg] = useState({});
-   const userData = JSON.parse(localStorage.getItem("user"));
+   const [logoImg, setLogoImg] = useState(null);
+   const [bgImg, setBgImg] = useState(null);
 
-   // console.log(userData);
+   console.log(user.user.creator);
 
    const { register, handleSubmit } = useForm();
 
-   const updateData = (data) => {
+   const updateData = async (data) => {
       data.category = selectedOption;
       data.budget = selectedBudget;
-      data.logo = logoImg;
-      data.backgroundImage = bgImg;
+      if (logoImg) {
+         data.logo = await hostImage(logoImg);
+      }
+      if (bgImg) {
+         data.backgroundImage = await hostImage(bgImg);
+      }
+      data.id = user.user.creator;
+
       for (const key in data) {
          if (data[key] === "") {
             delete data[key];
@@ -39,13 +45,6 @@ const CreatorUpdateProfile = () => {
             delete data[key];
          }
       }
-
-      const formData = new FormData();
-
-      for (const key in data) {
-         formData.append(key, data[key]);
-      }
-      formData.append("id", user.data._id);
 
       console.log(data);
       Swal.fire({
@@ -59,16 +58,10 @@ const CreatorUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-hkgd.onrender.com/creator/update`, formData, {
-                  headers: {
-                     "Content-Type": "multipart/form-data",
-                  },
-               })
+               .put(`https://sponskart-server.vercel.app/creator/update`, data)
                .then((res) => {
-                  // console.log(res.data.data);
-                  userData.data = res.data.data;
-                  setUser(userData);
-                  localStorage.setItem("user", JSON.stringify(userData));
+                  console.log(res.data.data);
+                  user.data = res.data.data;
                })
                .catch((error) => console.log(error));
          }

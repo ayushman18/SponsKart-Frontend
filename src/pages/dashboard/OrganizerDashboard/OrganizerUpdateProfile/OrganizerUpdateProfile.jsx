@@ -8,43 +8,42 @@ import axios from "axios";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { hostImage } from "../../../../api/api";
 
 const OrganizerUpdateProfile = () => {
-   const { user, setUser } = useAuth();
+   const { user } = useAuth();
    const { step, setStep } = useStep();
-   const [selectedOption, setSelectedOption] = useState([]);
-   const [selectedPlatform, setSelectedPlatform] = useState([]);
-   const [selectedBudget, setSelectedBudget] = useState([]);
-   const [selectedFootfall, setSelectedFootfall] = useState([]);
+   const [selectedOption, setSelectedOption] = useState(user.data.category || []);
+   const [selectedPlatform, setSelectedPlatform] = useState(user.data.platforms || []);
+   const [selectedBudget, setSelectedBudget] = useState(user.data.budget || {});
+   const [selectedFootfall, setSelectedFootfall] = useState(user.data.footfall || {});
    const [logoImg, setLogoImg] = useState({});
    const [bgImg, setBgImg] = useState({});
 
-   const userData = JSON.parse(localStorage.getItem("user"));
-   const { register, handleSubmit, reset } = useForm();
+   const { register, handleSubmit } = useForm();
 
-   const updateData = (data) => {
+   const updateData = async (data) => {
       data.category = selectedOption;
       data.footfall = selectedFootfall;
       data.budget = selectedBudget;
       data.platforms = selectedPlatform;
-      data.logo = logoImg;
-      data.backgroundImage = bgImg;
-      console.log(data);
-      // for (const key in data) {
-      //    if (data[key] === "") {
-      //       delete data[key];
-      //    } else if (typeof data[key] === "object" && !Array.isArray(data[key])) {
-      //       if (!data[key].name || !data[key].value) {
-      //          delete data[key];
-      //       }
-      //    }
-      // }
-      const formData = new FormData();
-
-      for (const key in data) {
-         formData.append(key, data[key]);
+      if (logoImg) {
+         data.logo = await hostImage(logoImg);
       }
-      formData.append("id", user.data._id);
+      if (bgImg) {
+         data.backgroundImage = await hostImage(bgImg);
+      }
+      data.id = user.user.organizer;
+      for (const key in data) {
+         if (data[key] === "") {
+            delete data[key];
+         } else if (data[key].length === 0) {
+            delete data[key];
+         }
+      }
+
+      console.log(data);
+
       Swal.fire({
          title: "Are you sure?",
          text: "Your provided all data are correct?",
@@ -56,17 +55,10 @@ const OrganizerUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-hkgd.onrender.com/organizer/update`, formData, {
-                  headers: {
-                     "Content-Type": "multipart/form-data",
-                  },
-               })
+               .put(`https://sponskart-server.vercel.app/organizer/update`, data)
                .then((res) => {
-                  // console.log(res.data.data);
-                  userData.data = res.data.data;
-                  setUser(userData);
-                  localStorage.setItem("user", JSON.stringify(userData));
-                  reset();
+                  console.log(res.data.data);
+                  user.data = res.data.data;
                })
                .catch((error) => console.log(error));
          }

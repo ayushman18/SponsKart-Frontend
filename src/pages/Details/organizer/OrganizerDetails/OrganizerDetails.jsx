@@ -18,18 +18,14 @@ const OrganizerDetails = () => {
    return (
       <section className="bg-white">
          <img
-            src={`https://sponskart-hkgd.onrender.com/${data.backgroundImage}`}
+            src={data.backgroundImage}
             alt="Background Image"
             className="h-64 object-cover w-full mb-5 shadow-xl"
          />
          <div className="container mx-auto grid lg:grid-cols-3 gap-6">
             <div className="order-2 lg:order-1">
                <div className="text-center hidden lg:block py-8 border-b border-[#5252526E]">
-                  <img
-                     src={`https://sponskart-hkgd.onrender.com/${data.logo}`}
-                     alt={data.brandName}
-                     className="w-32 bg-gray-300 px-2 mx-auto"
-                  />
+                  <img src={data.logo} alt={data.brandName} className="w-32 bg-gray-300 px-2 mx-auto" />
                   <div className="flex justify-center items-center gap-4 mx-auto">{data.HolderName}</div>
                   <p className="text-4xl">{data.brandName}</p>
                </div>

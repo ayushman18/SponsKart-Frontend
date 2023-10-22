@@ -1,52 +1,44 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
-   const { setUser } = useAuth();
+   const { emailPassSignIn } = useAuth();
    const navigate = useNavigate();
    const location = useLocation();
    const [loading, setLoading] = useState(false);
    const [showPass, setShowPass] = useState(false);
    const from = location.state?.pathname || "/";
-   // console.log(from);
+
    const { register, handleSubmit } = useForm();
 
    const onSubmit = (data) => {
       setLoading(true);
-      // console.log(data);
-      axios
-         .post("https://sponskart-hkgd.onrender.com/signin", data)
+      const { email, password } = data;
+      console.log(data);
+      emailPassSignIn(email, password)
          .then((res) => {
+            console.log(res.user);
+
             setLoading(false);
-            // console.log("here", res.data);
 
-            if (res.data.code === 200) {
-               localStorage.setItem("user", JSON.stringify(res.data.data));
-               const percent = (Object.keys(res.data.data.data).length / 20) * 100;
-               if (Math.round(percent) < 100) {
-                  Swal.fire("You are welcome in Sponskart!", "Thanks for joining.", "warning");
-               } else {
-                  Swal.fire({
-                     title: "You are welcome in Sponskart!",
-                     text: "Thanks for joining.",
-                     imageUrl: "https://i.ibb.co/P96V9ns/welcome.png",
-                     imageWidth: 300,
-                     imageHeight: 200,
-                     imageAlt: "Custom image",
-                     showConfirmButton: false,
-                     timer: 2000,
-                  });
-               }
+            Swal.fire({
+               title: "You are welcome in Sponskart!",
+               text: "Thanks for joining.",
+               imageUrl: "https://i.ibb.co/P96V9ns/welcome.png",
+               imageWidth: 300,
+               imageHeight: 200,
+               imageAlt: "Custom image",
+               showConfirmButton: false,
+               timer: 2000,
+            });
 
-               setUser(res.data.data);
-               navigate(from);
-            }
+            navigate(from);
          })
+
          .catch((err) => {
             setLoading(false);
             console.log(err);

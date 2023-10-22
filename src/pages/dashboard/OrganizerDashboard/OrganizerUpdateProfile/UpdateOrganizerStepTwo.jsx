@@ -1,4 +1,5 @@
 import Select from "react-select";
+import useAuth from "../../../../hooks/useAuth";
 
 const UpdateOrganizerStepTwo = ({
    register,
@@ -9,6 +10,7 @@ const UpdateOrganizerStepTwo = ({
    selectedFootfall,
    setSelectedFootfall,
 }) => {
+   const { user } = useAuth();
    const socialMediaOptions = [
       { value: "facebook", label: "Facebook" },
       { value: "linkedin", label: "LinkedIn" },
@@ -64,12 +66,14 @@ const UpdateOrganizerStepTwo = ({
             placeholder="Facebook link"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
             {...register("facebookLink")}
+            defaultValue={user.data?.facebookLink}
          />
          <input
             type="text"
             placeholder="Twitter link"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
             {...register("twitterLink")}
+            defaultValue={user.data?.twitterLink}
          />
 
          <input
@@ -77,6 +81,29 @@ const UpdateOrganizerStepTwo = ({
             placeholder="LinkedIn Profile"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
             {...register("linkedinLink")}
+            defaultValue={user.data?.linkedinLink}
+         />
+         <input
+            type="text"
+            placeholder="Instagram link"
+            className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
+            {...register("instagramLink")}
+            defaultValue={user.data?.instagramLink}
+         />
+
+         <input
+            type="text"
+            placeholder="Youtube Profile"
+            className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
+            {...register("youtubeLink")}
+            defaultValue={user.data?.youtubeLink}
+         />
+         <input
+            type="text"
+            placeholder="Organization Website"
+            className="input input-bordered w-full max-w-xs input-style px-4 py-8 my-5"
+            {...register("websiteLink")}
+            defaultValue={user.data?.websiteLink}
          />
       </div>
    );

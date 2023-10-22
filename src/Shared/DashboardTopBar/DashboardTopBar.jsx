@@ -34,7 +34,7 @@ const DashboardTopBar = () => {
                <div className="w-16 rounded-full bg-slate-200">
                   {user.data.logo ? (
                      <>
-                        <img src={"https://sponskart-hkgd.onrender.com/" + user.data.logo} alt="" />
+                        <img src={user.data.logo.url} alt="" />
                      </>
                   ) : (
                      <FaUser className="w-16 h-16"></FaUser>
@@ -47,7 +47,7 @@ const DashboardTopBar = () => {
                      ? user?.data?.organizationName || "No Name"
                      : user.user.type === "brand"
                      ? user.data.brandName
-                     : user.data.firstname + " " + user.data.lastname}
+                     : user.data.name}
                </p>
                <p>{user.data.location},India</p>
             </div>

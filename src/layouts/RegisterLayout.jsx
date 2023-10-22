@@ -10,11 +10,13 @@ const RegisterLayout = () => {
          >
             <div className="bg-opacity-50 bg-black">
                <div className="mx-auto container flex justify-center items-center min-h-screen ">
-                  <div className="lg:w-3/4 bg-white py-11 rounded-3xl lg:pl-20 px-14 relative">
-                     <Link to={"/"}>
-                        <img src="./logo.png" alt="" className="w-72 mx-auto" />
-                     </Link>
-                     <Outlet></Outlet>
+                  <div className="p-10 rounded-2xl text-center bg-white relative">
+                     <div>
+                        <Link to={"/"}>
+                           <img src="./logo.png" alt="" className="w-72 mx-auto" />
+                        </Link>
+                        <Outlet></Outlet>
+                     </div>
                   </div>
                </div>
             </div>

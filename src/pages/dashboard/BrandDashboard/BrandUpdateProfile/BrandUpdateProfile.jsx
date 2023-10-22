@@ -11,16 +11,16 @@ import UpdateBrandStepThree from "./UpdateBrandStepThree";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { hostImage } from "../../../../api/api";
 
 const BrandUpdateProfile = () => {
-   const { user, setUser } = useAuth();
+   const { user } = useAuth();
    const { step, setStep } = useStep();
-   const [selectedOption, setSelectedOption] = useState(null);
+   const [selectedOption, setSelectedOption] = useState(user.data.brandType || []);
    const [logoImg, setLogoImg] = useState({});
    const [bgImg, setBgImg] = useState({});
 
-   const userData = JSON.parse(localStorage.getItem("user"));
-   const { register, handleSubmit, reset } = useForm();
+   const { register, handleSubmit } = useForm();
    const options = [
       { value: "fitness", label: "Fitness" },
       { value: "healthCare", label: "Health Care" },
@@ -36,10 +36,16 @@ const BrandUpdateProfile = () => {
       { value: "others", label: "Others" },
    ];
 
-   const updateData = (data) => {
-      data.brandType = selectedOption?.map((type) => type.value);
-      data.logo = logoImg;
-      data.backgroundImage = bgImg;
+   const updateData = async (data) => {
+      data.brandType = selectedOption;
+      if (logoImg) {
+         data.logo = await hostImage(logoImg);
+      }
+      if (bgImg) {
+         data.backgroundImage = await hostImage(bgImg);
+      }
+      data.id = user.user.brand;
+      console.log(data);
 
       for (const key in data) {
          if (data[key] === "" || data[key] === undefined) {
@@ -50,14 +56,7 @@ const BrandUpdateProfile = () => {
             }
          }
       }
-      //data._id
-      // https://sponskart-hkgd.onrender.com/
-      const formData = new FormData();
 
-      for (const key in data) {
-         formData.append(key, data[key]);
-      }
-      formData.append("id", user.data._id);
       Swal.fire({
          title: "Are you sure?",
          text: "Your provided all data are correct?",
@@ -69,17 +68,10 @@ const BrandUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-hkgd.onrender.com/brand/update`, formData, {
-                  headers: {
-                     "Content-Type": "multipart/form-data",
-                  },
-               })
+               .put(`https://sponskart-server.vercel.app/brand/update`, data)
                .then((res) => {
-                  // console.log(res.data.data);
-                  userData.data = res.data.data;
-                  setUser(userData);
-                  localStorage.setItem("user", JSON.stringify(userData));
-                  reset();
+                  console.log(res.data.data);
+                  user.data = res.data.data;
                })
                .catch((error) => console.log(error));
          }

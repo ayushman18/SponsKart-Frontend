@@ -39,6 +39,8 @@ import MessageBox from "../pages/dashboard/ChatBox/MessageBox";
 import MobileChatbox from "../pages/dashboard/ChatBox/MobileChatbox";
 import MessageCard from "../pages/dashboard/ChatBox/MessageCard";
 import BrandUpdatePost from "../pages/dashboard/BrandDashboard/BrandUpdatePost/BrandUpdatePost";
+import BasicRegister from "../pages/register/BasicRegister/BasicRegister";
+import ViewProposal from "../pages/Details/brand/ViewProposal/ViewProposal";
 
 export const router = createBrowserRouter([
    {
@@ -56,21 +58,33 @@ export const router = createBrowserRouter([
          {
             path: "/brand/:id",
             element: <BrandDetails></BrandDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/brand/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/brand/get/${params.id}`),
          },
          {
             path: "/organizer/:id",
             element: <OrganizerDetails></OrganizerDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/organizer/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/organizer/get/${params.id}`),
          },
          {
             path: "/creator/:id",
             element: <CreatorDetails></CreatorDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-hkgd.onrender.com/creator/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/creator/get/${params.id}`),
          },
          {
             path: "/post/brand/:id",
-            element: <BrandPostDetails></BrandPostDetails>,
+            element: (
+               <PrivateRoute>
+                  <BrandPostDetails></BrandPostDetails>
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "/view-proposal/:id",
+            element: (
+               <PrivateRoute>
+                  <ViewProposal></ViewProposal>
+               </PrivateRoute>
+            ),
          },
       ],
    },
@@ -83,7 +97,11 @@ export const router = createBrowserRouter([
             element: <Register></Register>,
          },
          {
-            path: "content-creator",
+            path: "basic-register",
+            element: <BasicRegister></BasicRegister>,
+         },
+         {
+            path: "creator",
             element: <ContentCreatorRegister></ContentCreatorRegister>,
          },
          {
@@ -215,7 +233,7 @@ export const router = createBrowserRouter([
                   path: "updatePost/:id",
                   element: <BrandUpdatePost></BrandUpdatePost>,
                   loader: ({ params }) =>
-                     fetch(`https://sponskart-hkgd.onrender.com/brand/post?postId=${params.id}`),
+                     fetch(`https://sponskart-server.vercel.app/brand/post?postId=${params.id}`),
                },
             ],
          },

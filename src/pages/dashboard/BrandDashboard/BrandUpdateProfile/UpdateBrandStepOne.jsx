@@ -48,37 +48,30 @@ const UpdateBrandStepOne = ({ register, selectedOption, setSelectedOption, optio
             placeholder="Update Brand Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("brandName")}
-            defaultValue={user.data.brandName}
+            defaultValue={user.data?.brandName}
          />
          <input
             type="text"
             placeholder="Update Brand Holder Name"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("HolderName")}
-            defaultValue={user.data.HolderName}
+            {...register("brandHolder")}
+            defaultValue={user.data?.brandHolder}
          />
-         <input
-            type="text"
-            placeholder="Update Username"
-            className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            readOnly
-            {...register("username")}
-            defaultValue={user.user.username}
-         />
+
          <input
             type="email"
             placeholder="Email"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
             {...register("email")}
-            defaultValue={user.data.email}
+            defaultValue={user.data?.email}
             readOnly
          />
          <input
             type="tel"
             placeholder="Phone Number"
             className="input input-bordered min-w-[300px] input-style px-4 py-8 mb-5"
-            {...register("phonenumber")}
-            defaultValue={user.user.phonenumber}
+            {...register("phoneNumber")}
+            defaultValue={user.data?.phoneNumber}
          />
          <Select
             className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"
@@ -94,7 +87,7 @@ const UpdateBrandStepOne = ({ register, selectedOption, setSelectedOption, optio
             {...register("location")}
          >
             {indianStates.map((state, index) => (
-               <option key={index} selected={state === user.location}>
+               <option key={index} selected={state === user.data?.location}>
                   {state}
                </option>
             ))}

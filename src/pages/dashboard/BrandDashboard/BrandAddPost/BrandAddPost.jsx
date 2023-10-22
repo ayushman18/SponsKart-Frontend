@@ -11,6 +11,7 @@ const BrandAddPost = () => {
    const [method, setMethod] = useState("giveaway");
    const [platforms, setPlatforms] = useState([]);
    const [types, setTypes] = useState([]);
+   const [questions, setQuestions] = useState([""]);
    const indianStates = [
       "Andhra Pradesh",
       "Arunachal Pradesh",
@@ -73,11 +74,26 @@ const BrandAddPost = () => {
 
    const handelMethod = (e) => {
       setMethod(e.target.value);
-      // console.log(e.target.value);
    };
 
-   const updatePost = (data) => {
-      data.id = user.user._id;
+   const addQuestion = () => {
+      setQuestions([...questions, ""]);
+   };
+
+   const removeQuestion = (index) => {
+      const updatedQuestions = [...questions];
+      updatedQuestions.splice(index, 1);
+      setQuestions(updatedQuestions);
+   };
+
+   const handleQuestionChange = (index, event) => {
+      const updatedQuestions = [...questions];
+      updatedQuestions[index] = event.target.value;
+      setQuestions(updatedQuestions);
+   };
+
+   const addPost = (data) => {
+      data.questions = questions;
       for (const key in data) {
          if (data[key] === "") {
             delete data[key];
@@ -87,18 +103,19 @@ const BrandAddPost = () => {
          delete data["audience"];
          delete data["price"];
       } else {
-         data.price = parseInt(data.price);
+         data.pricing = parseInt(data.pricing);
          delete data["description"];
       }
       data.date = new Date();
       data.brandId = user.user.brand;
-      data.platform = platforms?.map((type) => type.value);
-      data.categories = types?.map((type) => type.value);
+      data.platform = platforms;
+      data.categories = types;
       data.miniFollower = parseInt(data.miniFollower || 0);
       if (data.platform.length === 0 && data.categories.length === 0) {
          Swal.fire("Please add Platforms and Categories", "", "error");
          return;
       }
+      console.log(data);
       Swal.fire({
          title: "Are you sure?",
          text: "Do you want to add this post?",
@@ -110,7 +127,7 @@ const BrandAddPost = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .post("https://sponskart-hkgd.onrender.com/brand/add/post", data)
+               .post("https://sponskart-server.vercel.app/brand/add/post", data)
                .then((res) => {
                   console.log(res.data.data);
                   Swal.fire("Posted!", "Your post has been added.", "success");
@@ -120,14 +137,12 @@ const BrandAddPost = () => {
                .catch((error) => console.log(error));
          }
       });
-
-      console.log(data);
    };
 
    return (
       <div>
          <h2 className="text-black text-2xl text-center">Add post</h2>
-         <form onSubmit={handleSubmit(updatePost)}>
+         <form onSubmit={handleSubmit(addPost)}>
             <div className="grid md:grid-cols-2 gap-6 justify-center items-start">
                <div>
                   <label className="label">
@@ -204,43 +219,7 @@ const BrandAddPost = () => {
                      </div>
                   </>
                )}
-               {/* <div className="w-[300px]">
-                  <label className="label">
-                     <span className="label-text text-black text-base">Select The Platform</span>
-                  </label>
-                  <div className="collapse collapse-arrow bg-white">
-                     <input type="checkbox" name="my-accordion-2" />
-                     <div className="collapse-title bg-white text-sm font-semibold">Platform</div>
-                     <div className="collapse-content">
-                        <div className="form-control">
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="facebook" />
-                              <span className="label-text text-base">Facebook</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="linkedin" />
-                              <span className="label-text text-base">LinkedIn</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="youtube" />
-                              <span className="label-text text-base">Youtube</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="instagram" />
-                              <span className="label-text text-base">Instagram</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="twitter" />
-                              <span className="label-text text-base">Twitter</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={platformAdder} defaultValue="other" />
-                              <span className="label-text text-base">Other</span>
-                           </label>
-                        </div>
-                     </div>
-                  </div>
-               </div> */}
+
                <div>
                   <label className="label">
                      <span className="label-text text-black text-base">Select The Platforms</span>
@@ -267,69 +246,7 @@ const BrandAddPost = () => {
                      {...register("miniFollower")}
                   />
                </div>
-               {/* <div className="w-[300px]">
-                  <label className="label">
-                     <span className="label-text text-black text-base">
-                        Choose Catergories for your product
-                     </span>
-                  </label>
-                  <div className="collapse collapse-arrow bg-white">
-                     <input type="checkbox" name="my-accordion-2" />
-                     <div className="collapse-title bg-white text-sm font-semibold">Select Categories</div>
-                     <div className="collapse-content">
-                        <div className="form-control">
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="fitness" />
-                              <span className="label-text text-base">Fitness</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="healthCare" />
-                              <span className="label-text text-base">Health Care</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="lifeStyle" />
-                              <span className="label-text text-base">Lifestyle</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="cosmetics" />
-                              <span className="label-text text-base">Cosmetics</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="education" />
-                              <span className="label-text text-base">Education</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="technology" />
-                              <span className="label-text text-base">Technology</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="finance" />
-                              <span className="label-text text-base">Finance</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="clothing" />
-                              <span className="label-text text-base">Clothing</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="web3" />
-                              <span className="label-text text-base">Web3</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="food" />
-                              <span className="label-text text-base">Food (FMCG)</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="hospitality" />
-                              <span className="label-text text-base">Hospitality</span>
-                           </label>
-                           <label className="cursor-pointer justify-start gap-4 label">
-                              <input type="checkbox" onChange={typeAdder} defaultValue="others" />
-                              <span className="label-text text-base">Others</span>
-                           </label>
-                        </div>
-                     </div>
-                  </div>
-               </div> */}
+
                <div>
                   <label className="label">
                      <span className="label-text text-black text-base">
@@ -360,6 +277,29 @@ const BrandAddPost = () => {
                      ))}
                   </select>
                </div>
+
+               <div className="col-span-2">
+                  <div className="flex flex-wrap items-center gap-4">
+                     <p>Want to add questions?</p>
+                     <p onClick={addQuestion} className="btn btn-success">
+                        Add Question
+                     </p>
+                  </div>
+               </div>
+               {questions.map((question, index) => (
+                  <div key={index} className="join">
+                     <input
+                        type="text"
+                        className="input input-bordered min-w-[300px] input-style px-4 py-6 join-item"
+                        value={question}
+                        placeholder={`Type Question ${index + 1}`}
+                        onChange={(e) => handleQuestionChange(index, e)}
+                     />
+                     <p onClick={() => removeQuestion(index)} className="btn btn-error rounded-2xl join-item">
+                        Remove
+                     </p>
+                  </div>
+               ))}
             </div>
             <div className="flex justify-center items-center my-6">
                <button type="submit" className="btn btn-success">

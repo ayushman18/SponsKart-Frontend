@@ -22,23 +22,23 @@ const BrandPostCard = ({ data }) => {
                <p className="text-gray-700">{data.describe?.slice(0, 300) + "..."}</p>
                <div className="flex gap-4 my-2 items-center flex-wrap">
                   <p className="text-sm text-gray-600">Categories:</p>
-                  {data.categories?.map((category, index) => (
+                  {data?.categories?.map((category, index) => (
                      <div
-                        className="px-2 rounded-full border border-gray-400 text-center text-sm uppercase"
+                        className="px-2 rounded-full border border-gray-400 text-center text-sm"
                         key={index}
                      >
-                        {category}
+                        {category.label}
                      </div>
                   ))}
                </div>
                <div className="flex gap-4 my-2 items-center flex-wrap">
                   <p className="text-sm text-gray-600">Platforms:</p>
-                  {data.platform?.map((platform, index) => (
+                  {data?.platform?.map((platform, index) => (
                      <div
                         key={index}
-                        className="px-2 uppercase rounded-full border border-green-500 text-green-500 text-center text-sm"
+                        className="px-2 rounded-full border border-green-500 text-green-500 text-center text-sm"
                      >
-                        {platform}
+                        {platform.label}
                      </div>
                   ))}
                </div>
@@ -59,10 +59,12 @@ const BrandPostCard = ({ data }) => {
                   <FaUsers className="text-xl text-purple-500"></FaUsers>{" "}
                   <span>{data.miniFollower} Followers</span>
                </p>
-               <p className="flex gap-2 items-center my-3">
-                  <BiMaleFemale className="text-xl text-red-500"></BiMaleFemale>{" "}
-                  <span>{data.targetAudience} Audience</span>
-               </p>
+               {data.targetAudience && (
+                  <p className="flex gap-2 items-center my-3">
+                     <BiMaleFemale className="text-xl text-red-500"></BiMaleFemale>{" "}
+                     <span>{data.targetAudience} Audience</span>
+                  </p>
+               )}
 
                <Link to={`/post/brand/${data?._id}`}>
                   <button className="btn btn-success rounded-full btn-sm text-white hover:text-black">

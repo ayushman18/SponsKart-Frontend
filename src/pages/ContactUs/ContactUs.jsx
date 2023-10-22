@@ -9,7 +9,7 @@ const ContactUs = () => {
    const formData = (data) => {
       // console.log(data);
       axios
-         .post("https://sponskart-hkgd.onrender.com/contactUs", data)
+         .post("https://sponskart-server.vercel.app/contactUs", data)
          .then((res) => {
             console.log(res);
             reset();

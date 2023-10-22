@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 const BrandSearchCard = ({ data }) => {
-   // console.log(`https://sponskart-hkgd.onrender.com/+${data?.backgroundImage}`);
+   // console.log(`https://sponskart-server.vercel.app/+${data?.backgroundImage}`);
    return (
       <div className="card max-w-[420px] z-0 hover:shadow-2xl bg-base-100 rounded-2xl shadow-lg">
          <figure>
             <img
-               src={`https://sponskart-hkgd.onrender.com/${data?.backgroundImage}`}
+               src={data?.backgroundImage?.url}
                alt={data?.brandName}
                className="h-32 object-center object-cover w-full"
             />
@@ -22,15 +22,10 @@ const BrandSearchCard = ({ data }) => {
                         }  absolute -right-1 -top-1`}
                      ></div>
                      <div className="w-24 border-0 rounded-xl">
-                        <img src={`https://sponskart-hkgd.onrender.com/${data?.logo}`} alt="logo" />
+                        <img src={data.logo?.url} alt="logo" />
                      </div>
                   </div>
                ) : (
-                  // <img
-                  //    src={`https://sponskart-hkgd.onrender.com/${data?.logo}`}
-                  //    alt=""
-                  //    className="w-24 h-24 object-cover object-center bg-white text-black px-2 mx-auto z-50"
-                  // />
                   <div className="relative w-full h-24">
                      <FaUser className="text-8xl  bg-white text-black px-2 mx-auto z-50"></FaUser>
                      <div className={`w-4 h-4 rounded-full bg-yellow-500 absolute -right-1 -top-1`}></div>

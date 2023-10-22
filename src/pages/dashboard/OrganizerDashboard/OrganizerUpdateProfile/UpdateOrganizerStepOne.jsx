@@ -68,14 +68,7 @@ const UpdateOrganizerStepOne = ({ register, selectedOption, setSelectedOption })
             {...register("organizationHolder")}
             defaultValue={user.data.organizationHolder}
          />
-         <input
-            type="text"
-            placeholder="Update Username"
-            className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-            readOnly
-            {...register("username")}
-            defaultValue={user.user.username}
-         />
+
          <input
             type="email"
             placeholder="Email"
@@ -88,8 +81,8 @@ const UpdateOrganizerStepOne = ({ register, selectedOption, setSelectedOption })
             type="number"
             placeholder="Phone Number"
             className="input input-bordered w-full max-w-xs input-style px-4 py-8 mb-5"
-            {...register("phonenumber")}
-            defaultValue={user.user.phonenumber}
+            {...register("phoneNumber")}
+            defaultValue={user.data.phoneNumber}
          />
          <Select
             className="select select-bordered lg:mb-0 min-w-[300px] input-style px-4 h-16 mb-6"

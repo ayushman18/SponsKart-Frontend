@@ -17,9 +17,9 @@ const BrandDetails = () => {
       queryKey: ["posts"],
       queryFn: async () => {
          const res = await axios.get(
-            `https://sponskart-hkgd.onrender.com/brand/post/all?brandId=${data._id}`
+            `https://sponskart-server.vercel.app/brand/post/all?brandId=${data._id}`
          );
-         // console.log(res.data.data);
+         console.log(res.data.data);
          return res.data.data;
       },
    });
@@ -30,7 +30,7 @@ const BrandDetails = () => {
    return (
       <section className="bg-white">
          <img
-            src={`https://sponskart-hkgd.onrender.com/${data.backgroundImage}`}
+            src={data.backgroundImage?.url}
             alt="Background Image"
             className="h-64 object-cover w-full mb-5 shadow-xl"
          />
@@ -38,9 +38,9 @@ const BrandDetails = () => {
             <div className="order-2 lg:order-1">
                <div className="text-center hidden lg:block py-8 border-b border-[#5252526E]">
                   <img
-                     src={`https://sponskart-hkgd.onrender.com/${data.logo}`}
+                     src={data.logo?.url}
                      alt={data.brandName}
-                     className="w-32 bg-gray-300 px-2 mx-auto"
+                     className="w-32 h-28 object-cover bg-gray-300 px-2 mx-auto"
                   />
                   <div className="flex justify-center items-center gap-4 mx-auto">{data.HolderName}</div>
                   <p className="text-4xl">{data.brandName}</p>
@@ -120,7 +120,7 @@ const BrandDetails = () => {
                <div className="text-xl mt-9">
                   <p>About “{data.brandName}”</p>
                   <p>{data.shortDescription || ""}</p>
-                  <p>{data.longDescriptions || "User didn't update his profile yet."}</p>
+                  <p>{data.longDescription || "User didn't update his profile yet."}</p>
                </div>
                <div>
                   {posts?.map((post) => (
