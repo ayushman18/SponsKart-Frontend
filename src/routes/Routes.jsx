@@ -41,6 +41,7 @@ import MessageCard from "../pages/dashboard/ChatBox/MessageCard";
 import BrandUpdatePost from "../pages/dashboard/BrandDashboard/BrandUpdatePost/BrandUpdatePost";
 import BasicRegister from "../pages/register/BasicRegister/BasicRegister";
 import ViewProposal from "../pages/Details/brand/ViewProposal/ViewProposal";
+import ProposalDetails from "../pages/Details/brand/ProposalDetails/ProposalDetails";
 
 export const router = createBrowserRouter([
    {
@@ -83,6 +84,14 @@ export const router = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <ViewProposal></ViewProposal>
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "/proposal-details",
+            element: (
+               <PrivateRoute>
+                  <ProposalDetails></ProposalDetails>
                </PrivateRoute>
             ),
          },

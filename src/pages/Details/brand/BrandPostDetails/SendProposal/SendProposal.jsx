@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../../hooks/useAuth";
 // import axios from "axios";
-import { testInstance } from "../../../../../api/apiInstance";
+import { apiInstance } from "../../../../../api/apiInstance";
 import Swal from "sweetalert2";
 
 const SendProposal = ({ data, brand }) => {
@@ -20,7 +20,7 @@ const SendProposal = ({ data, brand }) => {
       data.questions.map((questions, index) => {
          proposalInfo.answers[`answer${index + 1}`] = info[`answer${index + 1}`];
       });
-      testInstance
+      apiInstance
          .post("proposal", proposalInfo)
          .then((res) => {
             if (res) {

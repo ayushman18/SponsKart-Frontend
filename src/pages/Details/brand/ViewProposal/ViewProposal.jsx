@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
-import { testInstance } from "../../../../api/apiInstance";
+import { apiInstance } from "../../../../api/apiInstance";
 import Loading from "../../../../components/Loading/Loading";
 import useAuth from "../../../../hooks/useAuth";
 
@@ -10,7 +10,7 @@ const ViewProposal = () => {
 
    const { data, isLoading } = useQuery(["proposal", id], async () => {
       try {
-         const res = await testInstance.get(`proposal/${id}?brandId=${user.data._id}`);
+         const res = await apiInstance.get(`proposal/${id}?brandId=${user.data._id}`);
          return res.data;
       } catch (error) {
          console.log(error);
@@ -48,9 +48,13 @@ const ViewProposal = () => {
                               <td>{proposal.proposalSender.name}</td>
                               <td>{proposal.proposal.slice(0, 30) + "..."}</td>
                               <td>
-                                 <button className="btn btn-success btn-sm normal-case mr-4">
+                                 <Link
+                                    to={`/proposal-details`}
+                                    className="btn btn-success btn-sm normal-case mr-4"
+                                    state={proposal}
+                                 >
                                     View Details
-                                 </button>
+                                 </Link>
                                  <button className="btn btn-warning btn-sm normal-case">Send Message</button>
                               </td>
                            </tr>
