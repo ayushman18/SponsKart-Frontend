@@ -127,7 +127,7 @@ const BrandAddPost = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .post("https://sponskart-server.vercel.app/brand/add/post", data)
+               .post("https://sponskart-server.onrender.com/brand/add/post", data)
                .then((res) => {
                   console.log(res.data.data);
                   Swal.fire("Posted!", "Your post has been added.", "success");

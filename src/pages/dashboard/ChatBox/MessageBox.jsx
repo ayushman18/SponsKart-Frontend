@@ -1,19 +1,75 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaArrowCircleRight, FaPaperclip, FaTrash } from "react-icons/fa";
+
+import ChatMessage from "./ChatMessage";
+
+import { useLocation, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { hostImage } from "../../../api/api";
+import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
+import { io } from "socket.io-client";
 
 const MessageBox = () => {
    const [imageUrl, setImageUrl] = useState([]);
+   const [file, setFile] = useState(null);
+   const { user } = useAuth();
+   const [messages, setMessages] = useState([]);
+   const [arrivalMsg, setArrivalMsg] = useState(null);
+   const socket = useRef();
+   const { id: chatId } = useParams();
+   const { state: chat } = useLocation();
 
-   const handelMessage = (e) => {
+   useEffect(() => {
+      socket.current = io(import.meta.env.VITE_ServerUrl);
+   }, []);
+
+   const handelMessage = async (e) => {
       e.preventDefault();
 
-      const message = e.target.message.value;
-      const uploadedFiles = e.target.files.files;
-      // console.log({ message, uploadedFiles });
+      const message = e.target.message.value.trim();
+
+      const image = file;
+      let hostedImage;
+      if (image) {
+         hostedImage = await hostImage(image);
+      }
+      console.log(hostedImage);
+
+      const newMessage = {
+         chatId: chatId,
+         sender: user.data._id,
+         text: message,
+         file: hostedImage,
+      };
+
+      let receiver;
+      if (chat.brand_admin === user.data._id) {
+         receiver = chat.creator_participant;
+      } else {
+         receiver = chat.brand_admin;
+      }
+
+      if (message || hostedImage?.url) {
+         socket.current.emit("message", { ...newMessage, receiver });
+
+         try {
+            const res = await axios.post("https://sponskart-server.onrender.com/message", newMessage);
+            console.log(res.data);
+            setMessages([...messages, res.data]);
+            e.target.message.value = "";
+            handelFileDelete();
+         } catch (error) {
+            console.log(error);
+         }
+      } else {
+         toast.error("message can not sent empty.");
+      }
    };
 
    const handelFile = (files) => {
-      // console.log(files);
+      console.log(files[0]);
+      setFile(files[0]);
       let imageArr = [];
 
       for (const file in files) {
@@ -25,92 +81,58 @@ const MessageBox = () => {
       setImageUrl(imageArr);
    };
 
+   const handelFileDelete = () => {
+      let file = document.getElementById("input-message_file");
+      let emptyFile = document.createElement("input");
+      emptyFile.type = "file";
+      file.files = emptyFile.files;
+      setImageUrl([]);
+      setFile(null);
+   };
+   useEffect(() => {
+      const getAllMessages = async () => {
+         try {
+            const res = await axios.get(`https://sponskart-server.onrender.com/message/${chatId}`);
+
+            setMessages(res.data);
+         } catch (error) {
+            console.log(error);
+         }
+      };
+      getAllMessages();
+   }, [chatId]);
+
+   useEffect(() => {
+      const getMsg = (msg) => {
+         console.log(msg);
+      };
+
+      socket.current.on("message", getMsg);
+
+      socket.current.emit("addUsers", user.data._id);
+      socket.current.on("getUsers", (users) => {
+         console.log(users);
+      });
+      socket.current.on("getMessage", (msg) => {
+         setArrivalMsg(msg);
+      });
+   }, [user, socket]);
+   useEffect(() => {
+      if (
+         arrivalMsg &&
+         (arrivalMsg.sender === chat.brand_admin || arrivalMsg.sender === chat.creator_participant)
+      ) {
+         setMessages((prev) => [...prev, arrivalMsg]);
+      }
+   }, [arrivalMsg, chat]);
+
    return (
       <div className="md:h-full h-[650px] border-2 p-2 md:p-3 relative border-black rounded-2xl ">
          <div className="max-h-[575px] md:max-h-[400px] overflow-x-auto">
-            <div className="chat chat-start">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-            </div>
-            <div className="chat chat-end">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was you who would bring balance to the Force</div>
-            </div>
-            <div className="chat chat-start">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-            </div>
-            <div className="chat chat-end">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was you who would bring balance to the Force</div>
-            </div>
-            <div className="chat chat-start">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-            </div>
-            <div className="chat chat-end">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was you who would bring balance to the Force</div>
-            </div>
-            <div className="chat chat-start">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-            </div>
-            <div className="chat chat-end">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was you who would bring balance to the Force</div>
-            </div>
-            <div className="chat chat-start">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
-            </div>
-            <div className="chat chat-end">
-               <div className="chat-image avatar">
-                  <div className="w-6 rounded-full">
-                     <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                  </div>
-               </div>
-               <div className="chat-bubble">It was you who would bring balance to the Force</div>
-            </div>
+            <ChatMessage messages={messages} userId={user.data._id}></ChatMessage>
          </div>
          <div className="absolute bottom-4 sc">
-            <div className="flex overflow-x-scroll items-center">
+            <div className="flex items-center">
                {imageUrl.length > 0 && (
                   <>
                      {imageUrl.map((image, index) => (
@@ -118,16 +140,7 @@ const MessageBox = () => {
                            <img src={image} alt="" height={100} width={100} />
                         </div>
                      ))}
-                     <button
-                        className="btn btn-circle bg-red-500 text-white ml-4"
-                        onClick={() => {
-                           let file = document.getElementById("input-message_file");
-                           var emptyFile = document.createElement("input");
-                           emptyFile.type = "file";
-                           file.files = emptyFile.files;
-                           setImageUrl([]);
-                        }}
-                     >
+                     <button className="btn btn-circle bg-red-500 text-white ml-4" onClick={handelFileDelete}>
                         <FaTrash></FaTrash>
                      </button>
                   </>

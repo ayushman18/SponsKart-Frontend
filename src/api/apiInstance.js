@@ -3,11 +3,11 @@ const token = localStorage.getItem("token");
 console.log(token);
 
 export const api = axios.create({
-   baseURL: "https://sponskart-server.vercel.app/",
+   baseURL: "https://sponskart-server.onrender.com/",
 });
 
 export const apiInstance = axios.create({
-   baseURL: "https://sponskart-server.vercel.app/",
+   baseURL: "https://sponskart-server.onrender.com/",
    timeout: 10000,
    headers: { authorization: `Bearer ${token}` },
 });

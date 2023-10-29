@@ -15,7 +15,7 @@ const BrandManagePost = () => {
       queryKey: ["data"],
       queryFn: () =>
          axios
-            .get(`https://sponskart-server.vercel.app/brand/post/all?brandId=${user.user.brand}`)
+            .get(`https://sponskart-server.onrender.com/brand/post/all?brandId=${user.user.brand}`)
             .then((res) => res.data.data)
             .catch((err) => console.log(err)),
    });
@@ -32,7 +32,7 @@ const BrandManagePost = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .delete(`https://sponskart-server.vercel.app/brand/deletepost?postId=${id}`)
+               .delete(`https://sponskart-server.onrender.com/brand/deletepost?postId=${id}`)
                .then((res) => {
                   console.log(res.data);
                   refetch();

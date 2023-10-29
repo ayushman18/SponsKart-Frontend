@@ -20,16 +20,16 @@ const BrandPostDetails = () => {
    const { data, isLoading } = useQuery({
       queryKey: ["post", id],
       queryFn: async () => {
-         const res = await axios.get(`https://sponskart-server.vercel.app/brand/post?postId=${id}`);
-
+         const res = await axios.get(`https://sponskart-server.onrender.com/brand/post?postId=${id}`);
+         console.log(res);
          return res.data.data;
       },
    });
-
+   console.log(data);
    useEffect(() => {
       if (data?.brandId) {
          axios
-            .get(`https://sponskart-server.vercel.app/brand/get/${data.brandId}`)
+            .get(`https://sponskart-server.onrender.com/brand/get/${data.brandId}`)
             .then((response) => {
                setBrand(response.data.data);
                setIsPoster(data.brandId === user.user.brand);

@@ -59,7 +59,7 @@ const OrganizerRegister = () => {
 
       if (imgUrl) {
          axios
-            .put("https://sponskart-server.vercel.app/organizer/update", data)
+            .put("https://sponskart-server.onrender.com/organizer/update", data)
             .then((res) => {
                console.log("here", res.data);
 
@@ -69,6 +69,7 @@ const OrganizerRegister = () => {
                } else {
                   setLoading(false);
                   navigate("/");
+                  window.location.reload();
                }
             })
             .catch((err) => {

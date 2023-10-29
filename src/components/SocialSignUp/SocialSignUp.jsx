@@ -14,7 +14,7 @@ const SocialSignUp = ({ role }) => {
             console.log(res.user);
             if (res.user) {
                axios
-                  .post("https://sponskart-server.vercel.app/register", {
+                  .post("https://sponskart-server.onrender.com/register", {
                      name: res.user.displayName,
                      email: res.user.email,
                      type: role,
@@ -37,7 +37,7 @@ const SocialSignUp = ({ role }) => {
             console.log(res.user);
             if (res.user) {
                axios
-                  .post("https://sponskart-server.vercel.app/register", {
+                  .post("https://sponskart-server.onrender.com/register", {
                      name: res.user.displayName,
                      email: res.user.email,
                      type: role,

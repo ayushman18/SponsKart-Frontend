@@ -2,13 +2,18 @@ import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import DashboardNavbar from "../Shared/DashboardNavbar/DashboardNavbar";
 import DashboardTopBar from "../Shared/DashboardTopBar/DashboardTopBar";
+import Loading from "../components/Loading/Loading";
 
 const DashboardLayout = () => {
-   const { user } = useAuth();
+   const { user, loading } = useAuth();
 
    const arr = [1, 2, 3, 4, 5, 6, 7, 8];
    const percent = (Object.keys(user.data).length / 20) * 100;
    const number = Math.round(percent / (100 / 8));
+
+   if (loading) {
+      return <Loading />;
+   }
 
    return (
       <section className="bg-base-300">

@@ -57,7 +57,7 @@ const BrandRegister = () => {
 
       if (imgUrl) {
          axios
-            .put("https://sponskart-server.vercel.app/brand/update", data)
+            .put("https://sponskart-server.onrender.com/brand/update", data)
             .then((res) => {
                console.log("here", res.data);
 
@@ -67,6 +67,7 @@ const BrandRegister = () => {
                } else {
                   setLoading(false);
                   navigate("/");
+                  window.location.reload();
                }
             })
             .catch((err) => {

@@ -36,7 +36,7 @@ const BasicRegister = () => {
             updateUser({ name: data.name })
                .then(() => {
                   axios
-                     .post("https://sponskart-server.vercel.app/register", {
+                     .post("https://sponskart-server.onrender.com/register", {
                         name: data.name,
                         email: data.email,
                         type: role,

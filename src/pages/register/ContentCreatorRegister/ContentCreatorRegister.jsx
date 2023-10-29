@@ -60,7 +60,7 @@ const ContentCreatorRegister = () => {
 
       if (imgUrl) {
          axios
-            .put("https://sponskart-server.vercel.app/creator/update", data)
+            .put("https://sponskart-server.onrender.com/creator/update", data)
             .then((res) => {
                console.log("here", res.data);
 
@@ -70,6 +70,7 @@ const ContentCreatorRegister = () => {
                } else {
                   setLoading(false);
                   navigate("/");
+                  window.location.reload();
                }
             })
             .catch((err) => {

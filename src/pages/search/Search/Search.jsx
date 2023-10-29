@@ -19,7 +19,7 @@ const Search = () => {
    const { data: result, isLoading } = useQuery({
       queryKey: ["data"],
       queryFn: async () => {
-         const res = await axios.get(`https://sponskart-server.vercel.app/${category}/getall?text=${text}`);
+         const res = await axios.get(`https://sponskart-server.onrender.com/${category}/getall?text=${text}`);
          return res.data.data;
       },
    });
@@ -29,7 +29,7 @@ const Search = () => {
       // console.log(JSON.stringify(filter));
       // axios
       //    .get(
-      //       `https://sponskart-server.vercel.app/search?type=${category}&search=${text}&filter=${JSON.stringify(
+      //       `https://sponskart-server.onrender.com/search?type=${category}&search=${text}&filter=${JSON.stringify(
       //          filter
       //       )}`
       //    )

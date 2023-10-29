@@ -17,7 +17,7 @@ const BrandDetails = () => {
       queryKey: ["posts"],
       queryFn: async () => {
          const res = await axios.get(
-            `https://sponskart-server.vercel.app/brand/post/all?brandId=${data._id}`
+            `https://sponskart-server.onrender.com/brand/post/all?brandId=${data._id}`
          );
          console.log(res.data.data);
          return res.data.data;

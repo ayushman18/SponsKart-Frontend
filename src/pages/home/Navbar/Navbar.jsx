@@ -17,7 +17,7 @@ const Navbar = () => {
       setOnline(!online);
 
       axios
-         .put(`https://sponskart-server.vercel.app/${user.user.type}/update`, {
+         .put(`https://sponskart-server.onrender.com/${user.user.type}/update`, {
             status: !online ? "online" : "offline",
             id: user.data._id,
          })

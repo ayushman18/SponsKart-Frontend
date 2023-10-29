@@ -3,6 +3,7 @@ import useAuth from "../../../../../hooks/useAuth";
 // import axios from "axios";
 import { apiInstance } from "../../../../../api/apiInstance";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const SendProposal = ({ data, brand }) => {
    const { register, handleSubmit } = useForm();
@@ -27,7 +28,10 @@ const SendProposal = ({ data, brand }) => {
                Swal.fire("Proposal Send!", "You proposal send to brand!", "success");
             }
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            console.log(err);
+            toast.error("Something went wrong please try again after refresh.");
+         });
       console.log(proposalInfo);
       document.getElementById("my_modal_1").close();
    };

@@ -68,7 +68,7 @@ const BrandUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-server.vercel.app/brand/update`, data)
+               .put(`https://sponskart-server.onrender.com/brand/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;

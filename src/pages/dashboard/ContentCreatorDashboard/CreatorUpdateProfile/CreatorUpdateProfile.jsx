@@ -58,7 +58,7 @@ const CreatorUpdateProfile = () => {
       }).then((result) => {
          if (result.isConfirmed) {
             axios
-               .put(`https://sponskart-server.vercel.app/creator/update`, data)
+               .put(`https://sponskart-server.onrender.com/creator/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;

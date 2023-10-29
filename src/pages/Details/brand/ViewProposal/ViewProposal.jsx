@@ -28,7 +28,7 @@ const ViewProposal = () => {
             <button className="btn btn-link normal-case "> View Post</button>
          </Link>
          <div>
-            {data.length === 0 ? (
+            {data?.length === 0 ? (
                <p>No proposal Found</p>
             ) : (
                <div className="overflow-x-auto">
@@ -42,7 +42,7 @@ const ViewProposal = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {data.map((proposal, index) => (
+                        {data?.map((proposal, index) => (
                            <tr className="bg-base-200" key={proposal._id}>
                               <th>{index + 1}</th>
                               <td>{proposal.proposalSender.name}</td>
@@ -55,7 +55,6 @@ const ViewProposal = () => {
                                  >
                                     View Details
                                  </Link>
-                                 <button className="btn btn-warning btn-sm normal-case">Send Message</button>
                               </td>
                            </tr>
                         ))}

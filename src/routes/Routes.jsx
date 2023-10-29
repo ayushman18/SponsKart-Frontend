@@ -59,17 +59,17 @@ export const router = createBrowserRouter([
          {
             path: "/brand/:id",
             element: <BrandDetails></BrandDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/brand/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.onrender.com/brand/get/${params.id}`),
          },
          {
             path: "/organizer/:id",
             element: <OrganizerDetails></OrganizerDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/organizer/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.onrender.com/organizer/get/${params.id}`),
          },
          {
             path: "/creator/:id",
             element: <CreatorDetails></CreatorDetails>,
-            loader: ({ params }) => fetch(`https://sponskart-server.vercel.app/creator/get/${params.id}`),
+            loader: ({ params }) => fetch(`https://sponskart-server.onrender.com/creator/get/${params.id}`),
          },
          {
             path: "/post/brand/:id",
@@ -242,7 +242,7 @@ export const router = createBrowserRouter([
                   path: "updatePost/:id",
                   element: <BrandUpdatePost></BrandUpdatePost>,
                   loader: ({ params }) =>
-                     fetch(`https://sponskart-server.vercel.app/brand/post?postId=${params.id}`),
+                     fetch(`https://sponskart-server.onrender.com/brand/post?postId=${params.id}`),
                },
             ],
          },

@@ -1,23 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../../../api/apiInstance";
 import Loading from "../../../../components/Loading/Loading";
 import { FaArrowAltCircleRight, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { handelCreateChat } from "../../../../api/chatApi";
+import { toast } from "react-toastify";
 
 const ProposalDetails = () => {
    const location = useLocation();
-   const { answers, proposal, proposalSender, questions } = location.state;
+   const navigate = useNavigate();
+   const { answers, proposal, proposalSender, questions, brandId, postId } = location.state;
+   console.log(location.state);
    const { data, isLoading } = useQuery(["sender", proposalSender], async () => {
       const res = await api.get(`/creator/get/${proposalSender.creator}`);
       return res.data.data;
    });
+
    if (isLoading) {
       return <Loading></Loading>;
    }
    return (
       <div className="container mx-auto">
          <div className="flex justify-end">
-            <button className="btn btn-info">Send Message</button>
+            <button
+               className="btn btn-info"
+               onClick={async () => {
+                  const data = await handelCreateChat(brandId, proposalSender.creator, postId);
+                  if (data) {
+                     navigate(`/dashboard/messages/${data._id}`, { state: data });
+                  } else {
+                     toast.error("Something went wrong please try again after refresh.");
+                  }
+               }}
+            >
+               Send Message
+            </button>
          </div>
          <div className="md:grid grid-cols-3 gap-8">
             <div>

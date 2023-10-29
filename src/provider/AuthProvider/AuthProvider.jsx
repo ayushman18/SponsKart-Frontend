@@ -118,14 +118,21 @@ const AuthProvider = ({ children }) => {
 
          if (loggedUser) {
             axios
-               .post("https://sponskart-server.vercel.app/signin", { email: loggedUser?.email })
+               .post("https://sponskart-server.onrender.com/signin", { email: loggedUser?.email })
                .then((res) => {
                   setLoading(false);
                   setUser(res.data.data);
                   console.log(res.data.data);
                   localStorage.setItem("token", res.data.data.token);
                })
-               .catch((err) => console.log(err));
+               .catch((err) => {
+                  setLoading(false);
+                  console.log(err);
+               });
+         } else {
+            setUser(null);
+            setLoading(false);
+            localStorage.remove("token");
          }
       });
       return () => unsubscribe();
