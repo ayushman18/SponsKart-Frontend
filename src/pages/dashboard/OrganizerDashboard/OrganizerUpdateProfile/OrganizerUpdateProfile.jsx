@@ -9,6 +9,7 @@ import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { hostImage } from "../../../../api/api";
 import { api } from "../../../../api/apiInstance";
+import { toast } from "react-toastify";
 
 const OrganizerUpdateProfile = () => {
    const { user } = useAuth();
@@ -58,8 +59,17 @@ const OrganizerUpdateProfile = () => {
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;
+                  Swal.fire({
+                     title: "Your profile updated!",
+                     text: "Thank you.",
+                     showConfirmButton: false,
+                     timer: 2000,
+                  });
                })
-               .catch((error) => console.log(error));
+               .catch((error) => {
+                  console.log(error);
+                  toast.error("Something went wrong. Please try again");
+               });
          }
       });
    };
