@@ -22,19 +22,25 @@ const Banner = () => {
             <div className="mb-10">
                <span>Popular: </span>
                <Link to={"/"} className="text-blue-400">
-                  Digital Marketing,{" "}
+                  Education,{" "}
                </Link>
                <Link to={"/"} className="text-blue-400">
-                  Video Animation,{" "}
+                  Media,{" "}
                </Link>
                <Link to={"/"} className="text-blue-400">
-                  Music & Audio,{" "}
+                  Gaming,{" "}
                </Link>
                <Link to={"/"} className="text-blue-400">
-                  Programming & Tech,{" "}
+                  Tech,{" "}
                </Link>
                <Link to={"/"} className="text-blue-400">
-                  Business{" "}
+                  Lifestyle{" "}
+               </Link>
+               <Link to={"/"} className="text-blue-400">
+                  Music{" "}
+               </Link>
+               <Link to={"/"} className="text-blue-400">
+                  Hospitality{" "}
                </Link>
             </div>
 

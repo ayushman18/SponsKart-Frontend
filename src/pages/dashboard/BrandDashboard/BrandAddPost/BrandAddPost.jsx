@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
+import { api } from "../../../../api/apiInstance";
 
 const BrandAddPost = () => {
    const { user } = useAuth();
@@ -126,8 +126,7 @@ const BrandAddPost = () => {
          confirmButtonText: "Yes, Add Post",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .post("https://sponskart-server.onrender.com/brand/add/post", data)
+            api.post("brand/add/post", data)
                .then((res) => {
                   console.log(res.data.data);
                   Swal.fire("Posted!", "Your post has been added.", "success");

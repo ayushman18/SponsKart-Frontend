@@ -9,9 +9,9 @@ import UpdateBrandStepOne from "./UpdateBrandStepOne";
 import UpdateBrandStepTwo from "./UpdateBrandStepTwo";
 import UpdateBrandStepThree from "./UpdateBrandStepThree";
 import { useState } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { hostImage } from "../../../../api/api";
+import { api } from "../../../../api/apiInstance";
 
 const BrandUpdateProfile = () => {
    const { user } = useAuth();
@@ -67,8 +67,7 @@ const BrandUpdateProfile = () => {
          confirmButtonText: "Yes, Update!",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .put(`https://sponskart-server.onrender.com/brand/update`, data)
+            api.put(`brand/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;

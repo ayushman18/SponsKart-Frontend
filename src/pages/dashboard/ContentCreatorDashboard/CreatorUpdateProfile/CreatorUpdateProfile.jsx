@@ -8,10 +8,10 @@ import useStep from "../../../../hooks/useStep";
 import UpdateCreatorStepOne from "./UpdateCreatorStepOne";
 import UpdateCreatorStepTwo from "./UpdateCreatorStepTwo";
 import UpdateCreatorStepThree from "./UpdateCreatorStepThree";
-import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { hostImage } from "../../../../api/api";
+import { api } from "../../../../api/apiInstance";
 
 // todo: fix file upload bug
 
@@ -57,8 +57,7 @@ const CreatorUpdateProfile = () => {
          confirmButtonText: "Yes, Update!",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .put(`https://sponskart-server.onrender.com/creator/update`, data)
+            api.put(`creator/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;

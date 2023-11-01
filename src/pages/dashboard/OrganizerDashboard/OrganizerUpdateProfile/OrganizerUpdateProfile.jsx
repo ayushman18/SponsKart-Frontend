@@ -4,11 +4,11 @@ import Steps from "../../../../components/Steps/Steps";
 import UpdateOrganizerStepOne from "./UpdateOrganizerStepOne";
 import UpdateOrganizerStepTwo from "./UpdateOrganizerStepTwo";
 import UpdateOrganizerStepThree from "./UpdateOrganizerStepThree";
-import axios from "axios";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { hostImage } from "../../../../api/api";
+import { api } from "../../../../api/apiInstance";
 
 const OrganizerUpdateProfile = () => {
    const { user } = useAuth();
@@ -54,8 +54,7 @@ const OrganizerUpdateProfile = () => {
          confirmButtonText: "Yes, Update!",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .put(`https://sponskart-server.onrender.com/organizer/update`, data)
+            api.put(`organizer/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;

@@ -42,11 +42,13 @@ import BrandUpdatePost from "../pages/dashboard/BrandDashboard/BrandUpdatePost/B
 import BasicRegister from "../pages/register/BasicRegister/BasicRegister";
 import ViewProposal from "../pages/Details/brand/ViewProposal/ViewProposal";
 import ProposalDetails from "../pages/Details/brand/ProposalDetails/ProposalDetails";
+import Error from "../components/Error/Error";
 
 export const router = createBrowserRouter([
    {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement: <Error></Error>,
       children: [
          {
             path: "/",

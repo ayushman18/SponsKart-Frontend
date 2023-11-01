@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 const BrandSearchCard = ({ data }) => {
-   // console.log(`https://sponskart-server.onrender.com/+${data?.backgroundImage}`);
    return (
       <div className="card max-w-[420px] z-0 hover:shadow-2xl bg-base-100 rounded-2xl shadow-lg">
          <figure>

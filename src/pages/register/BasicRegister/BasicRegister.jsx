@@ -5,11 +5,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SocialSignUp from "../../../components/SocialSignUp/SocialSignUp";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
+import { api } from "../../../api/apiInstance";
 
 const BasicRegister = () => {
    const { emailPassSignUp, updateUser } = useAuth();
    const [showPass, setShowPass] = useState(false);
+   const [loading, setLoading] = useState(false);
    const location = useLocation();
    const [agree, setAgree] = useState(false);
    const {
@@ -23,43 +24,61 @@ const BasicRegister = () => {
    const onSubmit = (data) => {
       if (!agree) {
          toast.error("Please agree with terms and conditions");
+
          return;
       }
       if (data.password !== data.confirmPassword) {
          toast.error("Password does not match.");
          return;
       }
-      console.log(data);
-      emailPassSignUp(data.email, data.password)
-         .then((res) => {
-            console.log(res.user);
-            updateUser({ name: data.name })
-               .then(() => {
-                  axios
-                     .post("https://sponskart-server.onrender.com/register", {
-                        name: data.name,
-                        email: data.email,
-                        type: role,
+      api.post("register", {
+         name: data.name,
+         email: data.email,
+         type: role,
+      })
+         .then((response) => {
+            console.log(response.data.data.result);
+            emailPassSignUp(data.email, data.password)
+               .then((res) => {
+                  console.log(res.user);
+                  updateUser({ name: data.name })
+                     .then(() => {
+                        setLoading(false);
+                        navigate(`/register/${role}`, { state: response.data.data.result });
                      })
-                     .then((res) => {
-                        navigate(`/register/${role}`, { state: res.data.data.result });
-                        console.log(res.data.data.result);
-                     })
-                     .catch((err) => console.log(err));
+                     .catch((err) => {
+                        console.log(err);
+                        toast.error("An error occurred while creating user. Please try again");
+                     });
                })
                .catch((err) => {
                   console.log(err);
+                  toast.error("An error occurred while creating user. Please try again");
                });
          })
          .catch((err) => {
             console.log(err);
             toast.error("An error occurred while creating user. Please try again");
          });
+      setLoading(true);
    };
    const checked = () => {
       const checkbox = document.getElementById("agree");
       setAgree(checkbox.checked);
    };
+
+   if (loading) {
+      return (
+         <div>
+            <h2 className="text-xl">Thanks for joining us. Please wait we are creating your account!! </h2>
+            <div>
+               <span className="loading loading-ring loading-sm"></span>
+               <span className="loading loading-ring loading-sm"></span>
+               <span className="loading loading-ring loading-sm"></span>
+            </div>
+         </div>
+      );
+   }
 
    return (
       <div className="mx-auto lg:min-w-[50vw]">
@@ -184,7 +203,7 @@ const BasicRegister = () => {
                : ""}
          </p>
 
-         <SocialSignUp role={role}></SocialSignUp>
+         <SocialSignUp role={role} register={true} setLoading={setLoading}></SocialSignUp>
       </div>
    );
 };

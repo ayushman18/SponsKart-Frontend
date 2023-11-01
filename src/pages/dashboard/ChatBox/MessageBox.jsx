@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { FaArrowCircleRight, FaPaperclip, FaTrash } from "react-icons/fa";
-
 import ChatMessage from "./ChatMessage";
-
 import { useLocation, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { hostImage } from "../../../api/api";
-import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { io } from "socket.io-client";
+import { api } from "../../../api/apiInstance";
 
 const MessageBox = () => {
    const [imageUrl, setImageUrl] = useState([]);
@@ -54,7 +52,7 @@ const MessageBox = () => {
          socket.current.emit("message", { ...newMessage, receiver });
 
          try {
-            const res = await axios.post("https://sponskart-server.onrender.com/message", newMessage);
+            const res = await api.post("message", newMessage);
             console.log(res.data);
             setMessages([...messages, res.data]);
             e.target.message.value = "";
@@ -92,7 +90,7 @@ const MessageBox = () => {
    useEffect(() => {
       const getAllMessages = async () => {
          try {
-            const res = await axios.get(`https://sponskart-server.onrender.com/message/${chatId}`);
+            const res = await api.get(`message/${chatId}`);
 
             setMessages(res.data);
          } catch (error) {

@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import MessageCard from "./MessageCard";
 import { Outlet } from "react-router-dom";
-import axios from "axios";
+
 import useAuth from "../../../hooks/useAuth";
+import { api } from "../../../api/apiInstance";
 
 const ChatBox = () => {
    const { user } = useAuth();
 
    const { data: chats = [], isLoading } = useQuery(["data"], async () => {
-      const res = await axios.get(`https://sponskart-server.onrender.com/chat/${user.data._id}`);
+      const res = await api.get(`chat/${user.data._id}`);
       return res.data.result;
    });
 

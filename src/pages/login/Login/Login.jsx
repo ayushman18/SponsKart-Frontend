@@ -4,6 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import SocialSignUp from "../../../components/SocialSignUp/SocialSignUp";
 
 const Login = () => {
    const { emailPassSignIn } = useAuth();
@@ -37,6 +38,7 @@ const Login = () => {
             });
 
             navigate(from);
+            window.location.reload();
          })
 
          .catch((err) => {
@@ -112,6 +114,7 @@ const Login = () => {
                </button>
             </div>
          </form>
+         <SocialSignUp setLoading={setLoading}></SocialSignUp>
       </div>
    );
 };

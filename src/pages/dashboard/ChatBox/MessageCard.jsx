@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
 import moment from "moment";
 import { toast } from "react-toastify";
+import { api } from "../../../api/apiInstance";
 // import { socket } from "../../../socket";
 
 const MessageCard = ({ chat }) => {
@@ -30,8 +30,7 @@ const MessageCard = ({ chat }) => {
          setLoading(false);
       }
       if (type && oppositeId) {
-         axios
-            .get(`https://sponskart-server.onrender.com/${type}/get/${oppositeId}`)
+         api.get(`${type}/get/${oppositeId}`)
             .then((res) => {
                setData(res.data.data);
                setLoading(false);

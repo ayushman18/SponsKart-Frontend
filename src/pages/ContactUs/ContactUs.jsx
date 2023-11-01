@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import background from "./../../assets/register/background.png";
-import axios from "axios";
+
 import { toast } from "react-toastify";
+import { api } from "../../api/apiInstance";
 
 const ContactUs = () => {
    const { register, handleSubmit, reset } = useForm();
 
    const formData = (data) => {
       // console.log(data);
-      axios
-         .post("https://sponskart-server.onrender.com/contactUs", data)
+      api.post("contactUs", data)
          .then((res) => {
             console.log(res);
             reset();

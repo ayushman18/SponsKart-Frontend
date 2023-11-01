@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { hostImage } from "../../../api/api";
+import { api } from "../../../api/apiInstance";
 
 const OrganizerRegister = () => {
    const [loading, setLoading] = useState(false);
@@ -53,35 +53,38 @@ const OrganizerRegister = () => {
    const onSubmit = async (data) => {
       setLoading(true);
       data.id = location.state.organizer;
-      const imgUrl = await hostImage(data.logo[0]);
-      data.logo = imgUrl;
+      let imgUrl;
+      if (data.logo[0]) {
+         imgUrl = await hostImage(data.logo[0]);
+         data.logo = imgUrl;
+         if (!imgUrl) {
+            setLoading(false);
+            toast.error("Something went wrong please try again.");
+            return;
+         }
+      }
       console.log(data);
 
-      if (imgUrl) {
-         axios
-            .put("https://sponskart-server.onrender.com/organizer/update", data)
-            .then((res) => {
-               console.log("here", res.data);
+      api.put("organizer/update", data)
+         .then((res) => {
+            console.log("here", res.data);
 
-               if (res.data.code === "ERR_BAD_REQUEST") {
-                  setLoading(false);
-                  toast.error(res.data.message);
-               } else {
-                  setLoading(false);
-                  navigate("/");
-                  window.location.reload();
-               }
-            })
-            .catch((err) => {
+            if (res.data.code === "ERR_BAD_REQUEST") {
                setLoading(false);
-               if (err.code) {
-                  toast.error(err.response.data.message);
-               }
-               console.log(err);
-            });
-      } else {
-         toast.error("Something went wrong.");
-      }
+               toast.error(res.data.message);
+            } else {
+               setLoading(false);
+               navigate("/");
+               window.location.reload();
+            }
+         })
+         .catch((err) => {
+            setLoading(false);
+            if (err.code) {
+               toast.error(err.response.data.message);
+            }
+            console.log(err);
+         });
    };
 
    if (loading) {

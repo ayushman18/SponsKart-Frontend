@@ -1,8 +1,8 @@
-import axios from "axios";
 import ManagePostCard from "../../../../components/ManagePostCard/ManagePostCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { api } from "../../../../api/apiInstance";
 
 const BrandManagePost = () => {
    const { user } = useAuth();
@@ -14,8 +14,8 @@ const BrandManagePost = () => {
    } = useQuery({
       queryKey: ["data"],
       queryFn: () =>
-         axios
-            .get(`https://sponskart-server.onrender.com/brand/post/all?brandId=${user.user.brand}`)
+         api
+            .get(`brand/post/all?brandId=${user.user.brand}`)
             .then((res) => res.data.data)
             .catch((err) => console.log(err)),
    });
@@ -31,8 +31,7 @@ const BrandManagePost = () => {
          confirmButtonText: "Yes, delete it!",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .delete(`https://sponskart-server.onrender.com/brand/deletepost?postId=${id}`)
+            api.delete(`brand/deletepost?postId=${id}`)
                .then((res) => {
                   console.log(res.data);
                   refetch();

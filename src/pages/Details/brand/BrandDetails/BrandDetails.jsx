@@ -7,8 +7,8 @@ import twitter from "./../../../../assets/socialIcon/twitter.png";
 import { Rating } from "@smastrom/react-rating";
 import BrandPostCard from "../BrandPostCard/BrandPostCard";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect } from "react";
+import { api } from "../../../../api/apiInstance";
 
 const BrandDetails = () => {
    const { data } = useLoaderData();
@@ -16,9 +16,7 @@ const BrandDetails = () => {
    const { data: posts } = useQuery({
       queryKey: ["posts"],
       queryFn: async () => {
-         const res = await axios.get(
-            `https://sponskart-server.onrender.com/brand/post/all?brandId=${data._id}`
-         );
+         const res = await api.get(`brand/post/all?brandId=${data._id}`);
          console.log(res.data.data);
          return res.data.data;
       },

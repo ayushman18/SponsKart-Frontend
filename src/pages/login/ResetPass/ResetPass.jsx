@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { api } from "../../../api/apiInstance";
 
 const ResetPass = () => {
    const { register, handleSubmit } = useForm();
@@ -19,8 +19,7 @@ const ResetPass = () => {
       }
 
       const password = data.confirm_password;
-      axios
-         .post(`https://sponskart-server.onrender.com/resetpassword?token=${token}`, { password })
+      api.post(`resetpassword?token=${token}`, { password })
          .then((res) => {
             console.log(res.status);
             if (res.status === 200) {

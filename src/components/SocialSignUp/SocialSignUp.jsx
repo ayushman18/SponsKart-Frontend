@@ -1,32 +1,57 @@
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { api } from "../../api/apiInstance";
 
-const SocialSignUp = ({ role }) => {
-   const { googleLogin, facebookLogin } = useAuth();
+const SocialSignUp = ({ role, register, setLoading }) => {
+   const { googleLogin, facebookLogin, deleteRegisterUser } = useAuth();
    const navigate = useNavigate();
 
    const handelGoogleLogin = () => {
+      setLoading(true);
+
       googleLogin()
          .then((res) => {
             console.log(res.user);
-            if (res.user) {
-               axios
-                  .post("https://sponskart-server.onrender.com/register", {
-                     name: res.user.displayName,
-                     email: res.user.email,
-                     type: role,
-                  })
+            if (res.user && register) {
+               api.post("register", {
+                  name: res.user.displayName,
+                  email: res.user.email,
+                  type: role,
+               })
                   .then((res) => {
+                     setLoading(false);
                      navigate(`/register/${role}`, { state: res.data.data.result });
                      console.log(res.data.data.result);
                   })
-                  .catch((err) => console.log(err));
+                  .catch((err) => {
+                     setLoading(false);
+                     console.log(err.response.data.message);
+                     if (err.response.data) {
+                        toast.error(err.response.data.message);
+                        navigate("/");
+                     }
+                  });
+            } else {
+               api.post("/signin", { email: res.user.email })
+                  .then((res) => {
+                     console.log(res);
+                     setLoading(false);
+                     navigate("/");
+                     window.location.reload();
+                  })
+                  .catch((err) => {
+                     setLoading(false);
+                     toast.error(err.response.data.message);
+                     deleteRegisterUser(res.user)
+                        .then(() => console.log("userDeleted"))
+                        .catch((err) => console.log(err));
+                  });
             }
          })
          .catch((err) => {
+            setLoading(false);
             console.log(err);
             toast.error("An error occurred while creating user. Please try again");
          });
@@ -36,12 +61,11 @@ const SocialSignUp = ({ role }) => {
          .then((res) => {
             console.log(res.user);
             if (res.user) {
-               axios
-                  .post("https://sponskart-server.onrender.com/register", {
-                     name: res.user.displayName,
-                     email: res.user.email,
-                     type: role,
-                  })
+               api.post("register", {
+                  name: res.user.displayName,
+                  email: res.user.email,
+                  type: role,
+               })
                   .then((res) => {
                      navigate(`/register/${role}`, { state: res.data.data.result });
                      console.log(res.data.data.result);

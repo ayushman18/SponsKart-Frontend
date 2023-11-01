@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { FaUser } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import BrandSearchCard from "../../../search/BrandSearchCard/BrandSearchCard";
@@ -9,6 +8,7 @@ import SendProposal from "./SendProposal/SendProposal";
 import moment from "moment";
 import useAuth from "../../../../hooks/useAuth";
 import { useEffect } from "react";
+import { api } from "../../../../api/apiInstance";
 
 const BrandPostDetails = () => {
    const { id } = useParams();
@@ -20,7 +20,7 @@ const BrandPostDetails = () => {
    const { data, isLoading } = useQuery({
       queryKey: ["post", id],
       queryFn: async () => {
-         const res = await axios.get(`https://sponskart-server.onrender.com/brand/post?postId=${id}`);
+         const res = await api.get(`brand/post?postId=${id}`);
          console.log(res);
          return res.data.data;
       },
@@ -28,8 +28,7 @@ const BrandPostDetails = () => {
    console.log(data);
    useEffect(() => {
       if (data?.brandId) {
-         axios
-            .get(`https://sponskart-server.onrender.com/brand/get/${data.brandId}`)
+         api.get(`brand/get/${data.brandId}`)
             .then((response) => {
                setBrand(response.data.data);
                setIsPoster(data.brandId === user.user.brand);

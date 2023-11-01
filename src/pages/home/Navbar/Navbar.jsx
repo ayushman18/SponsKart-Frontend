@@ -3,10 +3,9 @@ import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
 import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
 import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
-
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
+import { api } from "../../../api/apiInstance";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
@@ -16,14 +15,16 @@ const Navbar = () => {
    const handelStatus = () => {
       setOnline(!online);
 
-      axios
-         .put(`https://sponskart-server.onrender.com/${user.user.type}/update`, {
-            status: !online ? "online" : "offline",
-            id: user.data._id,
-         })
+      api.put(`${user.user.type}/update`, {
+         status: !online ? "online" : "offline",
+         id: user.data._id,
+      })
          .then((res) => {
             console.log(res.data);
          })
+         .catch((err) => console.log(err));
+      api.post(`status/${user.user._id}`)
+         .then((res) => console.log(res.data))
          .catch((err) => console.log(err));
    };
 

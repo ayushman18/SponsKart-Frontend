@@ -4,6 +4,7 @@ import {
    FacebookAuthProvider,
    GoogleAuthProvider,
    createUserWithEmailAndPassword,
+   deleteUser,
    getAuth,
    onAuthStateChanged,
    sendEmailVerification,
@@ -15,8 +16,9 @@ import {
    updatePhoneNumber,
    updateProfile,
 } from "firebase/auth";
-import axios from "axios";
 import Swal from "sweetalert2";
+import { api } from "../../api/apiInstance";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -89,6 +91,10 @@ const AuthProvider = ({ children }) => {
          });
       });
    };
+   // delete user
+   const deleteRegisterUser = (user) => {
+      return deleteUser(user);
+   };
 
    // !log out function
 
@@ -117,8 +123,7 @@ const AuthProvider = ({ children }) => {
          console.log(loggedUser);
 
          if (loggedUser) {
-            axios
-               .post("https://sponskart-server.onrender.com/signin", { email: loggedUser?.email })
+            api.post("signin", { email: loggedUser?.email })
                .then((res) => {
                   setLoading(false);
                   setUser(res.data.data);
@@ -127,12 +132,13 @@ const AuthProvider = ({ children }) => {
                })
                .catch((err) => {
                   setLoading(false);
+                  toast.error("Please check your internet connection and refresh the page again.");
                   console.log(err);
                });
          } else {
             setUser(null);
             setLoading(false);
-            localStorage.remove("token");
+            localStorage.removeItem("token");
          }
       });
       return () => unsubscribe();
@@ -155,6 +161,7 @@ const AuthProvider = ({ children }) => {
       verifyEmail,
       updateMobileNumber,
       updateNewEmail,
+      deleteRegisterUser,
    };
 
    return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>;

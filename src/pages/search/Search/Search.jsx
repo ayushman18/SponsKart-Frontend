@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
+
 import { toast } from "react-toastify";
 import ContentCreatorSearchCard from "../ContentCreatorSearchCard/ContentCreatorSearchCard";
 import BrandSearchCard from "../BrandSearchCard/BrandSearchCard";
@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import SearchPageTitle from "../SearchPageTitle/SearchPageTitle";
+import { api } from "../../../api/apiInstance";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
@@ -19,7 +20,7 @@ const Search = () => {
    const { data: result, isLoading } = useQuery({
       queryKey: ["data"],
       queryFn: async () => {
-         const res = await axios.get(`https://sponskart-server.onrender.com/${category}/getall?text=${text}`);
+         const res = await api.get(`${category}/getall?text=${text}`);
          return res.data.data;
       },
    });
@@ -27,9 +28,9 @@ const Search = () => {
    const handelFilterSearch = (filter) => {
       console.log(filter);
       // console.log(JSON.stringify(filter));
-      // axios
+      // api
       //    .get(
-      //       `https://sponskart-server.onrender.com/search?type=${category}&search=${text}&filter=${JSON.stringify(
+      //       `search?type=${category}&search=${text}&filter=${JSON.stringify(
       //          filter
       //       )}`
       //    )

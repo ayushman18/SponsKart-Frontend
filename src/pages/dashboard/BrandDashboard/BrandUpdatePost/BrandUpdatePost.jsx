@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import { useLoaderData, useParams } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import { api } from "../../../../api/apiInstance";
 
 const BrandUpdatePost = () => {
    const { user } = useAuth();
@@ -133,8 +133,7 @@ const BrandUpdatePost = () => {
          confirmButtonText: "Yes, Add Post",
       }).then((result) => {
          if (result.isConfirmed) {
-            axios
-               .put("https://sponskart-server.onrender.com/brand/updatepost", data)
+            api.put("brand/updatepost", data)
                .then((res) => {
                   console.log(res.data.data);
                   Swal.fire("Posted!", "Your post has been added.", "success");
