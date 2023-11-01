@@ -34,7 +34,7 @@ const SocialSignUp = ({ role, register, setLoading }) => {
                      }
                   });
             } else {
-               api.post("/signin", { email: res.user.email })
+               api.post("signin", { email: res.user.email })
                   .then((res) => {
                      console.log(res);
                      setLoading(false);

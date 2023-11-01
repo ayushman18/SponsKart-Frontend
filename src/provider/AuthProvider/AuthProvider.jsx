@@ -123,18 +123,20 @@ const AuthProvider = ({ children }) => {
          console.log(loggedUser);
 
          if (loggedUser) {
-            api.post("signin", { email: loggedUser?.email })
-               .then((res) => {
-                  setLoading(false);
-                  setUser(res.data.data);
-                  console.log(res.data.data);
-                  localStorage.setItem("token", res.data.data.token);
-               })
-               .catch((err) => {
-                  setLoading(false);
-                  toast.error("Please check your internet connection and refresh the page again.");
-                  console.log(err);
-               });
+            setTimeout(() => {
+               api.post("signin", { email: loggedUser?.email })
+                  .then((res) => {
+                     setLoading(false);
+                     setUser(res.data.data);
+                     console.log(res.data.data);
+                     localStorage.setItem("token", res.data.data.token);
+                  })
+                  .catch((err) => {
+                     setLoading(false);
+                     toast.error("Please check your internet connection and refresh the page again.");
+                     console.log(err);
+                  });
+            }, 1000);
          } else {
             setUser(null);
             setLoading(false);
