@@ -31,12 +31,6 @@ const CreatorUpdateProfile = () => {
    const updateData = async (data) => {
       data.category = selectedOption;
       data.budget = selectedBudget;
-      if (logoImg) {
-         data.logo = await hostImage(logoImg);
-      }
-      if (bgImg) {
-         data.backgroundImage = await hostImage(bgImg);
-      }
       data.id = user.user.creator;
 
       for (const key in data) {
@@ -56,8 +50,24 @@ const CreatorUpdateProfile = () => {
          confirmButtonColor: "#3085d6",
          cancelButtonColor: "#d33",
          confirmButtonText: "Yes, Update!",
-      }).then((result) => {
+      }).then(async (result) => {
+         Swal.fire({
+            title: "Please wait we are updating!",
+            icon: "warning",
+            text: "Thank you.",
+            showConfirmButton: false,
+            timer: 2000,
+         });
          if (result.isConfirmed) {
+            if (logoImg.name) {
+               console.log("entered");
+               data.logo = await hostImage(logoImg);
+            }
+            if (bgImg.name) {
+               console.log("entered");
+               data.backgroundImage = await hostImage(bgImg);
+            }
+            console.log(data);
             api.put(`creator/update`, data)
                .then((res) => {
                   console.log(res.data.data);

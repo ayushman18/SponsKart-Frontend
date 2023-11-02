@@ -28,12 +28,7 @@ const OrganizerUpdateProfile = () => {
       data.footfall = selectedFootfall;
       data.budget = selectedBudget;
       data.platforms = selectedPlatform;
-      if (logoImg) {
-         data.logo = await hostImage(logoImg);
-      }
-      if (bgImg) {
-         data.backgroundImage = await hostImage(bgImg);
-      }
+
       data.id = user.user.organizer;
       for (const key in data) {
          if (data[key] === "") {
@@ -53,8 +48,24 @@ const OrganizerUpdateProfile = () => {
          confirmButtonColor: "#3085d6",
          cancelButtonColor: "#d33",
          confirmButtonText: "Yes, Update!",
-      }).then((result) => {
+      }).then(async (result) => {
+         Swal.fire({
+            title: "Please wait we are updating!",
+            icon: "warning",
+            text: "Thank you.",
+            showConfirmButton: false,
+            timer: 2000,
+         });
          if (result.isConfirmed) {
+            if (logoImg.name) {
+               console.log("entered");
+               data.logo = await hostImage(logoImg);
+            }
+            if (bgImg.name) {
+               console.log("entered");
+               data.backgroundImage = await hostImage(bgImg);
+            }
+            console.log(data);
             api.put(`organizer/update`, data)
                .then((res) => {
                   console.log(res.data.data);

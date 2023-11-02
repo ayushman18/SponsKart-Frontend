@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import ContentCreatorSearchCard from "../ContentCreatorSearchCard/ContentCreatorSearchCard";
 import BrandSearchCard from "../BrandSearchCard/BrandSearchCard";
 import CreatorFilter from "../Filters/CreatorFilter";
@@ -8,19 +8,28 @@ import OrganizerSearchCard from "../OrganizerSearchCard/OrganizerSearchCard";
 import OrganizerFilter from "../Filters/OrganizerFilter";
 import BrandFilter from "../Filters/BrandFilter";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import SearchPageTitle from "../SearchPageTitle/SearchPageTitle";
 import { api } from "../../../api/apiInstance";
 
 const Search = () => {
    const [searchParams] = useSearchParams();
-   const text = searchParams.get("text");
-   const category = searchParams.get("category");
+   const [loading, setLoading] = useState(true);
+
+   const searchText = searchParams.get("text");
+   const searchCategory = searchParams.get("category");
+
+   const [text, setText] = useState(searchText);
+   const [category, setCategory] = useState(searchCategory);
+
    const { data: result, isLoading } = useQuery({
-      queryKey: ["data"],
+      queryKey: ["data", text, category],
       queryFn: async () => {
          const res = await api.get(`${category}/getall?text=${text}`);
+         if (res) {
+            setLoading(false);
+         }
          return res.data.data;
       },
    });
@@ -47,9 +56,12 @@ const Search = () => {
 
    useEffect(() => {
       console.log(result);
-   }, [result]);
 
-   if (isLoading) {
+      setText(searchText);
+      setCategory(searchCategory);
+   }, [result, category, text, searchText, searchCategory]);
+
+   if (isLoading || loading) {
       return (
          <>
             <LoadingSpinner></LoadingSpinner>

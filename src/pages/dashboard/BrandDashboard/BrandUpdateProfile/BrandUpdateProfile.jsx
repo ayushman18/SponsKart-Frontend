@@ -39,14 +39,8 @@ const BrandUpdateProfile = () => {
 
    const updateData = async (data) => {
       data.brandType = selectedOption;
-      if (logoImg) {
-         data.logo = await hostImage(logoImg);
-      }
-      if (bgImg) {
-         data.backgroundImage = await hostImage(bgImg);
-      }
+
       data.id = user.user.brand;
-      console.log(data);
 
       for (const key in data) {
          if (data[key] === "" || data[key] === undefined) {
@@ -66,14 +60,31 @@ const BrandUpdateProfile = () => {
          confirmButtonColor: "#3085d6",
          cancelButtonColor: "#d33",
          confirmButtonText: "Yes, Update!",
-      }).then((result) => {
+      }).then(async (result) => {
+         Swal.fire({
+            title: "Please wait we are updating!",
+            icon: "warning",
+            text: "Thank you.",
+            showConfirmButton: false,
+            timer: 2000,
+         });
          if (result.isConfirmed) {
+            if (logoImg.name) {
+               console.log("entered");
+               data.logo = await hostImage(logoImg);
+            }
+            if (bgImg.name) {
+               console.log("entered");
+               data.backgroundImage = await hostImage(bgImg);
+            }
+            console.log(data);
             api.put(`brand/update`, data)
                .then((res) => {
                   console.log(res.data.data);
                   user.data = res.data.data;
                   Swal.fire({
                      title: "Your profile updated!",
+                     icon: "success",
                      text: "Thank you.",
                      showConfirmButton: false,
                      timer: 2000,
