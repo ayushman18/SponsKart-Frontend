@@ -21,8 +21,8 @@ const CreatorUpdateProfile = () => {
    const { step, setStep } = useStep();
    const [selectedOption, setSelectedOption] = useState([]);
    const [selectedBudget, setSelectedBudget] = useState([]);
-   const [logoImg, setLogoImg] = useState(null);
-   const [bgImg, setBgImg] = useState(null);
+   const [logoImg, setLogoImg] = useState({});
+   const [bgImg, setBgImg] = useState({});
 
    console.log(user.user.creator);
 
@@ -41,7 +41,7 @@ const CreatorUpdateProfile = () => {
          }
       }
 
-      console.log(data);
+      console.log(data, logoImg);
       Swal.fire({
          title: "Are you sure?",
          text: "Your provided all data are correct?",
@@ -51,14 +51,14 @@ const CreatorUpdateProfile = () => {
          cancelButtonColor: "#d33",
          confirmButtonText: "Yes, Update!",
       }).then(async (result) => {
-         Swal.fire({
-            title: "Please wait we are updating!",
-            icon: "warning",
-            text: "Thank you.",
-            showConfirmButton: false,
-            timer: 2000,
-         });
          if (result.isConfirmed) {
+            Swal.fire({
+               title: "Please wait we are updating!",
+               icon: "warning",
+               text: "Thank you.",
+               showConfirmButton: false,
+               timer: 2000,
+            });
             if (logoImg.name) {
                console.log("entered");
                data.logo = await hostImage(logoImg);
