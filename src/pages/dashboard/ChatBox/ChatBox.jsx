@@ -24,7 +24,7 @@ const ChatBox = () => {
    return (
       <div className="md:grid grid-cols-2 h-[550px] gap-4 p-6 bg-white rounded-md hidden">
          <div className="overflow-y-scroll flex flex-col gap-4">
-            {chats.length < 1 ? (
+            {chats === "No Message Yet" ? (
                <p>You don&rsquo;t have any message yet.</p>
             ) : (
                chats?.map((chat) => <MessageCard key={chat._id} chat={chat}></MessageCard>)

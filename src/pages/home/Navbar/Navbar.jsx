@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { LuLogIn } from "react-icons/lu";
 import { useEffect } from "react";
-import { FaPowerOff, FaRegBell, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
+import { FaPowerOff, FaRegStar, FaRegUser, FaSearch, FaUser } from "react-icons/fa";
 import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { api } from "../../../api/apiInstance";
+import Notifications from "../../../components/Notifications/Notifications";
 
 const Navbar = () => {
    const { user, logOut } = useAuth();
@@ -86,11 +87,7 @@ const Navbar = () => {
                         {/* Sidebar content here */}
                         <div className="flex justify-between items-center">
                            <h2 className="text-3xl my-4 text-green-400">Sponskart</h2>
-                           {user && (
-                              <div className="w-10 ml-4 bg-gray-400 h-10 flex justify-center items-center rounded-full border">
-                                 <FaRegBell className="text-xl"></FaRegBell>
-                              </div>
-                           )}
+                           {user && <Notifications></Notifications>}
                         </div>
                         <div>
                            {user && (
@@ -319,9 +316,7 @@ const Navbar = () => {
             <div className="w-[2px]  h-8 bg-gray-500"></div>
             {user ? (
                <>
-                  <div className="w-14 ml-4 bg-gray-400 h-14 flex justify-center items-center rounded-full border">
-                     <FaRegBell className="text-2xl"></FaRegBell>
-                  </div>
+                  <Notifications />
                   <div className="dropdown dropdown-end ml-4">
                      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-16 rounded-full flex justify-center items-center">

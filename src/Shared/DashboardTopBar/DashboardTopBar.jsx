@@ -1,4 +1,4 @@
-import { FaCalendarAlt, FaRegBell, FaSearch, FaUser } from "react-icons/fa";
+import { FaCalendarAlt, FaSearch, FaUser } from "react-icons/fa";
 
 import moment from "moment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { useState } from "react";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
+import Notifications from "../../components/Notifications/Notifications";
 
 const DashboardTopBar = () => {
    const navigate = useNavigate();
@@ -104,9 +105,7 @@ const DashboardTopBar = () => {
                >
                   <AiOutlineMessage className=" text-xl"></AiOutlineMessage>
                </Link>
-               <button className="btn btn-circle bg-gray-100 rounded-full">
-                  <FaRegBell className=" text-xl"></FaRegBell>
-               </button>
+               <Notifications />
             </div>
          </div>
       </div>
