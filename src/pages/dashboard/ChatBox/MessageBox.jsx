@@ -125,7 +125,7 @@ const MessageBox = () => {
    }, [arrivalMsg, chat]);
 
    return (
-      <div className="md:h-full h-[650px] border-2 p-2 md:p-3 relative border-black rounded-2xl ">
+      <div className="md:h-full h-[650px] bg-white border-2 p-2 md:p-3 relative border-black rounded-2xl ">
          <div className="max-h-[575px] md:max-h-[400px] overflow-x-auto">
             <ChatMessage messages={messages} userId={user.data._id}></ChatMessage>
          </div>

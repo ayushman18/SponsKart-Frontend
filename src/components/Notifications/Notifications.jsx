@@ -4,6 +4,7 @@ import { FaRegBell } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { apiInstance } from "../../api/apiInstance";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Notifications = () => {
    const { user } = useAuth();
@@ -50,7 +51,14 @@ const Notifications = () => {
                ) : (
                   allNotifications?.map((notification) => (
                      <li key={notification._id}>
-                        <Link to={"/dashboard/messages"}>{notification.notification}</Link>
+                        <Link to={"/dashboard/messages"}>
+                           <p>
+                              {notification.notification} <br />{" "}
+                              <span className="text-xs text-gray-500">
+                                 {moment(notification.createdAt).fromNow()}
+                              </span>
+                           </p>
+                        </Link>
                      </li>
                   ))
                )}

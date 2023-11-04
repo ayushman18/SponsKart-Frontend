@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { api } from "../../../../api/apiInstance";
 import Loading from "../../../../components/Loading/Loading";
-import { FaArrowAltCircleRight, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaFacebook, FaLinkedin, FaUser, FaYoutube } from "react-icons/fa";
 import { handelCreateChat } from "../../../../api/chatApi";
 import { toast } from "react-toastify";
 
@@ -42,7 +42,11 @@ const ProposalDetails = () => {
                <div className="bg-gray-100 p-5 rounded-md w-fit text-center">
                   <div className="avatar">
                      <div className="w-24 mask mask-squircle">
-                        <img src={data.logo.url} />
+                        {data.logo?.url ? (
+                           <img src={data.logo?.url} />
+                        ) : (
+                           <FaUser className="text-8xl"></FaUser>
+                        )}
                      </div>
                   </div>
                   <h2 className="text-xl">{data.name}</h2>

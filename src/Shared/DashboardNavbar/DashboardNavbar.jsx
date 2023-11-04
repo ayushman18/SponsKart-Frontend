@@ -13,7 +13,7 @@ const DashboardNavbar = () => {
          <div className="avatar w-full">
             <div className="w-52 rounded-full mx-auto bg-gray-100">
                {user.data.logo ? (
-                  <img src={user.data.logo.url} alt="image" />
+                  <img src={user.data.logo?.url} alt="image" />
                ) : (
                   <FaUser className="text-[208px] pt-5"></FaUser>
                )}

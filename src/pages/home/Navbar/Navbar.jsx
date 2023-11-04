@@ -99,7 +99,7 @@ const Navbar = () => {
                                              <div className="avatar online">
                                                 <div className="w-12 border rounded-full">
                                                    {user.data.logo ? (
-                                                      <img src={user.data.logo.url} />
+                                                      <img src={user.data.logo?.url} />
                                                    ) : (
                                                       <FaUser className="text-5xl mx-auto"></FaUser>
                                                    )}
@@ -321,7 +321,7 @@ const Navbar = () => {
                      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-16 rounded-full flex justify-center items-center">
                            {user.data.logo ? (
-                              <img src={user.data.logo.url} />
+                              <img src={user.data.logo?.url} />
                            ) : (
                               <FaUser className="text-5xl"></FaUser>
                            )}
@@ -342,7 +342,7 @@ const Navbar = () => {
                                           }  border-2 border-white absolute top-0 right-0`}
                                        ></div>
                                        {user.data.logo ? (
-                                          <img src={user.data.logo.url} />
+                                          <img src={user.data.logo?.url} />
                                        ) : (
                                           <FaUser className="text-5xl mx-auto"></FaUser>
                                        )}

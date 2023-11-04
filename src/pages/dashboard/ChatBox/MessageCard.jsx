@@ -20,7 +20,7 @@ const MessageCard = ({ chat }) => {
       if (screen.width < 650) {
          setSmallDevice(true);
       }
-      if (chat.brand_admin === user.data._id) {
+      if (chat?.brand_admin === user.data._id) {
          setOppositeId(chat.creator_participant);
          setType("creator");
          setLoading(false);
@@ -52,7 +52,7 @@ const MessageCard = ({ chat }) => {
    }
 
    return (
-      <Link to={`/dashboard/${smallDevice ? "mobile-messages" : "messages"}/${chat._id}`} state={chat}>
+      <Link to={`/dashboard/messages/${chat._id}`} state={chat}>
          <div className="bg-[#e2e2e2] hover:bg-[#bbbbbb] py-2  px-4 rounded-md">
             <h2>{type === "creator" ? data?.name : data?.brandName}</h2>
             <p className="text-sm text-gray-700">{type === "creator" ? "Creator" : "Brand"}</p>

@@ -8,10 +8,10 @@ const BrandPostCard = ({ data }) => {
    return (
       <>
          <div
-            className="max-w-[750px] flex items-center p-8 rounded-lg my-10 custom-shadow"
+            className="max-w-[750px] flex items-center p-8 rounded-lg my-10 flex-wrap custom-shadow"
             // style={{ boxShadow: "" }}
          >
-            <div className="w-2/3">
+            <div className="md:w-2/3">
                <p className="text-gray-600 text-sm">
                   {data?.payType === "pay" ? "Pay For the product" : "Giveaway a Product"}
                </p>
@@ -43,7 +43,7 @@ const BrandPostCard = ({ data }) => {
                   ))}
                </div>
             </div>
-            <div className="divider divider-horizontal before:bg-gray-400 after:bg-gray-400"></div>
+            <div className="hidden md:flex divider divider-horizontal before:bg-gray-400 after:bg-gray-400"></div>
             <div>
                <h3 className="text-lg text-red-500">
                   {data?.postfor === "creator" ? "Creators" : "Organizer"} Need

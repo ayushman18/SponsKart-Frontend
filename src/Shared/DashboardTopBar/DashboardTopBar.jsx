@@ -35,7 +35,7 @@ const DashboardTopBar = () => {
                <div className="w-16 rounded-full bg-slate-200">
                   {user.data.logo ? (
                      <>
-                        <img src={user.data.logo.url} alt="" />
+                        <img src={user.data.logo?.url} alt="" />
                      </>
                   ) : (
                      <FaUser className="w-16 h-16"></FaUser>
@@ -98,7 +98,7 @@ const DashboardTopBar = () => {
             </div>
             <div className="flex items-center gap-4">
                <Link
-                  to={`/dashboard/${smallDevice ? "mobile-messages" : "messages"}`}
+                  to={`/dashboard/messages`}
                   className={`btn btn-circle  ${
                      location.pathname === "/dashboard/messages" ? "bg-[#B9DE6A]" : " bg-gray-100"
                   } rounded-full`}
