@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { hostImage } from "../../../api/api";
 import { api } from "../../../api/apiInstance";
+import Swal from "sweetalert2";
 
 const BrandRegister = () => {
    const [loading, setLoading] = useState(false);
@@ -74,6 +75,13 @@ const BrandRegister = () => {
             } else {
                setLoading(false);
                navigate("/");
+               Swal.fire({
+                  title: "Brand register successful please Update Profile",
+                  icon: "success",
+                  text: "Thank you.",
+                  showConfirmButton: false,
+                  timer: 2000,
+               });
                window.location.reload();
             }
          })

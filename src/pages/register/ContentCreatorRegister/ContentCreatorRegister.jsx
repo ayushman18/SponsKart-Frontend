@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { hostImage } from "../../../api/api";
 import { api } from "../../../api/apiInstance";
+import Swal from "sweetalert2";
 
 const ContentCreatorRegister = () => {
    const [loading, setLoading] = useState(false);
@@ -75,6 +76,13 @@ const ContentCreatorRegister = () => {
             } else {
                setLoading(false);
                navigate("/");
+               Swal.fire({
+                  title: "Creator register successful please Update Profile",
+                  icon: "success",
+                  text: "Thank you.",
+                  showConfirmButton: false,
+                  timer: 2000,
+               });
                window.location.reload();
             }
          })
