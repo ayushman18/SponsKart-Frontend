@@ -44,7 +44,7 @@ const Login = () => {
          .catch((err) => {
             setLoading(false);
             console.log(err);
-            toast.error(`${err.response.data.message}`);
+            toast.error(`User not found please register.`);
          });
    };
 
