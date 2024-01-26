@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+/*import { Link, useLoaderData } from "react-router-dom";
 // import img from "./../../../assets/search/gmail.png";
 import facebook from "./../../../../assets/socialIcon/facebook.png";
 import instagram from "./../../../../assets/socialIcon/instagram.png";
@@ -42,7 +42,7 @@ const BrandDetails = () => {
                   />
                   <div className="flex justify-center items-center gap-4 mx-auto">{data.HolderName}</div>
                   <p className="text-4xl">{data.brandName}</p>
-               </div>
+               </div>*\
                {/* <div className="py-8 border-b border-[#5252526E]">
                   <p className="text-xl text-center my-8">Company Followers </p>
                   <div>
@@ -55,8 +55,8 @@ const BrandDetails = () => {
                         <p>company name</p>
                      </div>
                   </div>
-               </div> */}
-               <div className="py-8 border-b border-[#5252526E]">
+               </div> */
+               /*<div className="py-8 border-b border-[#5252526E]">
                   <p className="text-xl text-center my-8">Follow Our Company at: </p>
                   <div>
                      {data.facebook && (
@@ -126,11 +126,11 @@ const BrandDetails = () => {
                   ))}
                </div>
 
-               {/* todo:make dynamic */}
-            </div>
+               {/* todo:make dynamic} */
+            /*</div>
          </div>
       </section>
    );
 };
 
-export default BrandDetails;
+export default BrandDetails;*/
